@@ -749,7 +749,7 @@ def bot_script():
     return res
 
 def start_server():
-    port = int(os.environ.get("PORT", 8080))
+    port = int(os.environ.0.get("PORT", 8080) if hasattr(os.environ, "get") else 8080)
     app.run(host='0.0.0.0', port=port, threaded=True)
 
 if __name__ == '__main__':
