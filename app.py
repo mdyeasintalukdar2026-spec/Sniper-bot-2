@@ -168,7 +168,7 @@ def bot_script():
             });
 
             var botMainLogo = "https://i.postimg.cc/d0J2bbK1/1794304401521.jpg";
-            var renderServerUrl = "https://sniper-bot-2-by7s.onrender.com";
+            var renderServerUrl = window.location.origin;
 
             var s = d.createElement('style');
             s.id = 'sniper-bot-style';
@@ -210,7 +210,7 @@ def bot_script():
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
 
-            var isLicensed = false;
+            var isLicensed = true;
             var currentMode = "1M";
             var activeScreen = "main";
             var selectedRealMarket = "EURUSD";
@@ -250,6 +250,7 @@ def bot_script():
             }
 
             createBotIcon();
+            toggleSniperPanel();
 
             function detectMarketAndPayout() {
                 var marketName = selectedRealMarket + " (REAL)";
@@ -272,41 +273,6 @@ def bot_script():
                 var panel = d.createElement('div');
                 panel.id = 'sniper-bot-panel';
                 panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:280px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:3px solid #22c55e;border-radius:14px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
-
-                if(!isLicensed) {
-                    panel.innerHTML = 
-                        '<div style="padding:14px;box-sizing:border-box;position:relative;">' +
-                            '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:6px;margin-bottom:9px;cursor:move;">' +
-                                '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
-                                    '<img src="' + botMainLogo + '" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
-                                    '<div style="font-size:10.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
-                                '</div>' +
-                                '<div style="display:flex;gap:4px;align-items:center;">' +
-                                    '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
-                                    '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div style="font-size:9.5px;font-weight:700;color:#94a3b8;margin-bottom:4px;">Password / Key:</div>' +
-                            '<input id="sniper-license-input" type="text" placeholder="Key..." style="width:100%;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:6.5px;color:#fff;font-size:10px;margin-bottom:7px;box-sizing:border-box;outline:none;" />' +
-                            '<button id="sniper-verify-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:4px;padding:7px;font-size:10.5px;font-weight:900;cursor:pointer;">VERIFY</button>' +
-                        '</div>';
-
-                    d.body.appendChild(panel);
-                    makeDraggable(panel);
-                    d.getElementById('sniper-close-btn').onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
-                    d.getElementById('sniper-minimize-btn').onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
-                    d.getElementById('sniper-verify-btn').onclick = function() {
-                        var val = d.getElementById('sniper-license-input').value.trim();
-                        if(val === "1122334455") {
-                            isLicensed = true;
-                            panel.remove();
-                            toggleSniperPanel();
-                        } else {
-                            alert('Invalid Password! Please use correct key.');
-                        }
-                    };
-                    return;
-                }
 
                 renderPanelContent(panel);
             }
@@ -582,8 +548,6 @@ def bot_script():
                                 '<div style="width:16px;height:28px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 10px ' + candleColor + ';"></div>' +
                             '</div>';
 
-                        # Auto trade disabled per instructions
-                        
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -634,8 +598,6 @@ def bot_script():
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
                         rulesDesc.innerText = "Rule: " + (data.rule || "Institutional Liquidity Sweep & Momentum Reversal.");
 
-                        # Auto trade disabled
-
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
@@ -673,8 +635,6 @@ def bot_script():
 
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
-
-                        # Auto trade disabled
 
                         setTimeout(function(){
                             if(!panel.isConnected) return;
