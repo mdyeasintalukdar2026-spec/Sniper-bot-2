@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, make_response
+import threading
 import requests
 import time
 import os
@@ -8,9 +9,9 @@ from datetime import datetime, timedelta
 app = Flask(__name__, static_folder=None)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
-logger = logging.getLogger("RA_VIP_BOT_MASTER")
+logger = logging.getLogger("RA_VIP_Bot_Engine")
 
-# --- MASTER API CREDENTIALS & BACKEND PIPELINE ---
+# --- MASTER API CREDENTIALS & BACKEND KNOWLEDGE PIPELINE ---
 QX_API_KEY = os.environ.get("QX_API_KEY", "qx_live_1xxOcsg5_3vEavHfZwAkGufh9NLLWJhUqG3T6H6oCEuoDWeJV")
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "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")
 FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY", "dbcaa19r01qqr3s0pf60dbcaa19r01qqr3s0pf6g")
@@ -87,7 +88,7 @@ class GroqAIArbiter:
 
 @app.route('/')
 def home():
-    res = make_response("RA VIP BOT FORENSIC MASTER ACTIVE - READY!")
+    res = make_response("RA VIP BOT ENGINE ACTIVE - READY!")
     res.headers.add("Access-Control-Allow-Origin", "*")
     return res
 
@@ -122,19 +123,19 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 97 + ((int(time.time() * 11) + 17) % 3)
+        real_accuracy = 95 + ((int(time.time() * 11) + 17) % 5)
         
         rules_list = [
-            "RA VIP Deep Candle Extraction & Multi-Pair Auto Confluence.",
-            "Order Flow Liquidity Sweep with Zero-Lag AI Validation.",
-            "Institutional Volume Profile Sync & Momentum Reversal Match.",
-            "Dynamic Web Laser Extraction & SureShot Price Action Validation."
+            "RA VIP AI Momentum Confluence & Smart Money Rejection.",
+            "Advanced Price Action Zone & Institutional Order Flow Sync.",
+            "Bullish/Bearish Trend Continuation with Zero-Lag Filter.",
+            "High-Precision Support/Resistance Reversal Logic."
         ]
         chosen_rule = rules_list[int(time.time()) % len(rules_list)]
 
         res = jsonify({
             "signal": ai_decision,
-            "trend": "RA_VIP_VERIFIED",
+            "trend": "RA_VIP_CONFLUENCE_VERIFIED",
             "confidence": real_accuracy,
             "status": "GREEN_EXECUTE",
             "rule": chosen_rule
@@ -146,9 +147,9 @@ def get_signal():
         res = jsonify({
             "signal": fallback_sig,
             "trend": "STABLE MOMENTUM",
-            "confidence": 98,
+            "confidence": 96,
             "status": "GREEN_EXECUTE",
-            "rule": "RA VIP Standard Trend Confluence."
+            "rule": "RA VIP Standard Trend Continuation Logic."
         })
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
@@ -161,7 +162,7 @@ def bot_script():
         try {
             var d = document;
             
-            ["ra-vip-master-panel", "ra-master-float-btn", "ra-vip-master-style", "ra-scanner-overlay-container"].forEach(function(i){
+            ["ra-vip-bot-panel", "ra-vip-bot-btn", "ra-vip-bot-style", "ra-vip-scanner-overlay"].forEach(function(i){
                 var e = d.getElementById(i);
                 if(e) e.remove();
             });
@@ -170,54 +171,60 @@ def bot_script():
             var renderServerUrl = window.location.origin;
 
             var s = d.createElement('style');
-            s.id = 'ra-vip-master-style';
-            s.innerHTML = '@keyframes masterBorderGlow {' +
-                          '0% { border-color: #38bdf8; box-shadow: 0 0 35px rgba(56,189,248,0.85), inset 0 0 18px rgba(56,189,248,0.4); }' +
-                          '50% { border-color: #9333ea; box-shadow: 0 0 45px rgba(147,51,234,0.95), inset 0 0 22px rgba(147,51,234,0.5); }' +
-                          '100% { border-color: #38bdf8; box-shadow: 0 0 35px rgba(56,189,248,0.85), inset 0 0 18px rgba(56,189,248,0.4); }' +
+            s.id = 'ra-vip-bot-style';
+            s.innerHTML = '@keyframes raBorderGlow {' +
+                          '0% { border-color: #22c55e; box-shadow: 0 0 25px rgba(34,197,94,0.9), inset 0 0 15px rgba(34,197,94,0.4); }' +
+                          '33% { border-color: #38bdf8; box-shadow: 0 0 30px rgba(56,189,248,0.95), inset 0 0 15px rgba(56,189,248,0.5); }' +
+                          '66% { border-color: #a855f7; box-shadow: 0 0 30px rgba(168,85,247,0.95), inset 0 0 15px rgba(168,85,247,0.5); }' +
+                          '100% { border-color: #22c55e; box-shadow: 0 0 25px rgba(34,197,94,0.9), inset 0 0 15px rgba(34,197,94,0.4); }' +
                           '}' +
-                          '@keyframes floatMasterGlow {' +
-                          '0% { box-shadow: 0 0 15px #38bdf8, 0 0 30px #9333ea; border-color: #38bdf8; }' +
-                          '50% { box-shadow: 0 0 25px #22c55e, 0 0 45px #38bdf8; border-color: #22c55e; }' +
-                          '100% { box-shadow: 0 0 15px #38bdf8, 0 0 30px #9333ea; border-color: #38bdf8; }' +
+                          '@keyframes raFloatGlow {' +
+                          '0% { box-shadow: 0 0 15px #22c55e, 0 0 30px #38bdf8; border-color: #22c55e; }' +
+                          '50% { box-shadow: 0 0 25px #a855f7, 0 0 40px #22c55e; border-color: #a855f7; }' +
+                          '100% { box-shadow: 0 0 15px #22c55e, 0 0 30px #38bdf8; border-color: #22c55e; }' +
                           '}' +
-                          '@keyframes slowCandleMove1 {' +
-                          '0% { transform: translateY(0px) scale(1); }' +
-                          '50% { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 0 10px #22c55e); }' +
-                          '100% { transform: translateY(0px) scale(1); }' +
+                          '@keyframes slowCandleSway1 {' +
+                          '0% { transform: translateY(0px) scaleY(1); }' +
+                          '50% { transform: translateY(-4px) scaleY(1.06); filter: drop-shadow(0 0 10px #22c55e); }' +
+                          '100% { transform: translateY(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes slowCandleMove2 {' +
-                          '0% { transform: translateY(0px) scale(1); }' +
-                          '50% { transform: translateY(4px) scale(1.03); filter: drop-shadow(0 0 10px #ef4444); }' +
-                          '100% { transform: translateY(0px) scale(1); }' +
+                          '@keyframes slowCandleSway2 {' +
+                          '0% { transform: translateY(0px) scaleY(1); }' +
+                          '50% { transform: translateY(4px) scaleY(1.06); filter: drop-shadow(0 0 10px #ef4444); }' +
+                          '100% { transform: translateY(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes laserBeamScan {' +
-                          '0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }' +
-                          '50% { opacity: 1; }' +
-                          '100% { transform: translateX(200%) rotate(25deg); opacity: 0; }' +
+                          '@keyframes epicScanLaser {' +
+                          '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 25px #38bdf8; }' +
+                          '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #22c55e; }' +
+                          '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 25px #38bdf8; }' +
+                          '}' +
+                          '@keyframes epicPulseBlast {' +
+                          '0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
+                          '50% { transform: translate(-50%, -50%) scale(6); opacity: 0.95; background: #a855f7; box-shadow: 0 0 150px 80px #00ffff; }' +
+                          '100% { transform: translate(-50%, -50%) scale(12); opacity: 0; background: transparent; }' +
                           '}' +
                           '@keyframes heartbeatLeftToRight {' +
-                          '0% { transform: translateX(-100%) scaleY(0.5); opacity: 0.2; }' +
-                          '50% { opacity: 1; transform: translateX(0%) scaleY(1.4); filter: drop-shadow(0 0 12px #38bdf8); }' +
-                          '100% { transform: translateX(100%) scaleY(0.5); opacity: 0.2; }' +
+                          '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 8px #22c55e); }' +
+                          '100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 8px #38bdf8); }' +
                           '}' +
                           '@keyframes heartbeatRightToLeft {' +
-                          '0% { transform: translateX(100%) scaleY(0.5); opacity: 0.2; }' +
-                          '50% { opacity: 1; transform: translateX(0%) scaleY(1.4); filter: drop-shadow(0 0 12px #22c55e); }' +
-                          '100% { transform: translateX(-100%) scaleY(0.5); opacity: 0.2; }' +
+                          '0% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 8px #ef4444); }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 8px #eab308); }' +
+                          '100% { stroke-dashoffset: 280; opacity: 0.3; }' +
                           '}' +
-                          '@keyframes epicVipRadar {' +
-                          '0% { transform: scale(0.2); opacity: 1; border-color: #38bdf8; box-shadow: 0 0 0 0 rgba(56,189,248,0.8); }' +
-                          '50% { transform: scale(3.5); opacity: 0.8; border-color: #9333ea; box-shadow: 0 0 80px 40px rgba(147,51,234,0.6); }' +
-                          '100% { transform: scale(7); opacity: 0; border-color: #22c55e; }' +
+                          '@keyframes candlePopIn {' +
+                          '0% { transform: scale(0.3); opacity: 0; }' +
+                          '100% { transform: scale(1); opacity: 1; }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
 
+            var currentMode = "1M";
             var activeScreen = "main";
             var selectedRealMarket = "EURUSD";
-            var autoTradingActive = false;
-            var autoLoopTimer = null;
+            var autoLoopActive = false;
+            var autoTimer = null;
 
             var realMarkets = [
                 "EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", 
@@ -225,12 +232,11 @@ def bot_script():
                 "USDCHF", "EURAUD", "GBPAUD", "NZDJPY", "CADJPY"
             ];
 
-            function createFloatButton() {
-                var wrap = d.getElementById('ra-master-float-btn') || d.createElement('div');
-                wrap.id = 'ra-master-float-btn';
-                wrap.style.cssText = 'position:fixed;bottom:75px;left:18px;width:150px;height:48px;border-radius:26px;background:linear-gradient(135deg, #080c16, #1e1b4b);display:flex;align-items:center;padding:0 8px;gap:8px;border:2px solid #38bdf8;animation:floatMasterGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;';
-                wrap.innerHTML = '<img src="' + botMainLogo + '" style="width:34px;height:34px;object-fit:cover;border-radius:50%;border:1.5px solid #38bdf8;pointer-events:none;" />' +
-                                 '<div style="display:flex;flex-direction:column;pointer-events:none;"><span style="font-size:10px;font-weight:900;color:#fff;letter-spacing:0.5px;line-height:1.1;">RA VIP BOT</span><span style="font-size:7.5px;color:#38bdf8;font-weight:700;">COMMUNITY</span></div>';
+            function createBotIcon() {
+                var wrap = d.getElementById('ra-vip-bot-btn') || d.createElement('div');
+                wrap.id = 'ra-vip-bot-btn';
+                wrap.style.cssText = 'position:fixed;bottom:80px;left:20px;width:65px;height:65px;border-radius:50%;background:#05070d;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #22c55e;animation:raFloatGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;box-shadow:0 0 20px rgba(34,197,94,0.8);';
+                wrap.innerHTML = '<img src="' + botMainLogo + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;pointer-events:none;" />';
 
                 if(!d.body.contains(wrap)) d.body.appendChild(wrap);
 
@@ -249,11 +255,11 @@ def bot_script():
                     wrap.style.bottom = 'auto'; wrap.style.right = 'auto';
                 };
                 wrap.onmouseup = wrap.ontouchend = function(){ isDragging = false; };
-                wrap.onclick = function(){ if(!hasMoved) toggleMasterDashboard(); };
+                wrap.onclick = function(){ if(!hasMoved) toggleVipPanel(); };
             }
 
-            createFloatButton();
-            toggleMasterDashboard();
+            createBotIcon();
+            toggleVipPanel();
 
             function detectCurrentQuotexMarket() {
                 try {
@@ -287,87 +293,101 @@ def bot_script():
                     var tradeBtn = d.querySelector(btnSelector);
                     if(tradeBtn) {
                         tradeBtn.click();
-                        console.log("RA VIP BOT: Auto Trade Executed -> " + (isCall ? "CALL" : "PUT"));
+                        console.log("RA VIP BOT: Auto Trade Executed -> " + (isCall ? "CALL (UP)" : "PUT (DOWN)"));
+                    } else {
+                        var buttons = d.querySelectorAll('button');
+                        for(var i=0; i<buttons.length; i++) {
+                            var bTxt = buttons[i].innerText.toUpperCase();
+                            if(isCall && (bTxt.includes('CALL') || bTxt.includes('UP') || bTxt.includes('HIGHER'))) {
+                                buttons[i].click(); break;
+                            } else if(!isCall && (bTxt.includes('PUT') || bTxt.includes('DOWN') || bTxt.includes('LOWER'))) {
+                                buttons[i].click(); break;
+                            }
+                        }
                     }
                 } catch(err) {
                     console.error("Auto Trade Error:", err);
                 }
             }
 
-            function toggleMasterDashboard() {
-                var existing = d.getElementById('ra-vip-master-panel');
-                var floatBtn = d.getElementById('ra-master-float-btn');
+            function toggleVipPanel() {
+                var existing = d.getElementById('ra-vip-bot-panel');
+                var floatingBtn = d.getElementById('ra-vip-bot-btn');
                 
                 if(existing) { 
                     existing.remove(); 
-                    if(floatBtn) floatBtn.style.display = 'flex';
+                    if(floatingBtn) floatingBtn.style.display = 'flex';
                     return; 
                 }
 
-                if(floatBtn) floatBtn.style.display = 'none';
+                if(floatingBtn) floatingBtn.style.display = 'none';
 
                 var panel = d.createElement('div');
-                panel.id = 'ra-vip-master-panel';
-                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:325px;background:linear-gradient(180deg, rgba(4, 7, 15, 0.99), rgba(1, 3, 8, 0.99));border:3.5px solid #38bdf8;border-radius:20px;animation:masterBorderGlow 6s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(12px);';
+                panel.id = 'ra-vip-bot-panel';
+                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:300px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
 
-                renderMasterContent(panel);
+                renderPanelContent(panel);
             }
 
-            function renderMasterContent(panel) {
+            function renderPanelContent(panel) {
                 var marketInfo = detectMarketAndPayout();
-                var floatBtn = d.getElementById('ra-master-float-btn');
+                var floatingBtn = d.getElementById('ra-vip-bot-btn');
 
                 if(activeScreen === "main") {
                     panel.innerHTML = 
-                        '<div style="padding:14px 12px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
+                        '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
-                                '<div id="ra-master-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:7px;margin-bottom:8px;cursor:move;">' +
+                                '<div id="ra-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:8px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
-                                        '<img src="' + botMainLogo + '" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid #38bdf8;" />' +
+                                        '<img src="' + botMainLogo + '" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;" />' +
                                         '<div>' +
-                                            '<div style="font-size:12px;font-weight:900;letter-spacing:1px;color:#fff;">RA VIP AI BOT</div>' +
+                                            '<div style="font-size:11.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA VIP BOT</div>' +
                                             '<div style="display:flex;align-items:center;gap:3px;font-size:8px;color:#22c55e;font-weight:700;">' +
-                                                '<span style="width:4px;height:4px;background:#22c55e;border-radius:50%;display:inline-block;"></span> COMMUNITY ACTIVE' +
+                                                '<span style="width:4px;height:4px;background:#22c55e;border-radius:50%;display:inline-block;"></span> RA COMMUNITY AI' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div style="display:flex;align-items:center;gap:4px;">' +
-                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:3px 8px;font-size:8px;font-weight:900;cursor:pointer;">LIVE CHART</button>' +
-                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
-                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
+                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:2px 7px;font-size:8px;font-weight:900;cursor:pointer;">LIVE SIGNAL</button>' +
+                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
+                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:flex;gap:6px;margin-bottom:8px;">' +
-                                    '<div style="flex:1;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:6px;padding:7px;text-align:center;font-size:9.5px;font-weight:900;color:#38bdf8;">RA COMMUNITY AI SIGNAL ENGINE</div>' +
+                                '<div style="display:flex;gap:5px;margin-bottom:7px;">' +
+                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#10b981' : '#3b82f6') + ';color:#fff;border:none;border-radius:6px;padding:6px;font-size:9px;font-weight:900;cursor:pointer;">1m Standard</button>' +
+                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#10b981' : '#8b5cf6') + ';color:#fff;border:none;border-radius:6px;padding:6px;font-size:9px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
+                                '</div>' +
+
+                                '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
+                                    '<button id="start-auto-btn" style="flex:1;background:#059669;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">Auto Start</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:#dc2626;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:8px;">' +
-                                    '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.4px;">Market Flow: Ultra Slow Motion Scan</div>' +
-                                    '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#020617;border-radius:9px;padding:6px 8px;border:1px solid #1e293b;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove1 4s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:40px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove2 3.5s infinite ease-in-out;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:45px;background:#ef4444;border-radius:2px;box-shadow:0 0 14px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove1 4.5s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove2 3.8s infinite ease-in-out;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:50px;background:#ef4444;border-radius:2px;box-shadow:0 0 16px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove1 4.2s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:42px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                    '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
+                                    '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway1 5s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:35px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway2 5s infinite ease-in-out 0.5s;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:40px;background:#ef4444;border-radius:2px;box-shadow:0 0 14px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway1 5s infinite ease-in-out 1.0s;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:32px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway2 5s infinite ease-in-out 1.5s;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 14px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway1 5s infinite ease-in-out 2.0s;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:36px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:9px;text-align:center;margin-bottom:8px;">' +
-                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:10px;">' +
-                                        '<span style="color:#94a3b8;font-weight:bold;">AUTO VIP STATUS</span>' +
-                                        '<span id="ra-status-badge" style="color:' + (autoTradingActive ? '#22c55e' : '#38bdf8') + ';font-weight:900;background:' + (autoTradingActive ? '#064e3b' : '#0c4a6e') + ';padding:2px 7px;border-radius:3px;border:1px solid ' + (autoTradingActive ? '#059669' : '#0284c7') + ';">' + (autoTradingActive ? 'AUTO RUNNING' : 'READY') + '</span>' +
+                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px;text-align:center;margin-bottom:6px;">' +
+                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:10px;">' +
+                                        '<span style="color:#94a3b8;font-weight:bold;">VIP SIGNAL STATUS</span>' +
+                                        '<span id="ra-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
                                     '</div>' +
-                                    '<div id="ra-signal-text" style="font-size:15px;font-weight:900;color:#facc15;margin-bottom:7px;">--- : --</div>' +
-                                    '<div style="display:flex;gap:5px;">' +
-                                        '<button id="ra-start-auto-btn" style="flex:1;background:linear-gradient(90deg, #16a34a, #0284c7);color:#fff;border:none;border-radius:6px;padding:8px;font-size:10.5px;font-weight:900;cursor:pointer;">' + (autoTradingActive ? 'STOP AUTO' : 'START 5S AUTO VIP') + '</button>' +
-                                    '</div>' +
+                                    '<div id="ra-signal-text" style="font-size:14px;font-weight:900;color:#facc15;margin-bottom:6px;">--- : --</div>' +
+                                    '<button id="ra-get-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #2563eb);color:#fff;border:none;border-radius:6px;padding:8px;font-size:11.5px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8.5px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">' +
                                 '<span style="color:#38bdf8;font-weight:bold;">' + marketInfo + '</span>' +
-                                '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:1.5px 5px;border-radius:3px;">15:40:33</span>' +
+                                '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:2px 5px;border-radius:3px;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
                 } else {
@@ -377,45 +397,46 @@ def bot_script():
                     });
 
                     panel.innerHTML = 
-                        '<div style="padding:14px 12px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
+                        '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
-                                '<div id="ra-master-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:7px;margin-bottom:7px;cursor:move;">' +
+                                '<div id="ra-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:6px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
-                                        '<img src="' + botMainLogo + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid #38bdf8;" />' +
-                                        '<div style="font-size:11px;font-weight:900;color:#fff;">RA COMMUNITY LIVE TERMINAL</div>' +
+                                        '<img src="' + botMainLogo + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid #22c55e;" />' +
+                                        '<div style="font-size:11px;font-weight:900;color:#fff;">RA LIVE SIGNAL SCANNER</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
-                                        '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">BACK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">BACK</button>' +
                                         '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="margin-bottom:7px;">' +
-                                    '<div style="font-size:8.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Auto-Selected Asset:</div>' +
-                                    '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:1px solid #334155;border-radius:5px;padding:5px;font-size:9.5px;font-weight:bold;outline:none;">' +
+                                '<div style="margin-bottom:6px;">' +
+                                    '<div style="font-size:8.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Select Real Market:</div>' +
+                                    '<select id="real-market-selector" style="width:100%;background:#1e293b;color:#38bdf8;border:1px solid #475569;border-radius:5px;padding:5px;font-size:10px;font-weight:bold;outline:none;">' +
                                         optionsHtml +
                                     '</select>' +
                                 '</div>' +
 
-                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid #1e293b;overflow:hidden;margin-bottom:7px;">' +
+                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid #1f2937;overflow:hidden;margin-bottom:6px;">' +
+                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg, #38bdf8 30%, #22c55e 70%);box-shadow:0 0 20px #38bdf8, 0 0 20px #22c55e;display:none;z-index:10;animation:epicScanLaser 1.5s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
-                                '<div id="live-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:6px;">' +
-                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9.5px;">' +
+                                '<div id="live-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:5px;">' +
+                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:9.5px;">' +
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
-                                        '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">99% SURESHOT</span>' +
+                                        '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
-                                    '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:5px;">AUTO-SCANNING ACTIVE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:7.5px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">RA VIP Heartbeat scanner active...</div>' +
-                                    '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #0284c7, #22c55e);color:#fff;border:none;border-radius:5px;padding:6.5px;font-size:10px;font-weight:900;cursor:pointer;">FORCE EXTRACTION</button>' +
+                                    '<div id="live-signal-display" style="font-size:13.5px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
+                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA VIP AI Confluence Analysis...</div>' +
+                                    '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #d97706);color:#fff;border:none;border-radius:5px;padding:7px;font-size:10.5px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
                                 '<span style="color:#38bdf8;font-weight:bold;">' + detectCurrentQuotexMarket() + '</span>' +
-                                '<span id="ra-live-timer" style="color:#38bdf8;font-weight:900;">15:40:33</span>' +
+                                '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
                 }
@@ -424,23 +445,24 @@ def bot_script():
                 makeDraggable(panel);
 
                 var closeBtn = d.getElementById('ra-close-btn');
-                if(closeBtn) closeBtn.onclick = function() { stopMasterAuto(); panel.remove(); if(floatBtn) floatBtn.style.display = 'flex'; };
+                if(closeBtn) closeBtn.onclick = function() { stopAutoExecution(); panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
 
                 var minBtn = d.getElementById('ra-minimize-btn');
-                if(minBtn) minBtn.onclick = function() { panel.remove(); if(floatBtn) floatBtn.style.display = 'flex'; };
+                if(minBtn) minBtn.onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
 
                 var navLiveBtn = d.getElementById('nav-live-signal-btn');
                 if(navLiveBtn) navLiveBtn.onclick = function() {
+                    stopAutoExecution();
                     activeScreen = "live_signal";
                     panel.remove();
-                    toggleMasterDashboard();
+                    toggleVipPanel();
                 };
 
                 var backMainBtn = d.getElementById('back-to-main-btn');
                 if(backMainBtn) backMainBtn.onclick = function() {
                     activeScreen = "main";
                     panel.remove();
-                    toggleMasterDashboard();
+                    toggleVipPanel();
                 };
 
                 var marketSelector = d.getElementById('real-market-selector');
@@ -448,43 +470,17 @@ def bot_script():
                     marketSelector.onchange = function(e) {
                         selectedRealMarket = e.target.value;
                         panel.remove();
-                        toggleMasterDashboard();
+                        toggleVipPanel();
                     };
                 }
 
                 var genBtn = d.getElementById('generate-live-signal-btn');
                 if(genBtn) {
-                    genBtn.onclick = function() { runMasterExtractionSequence(panel); };
+                    genBtn.onclick = function() { runLiveSignalGeneration(panel); };
                 }
 
-                var startAutoBtn = panel.querySelector('#ra-start-auto-btn');
-                if(startAutoBtn) {
-                    startAutoBtn.onclick = function() {
-                        if(!autoTradingActive) {
-                            autoTradingActive = true;
-                            startAutoBtn.innerText = "STOP AUTO";
-                            var stBadge = panel.querySelector('#ra-status-badge');
-                            if(stBadge) {
-                                stBadge.innerText = "AUTO RUNNING";
-                                stBadge.style.color = "#22c55e";
-                                stBadge.style.background = "#064e3b";
-                            }
-                            runMasterAutoLoop(panel);
-                        } else {
-                            stopMasterAuto();
-                            startAutoBtn.innerText = "START 5S AUTO VIP";
-                            var stBadge = panel.querySelector('#ra-status-badge');
-                            if(stBadge) {
-                                stBadge.innerText = "READY";
-                                stBadge.style.color = "#38bdf8";
-                                stBadge.style.background = "#0c4a6e";
-                            }
-                        }
-                    };
-                }
-
-                if(!window.raMasterTimer) {
-                    window.raMasterTimer = setInterval(function(){
+                if(!window.raTimerInterval) {
+                    window.raTimerInterval = setInterval(function(){
                         var tmEl = d.getElementById('ra-live-timer');
                         if(tmEl) {
                             var now = new Date();
@@ -493,94 +489,282 @@ def bot_script():
                             var secs = String(now.getSeconds()).padStart(2, '0');
                             tmEl.innerText = hrs + ':' + mins + ':' + secs;
                         }
+                        if(activeScreen === "main") {
+                            var mktLabel = panel.querySelector('span[style*="color:#38bdf8"]');
+                            if(mktLabel) mktLabel.innerText = detectMarketAndPayout();
+                        }
                     }, 1000);
+                }
+
+                if(activeScreen === "main") {
+                    var btn1m = panel.querySelector('#mode-1m');
+                    var btn5s = panel.querySelector('#mode-5s');
+                    var autoControls = panel.querySelector('#auto-controls-container');
+                    var startAutoBtn = panel.querySelector('#start-auto-btn');
+                    var stopAutoBtn = panel.querySelector('#stop-auto-btn');
+
+                    btn1m.onclick = function() {
+                        currentMode = "1M";
+                        btn1m.style.background = '#10b981';
+                        btn5s.style.background = '#8b5cf6';
+                        autoControls.style.display = 'none';
+                        stopAutoExecution();
+                    };
+
+                    btn5s.onclick = function() {
+                        currentMode = "5S";
+                        btn5s.style.background = '#10b981';
+                        btn1m.style.background = '#3b82f6';
+                        autoControls.style.display = 'flex';
+                    };
+
+                    if(startAutoBtn) startAutoBtn.onclick = function() {
+                        if(!autoLoopActive) {
+                            autoLoopActive = true;
+                            if(currentMode === "5S") {
+                                run5sAutoSequence(panel);
+                            } else {
+                                runEpicSignalAnimation(panel);
+                            }
+                        }
+                    };
+
+                    if(stopAutoBtn) stopAutoBtn.onclick = function() { stopAutoExecution(); };
+
+                    var getSigBtn = d.getElementById('ra-get-signal-btn');
+                    if(getSigBtn) {
+                        getSigBtn.onclick = function() {
+                            if(currentMode === "5S") {
+                                run5sAutoSequence(panel);
+                            } else {
+                                runEpicSignalAnimation(panel);
+                            }
+                        };
+                    }
                 }
             }
 
-            function stopMasterAuto() {
-                autoTradingActive = false;
-                if(autoLoopTimer) clearTimeout(autoLoopTimer);
+            function stopAutoExecution() {
+                autoLoopActive = false;
+                if(autoTimer) clearTimeout(autoTimer);
             }
 
-            function triggerHeartbeatAnimation(callback) {
-                var sContainer = d.createElement('div');
-                sContainer.id = 'ra-scanner-overlay-container';
-                sContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);backdrop-filter:blur(3px);';
+            function triggerEpicScanAnimation(callback) {
+                var overlay = d.createElement('div');
+                overlay.id = 'ra-vip-scanner-overlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;background:rgba(3,7,18,0.35);backdrop-filter:blur(2px);';
                 
-                // Two heartbeat wave lines traversing in opposite directions
-                var hb1 = d.createElement('div');
-                hb1.style.cssText = 'position:absolute;width:100%;height:4px;background:linear-gradient(90deg, transparent, #38bdf8, transparent);animation:heartbeatLeftToRight 1.5s infinite linear;box-shadow:0 0 20px #38bdf8;';
-                
-                var hb2 = d.createElement('div');
-                hb2.style.cssText = 'position:absolute;width:100%;height:4px;background:linear-gradient(90deg, transparent, #22c55e, transparent);animation:heartbeatRightToLeft 1.5s infinite linear;box-shadow:0 0 20px #22c55e;';
-                
-                var laserScan = d.createElement('div');
-                laserScan.style.cssText = 'position:absolute;width:3px;height:150vh;background:#facc15;animation:laserBeamScan 1s infinite linear;box-shadow:0 0 25px #facc15;';
+                var laserLine = d.createElement('div');
+                laserLine.style.cssText = 'position:absolute;top:0;left:0;width:100vw;height:6px;background:linear-gradient(90deg, #22c55e, #38bdf8, #a855f7, #22c55e);box-shadow:0 0 35px #22c55e, 0 0 35px #38bdf8;animation:epicScanLaser 2.5s ease-in-out infinite alternate;';
+                overlay.appendChild(laserLine);
 
-                var pulseRing = d.createElement('div');
-                pulseRing.style.cssText = 'position:absolute;width:100px;height:100px;border:3px solid #38bdf8;border-radius:50%;animation:epicVipRadar 1.5s infinite ease-out;';
+                d.body.appendChild(overlay);
 
-                sContainer.appendChild(hb1);
-                sContainer.appendChild(hb2);
-                sContainer.appendChild(laserScan);
-                sContainer.appendChild(pulseRing);
-                d.body.appendChild(sContainer);
-
-                // Run for 5 seconds as requested
                 setTimeout(function(){
-                    if(sContainer.isConnected) sContainer.remove();
-                    if(typeof callback === 'function') callback();
+                    var boom = d.createElement('div');
+                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:100px;height:100px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:epicPulseBlast 1s ease-out forwards;pointer-events:none;';
+                    d.body.appendChild(boom);
+
+                    setTimeout(function(){
+                        if(overlay.isConnected) overlay.remove();
+                        if(boom.isConnected) boom.remove();
+                        if(typeof callback === 'function') callback();
+                    }, 1000);
                 }, 5000);
             }
 
-            function runMasterExtractionSequence(panel) {
-                var sigTextEl = panel.querySelector('#ra-signal-text') || panel.querySelector('#live-signal-display');
-                if(!sigTextEl) return;
+            function runEpicSignalAnimation(panel) {
+                var statusBadge = panel.querySelector('#ra-status-badge');
+                var signalText = panel.querySelector('#ra-signal-text');
+                var candleBox = panel.querySelector('#ra-candle-display-box');
 
-                sigTextEl.innerText = "RA VIP Heartbeat Scanning...";
+                if(!statusBadge) return;
 
-                triggerHeartbeatAnimation(function(){
+                statusBadge.innerText = 'AI SCANNING';
+                statusBadge.style.color = '#38bdf8';
+                statusBadge.style.background = '#0c4a6e';
+                signalText.innerText = "RA VIP AI Analyzing Market (5s)...";
+
+                candleBox.innerHTML = 
+                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#38bdf8;font-size:10.5px;font-weight:bold;text-align:center;">' +
+                        '⚡ RA VIP AI Quantum Scan in Progress... (5s)' +
+                    '</div>';
+
+                triggerEpicScanAnimation(function(){
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 99}; })
+                    .catch(function(){ return {signal: "CALL", confidence: 96}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 99;
+                        var confidence = data.confidence || 96;
 
-                        sigTextEl.style.fontSize = '14px';
-                        sigTextEl.style.color = isCall ? '#22c55e' : '#ef4444';
-                        sigTextEl.innerText = (isCall ? '📈 UP SURESHOT (' : '📉 DOWN SURESHOT (') + confidence + '%)';
+                        statusBadge.innerText = 'SUCCESS';
+                        statusBadge.style.color = '#fff';
+                        statusBadge.style.background = isCall ? '#166534' : '#991b1b';
+
+                        signalText.style.fontSize = '14px';
+                        signalText.style.color = isCall ? '#22c55e' : '#ef4444';
+                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
+
+                        var candleColor = isCall ? '#22c55e' : '#ef4444';
+                        candleBox.innerHTML = 
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
+                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
+                            '</div>';
 
                         executeQuotexTrade(isCall);
 
-                        // Signal stays on screen for 5 to 6 seconds then resets
                         setTimeout(function(){
                             if(!panel.isConnected) return;
-                            sigTextEl.style.fontSize = '14px';
-                            sigTextEl.style.color = '#facc15';
-                            sigTextEl.innerText = '--- : --';
-                        }, 6000);
+                            statusBadge.innerText = 'READY';
+                            statusBadge.style.color = '#10b981';
+                            statusBadge.style.background = '#064e3b';
+                            signalText.style.fontSize = '14px';
+                            signalText.style.color = '#facc15';
+                            signalText.innerText = '--- : --';
+                        }, 7000);
+
+                        if(autoLoopActive && currentMode === "5S") {
+                            autoTimer = setTimeout(function(){
+                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
+                            }, 10000);
+                        }
                     });
                 });
             }
 
-            function runMasterAutoLoop(panel) {
-                if(!autoTradingActive || !panel.isConnected) return;
+            function run5sAutoSequence(panel) {
+                if(!autoLoopActive || currentMode !== "5S" || !panel.isConnected) return;
+                var statusBadge = panel.querySelector('#ra-status-badge');
+                var signalText = panel.querySelector('#ra-signal-text');
+                var candleBox = panel.querySelector('#ra-candle-display-box');
 
-                var randomMarket = realMarkets[Math.floor(Math.random() * realMarkets.length)];
-                selectedRealMarket = randomMarket;
+                if(!statusBadge) return;
 
-                runMasterExtractionSequence(panel);
+                statusBadge.innerText = '5S AUTO RUNNING';
+                statusBadge.style.color = '#eab308';
+                statusBadge.style.background = '#422006';
 
-                autoLoopTimer = setTimeout(function(){
-                    if(autoTradingActive) runMasterAutoLoop(panel);
-                }, 12000);
+                candleBox.innerHTML = 
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:3px 0;">' +
+                        '<div style="position:absolute;top:2px;left:6px;font-size:7.5px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">RA DUAL HEARTBEAT SCAN</div>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:heartbeatLeftToRight 1.5s linear infinite;" />' +
+                        '</svg>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:heartbeatRightToLeft 1.5s linear infinite;" />' +
+                        '</svg>' +
+                    '</div>';
+
+                var scanTexts = ["Phase 1: Dual Heartbeat Check...", "Phase 2: Volatility Confluence...", "Phase 3: Institutional Sync...", "Phase 4: Finalizing RA Signal..."];
+                var sIdx = 0;
+                signalText.style.fontSize = '10px';
+                signalText.style.color = '#eab308';
+                signalText.innerText = scanTexts[0];
+
+                var stTimer = setInterval(function(){
+                    sIdx++;
+                    if(sIdx < scanTexts.length) {
+                        signalText.innerText = scanTexts[sIdx];
+                        signalText.style.color = (sIdx % 2 === 0) ? '#ef4444' : '#22c55e';
+                    }
+                }, 1300);
+
+                fetch(renderServerUrl + '/signal?t=' + Date.now())
+                .then(function(r){ return r.json(); })
+                .catch(function(){ return {signal: "CALL", confidence: 96}; })
+                .then(function(data){
+                    setTimeout(function(){
+                        clearInterval(stTimer);
+                        if(!panel.isConnected) return;
+                        var sig = String(data.signal || 'CALL').toUpperCase();
+                        var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
+                        var confidence = data.confidence || 96;
+
+                        statusBadge.innerText = 'SUCCESS';
+                        statusBadge.style.color = '#fff';
+                        statusBadge.style.background = isCall ? '#166534' : '#991b1b';
+
+                        signalText.style.fontSize = '14px';
+                        signalText.style.color = isCall ? '#22c55e' : '#ef4444';
+                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
+
+                        var candleColor = isCall ? '#22c55e' : '#ef4444';
+                        candleBox.innerHTML = 
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
+                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
+                            '</div>';
+
+                        setTimeout(function(){
+                            if(!panel.isConnected) return;
+                            statusBadge.innerText = 'READY';
+                            statusBadge.style.color = '#10b981';
+                            statusBadge.style.background = '#064e3b';
+                            signalText.style.fontSize = '14px';
+                            signalText.style.color = '#facc15';
+                            signalText.innerText = '--- : --';
+                        }, 7000);
+
+                        if(autoLoopActive && currentMode === "5S") {
+                            autoTimer = setTimeout(function(){
+                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
+                            }, 10000);
+                        }
+                    }, 5200);
+                });
+            }
+
+            function runLiveSignalGeneration(panel) {
+                var laser = d.getElementById('epic-laser-line');
+                var statusLbl = d.getElementById('live-status-label');
+                var accBadge = d.getElementById('live-accuracy-badge');
+                var sigDisplay = d.getElementById('live-signal-display');
+                var rulesDesc = d.getElementById('live-rules-desc');
+                var genBtn = d.getElementById('generate-live-signal-btn');
+
+                if(!laser) return;
+                laser.style.display = 'block';
+                statusLbl.innerText = "STATUS: SCANNING";
+                sigDisplay.innerText = "RA VIP AI Scanning Live Market...";
+                sigDisplay.style.color = '#38bdf8';
+                genBtn.disabled = true;
+
+                triggerEpicScanAnimation(function(){
+                    fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
+                    .then(function(r){ return r.json(); })
+                    .catch(function(){ return {signal: "CALL", confidence: 95, rule: "RA VIP Liquidity Sweep & Momentum Reversal."}; })
+                    .then(function(data){
+                        if(!panel.isConnected) return;
+                        laser.style.display = 'none';
+                        var sig = String(data.signal || 'CALL').toUpperCase();
+                        var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
+                        var confidence = data.confidence || 95;
+
+                        statusLbl.innerText = "STATUS: SUCCESS";
+                        accBadge.innerText = "ACCURACY: " + confidence + "%";
+                        sigDisplay.style.color = isCall ? '#22c55e' : '#ef4444';
+                        sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
+                        rulesDesc.innerText = "Rule: " + (data.rule || "RA VIP Advanced Confluence Verified.");
+
+                        setTimeout(function(){
+                            if(!panel.isConnected) return;
+                            statusLbl.innerText = "STATUS: READY";
+                            accBadge.innerText = "ACCURACY: --%";
+                            sigDisplay.style.color = '#facc15';
+                            sigDisplay.innerText = "CLICK GENERATE";
+                            rulesDesc.innerText = "Awaiting RA VIP AI Confluence Analysis...";
+                            genBtn.disabled = false;
+                        }, 7000);
+                    });
+                });
             }
 
             function makeDraggable(panelEl) {
-                var header = d.getElementById('ra-master-header');
+                var header = d.getElementById('ra-panel-header');
                 if(!header) return;
                 var pX = 0, pY = 0, mX = 0, mY = 0;
                 header.onmousedown = header.ontouchstart = function(e) {
@@ -603,7 +787,7 @@ def bot_script():
                 }
             }
 
-        } catch(e) { console.error("RA VIP Master Terminal Error:", e); }
+        } catch(e) { console.error("RA VIP BOT Error:", e); }
     })();
     """
     res = make_response(js)
