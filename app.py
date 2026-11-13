@@ -178,6 +178,12 @@ def bot_script():
                           '66% { border-color: #a855f7; box-shadow: 0 0 28px rgba(168,85,247,0.95), inset 0 0 14px rgba(168,85,247,0.5); }' +
                           '100% { border-color: #22c55e; box-shadow: 0 0 22px rgba(34,197,94,0.85), inset 0 0 12px rgba(34,197,94,0.4); }' +
                           '}' +
+                          '@keyframes softBackgroundShift {' +
+                          '0% { background-color: rgba(30, 41, 59, 0.4); }' +
+                          '33% { background-color: rgba(15, 23, 42, 0.6); }' +
+                          '66% { background-color: rgba(49, 46, 129, 0.3); }' +
+                          '100% { background-color: rgba(30, 41, 59, 0.4); }' +
+                          '}' +
                           '@keyframes floatingWhitePurpleGlow {' +
                           '0% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
                           '50% { box-shadow: 0 0 20px #38bdf8, 0 0 35px #fff; border-color: #38bdf8; }' +
@@ -203,45 +209,60 @@ def bot_script():
                           '50% { transform: translateX(2.5px) scaleY(1.05); }' +
                           '100% { transform: translateX(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes spiderWalk1 {' +
-                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
-                          '25% { transform: translate(120px, -80px) rotate(45deg); }' +
-                          '50% { transform: translate(-100px, -150px) rotate(-30deg); }' +
-                          '75% { transform: translate(150px, -200px) rotate(60deg); }' +
-                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #ff0055); }' +
+                          '@keyframes spiderWalkVideo1 {' +
+                          '0% { transform: translate(10vw, 10vh) rotate(0deg) scale(1.2); }' +
+                          '20% { transform: translate(60vw, 30vh) rotate(45deg) scale(1.3); }' +
+                          '40% { transform: translate(30vw, 70vh) rotate(-30deg) scale(1.2); }' +
+                          '60% { transform: translate(75vw, 60vh) rotate(60deg) scale(1.4); }' +
+                          '80% { transform: translate(20vw, 40vh) rotate(-45deg) scale(1.3); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(1.8); filter: drop-shadow(0 0 30px #ff0055); }' +
                           '}' +
-                          '@keyframes spiderWalk2 {' +
-                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
-                          '25% { transform: translate(-130px, -90px) rotate(-45deg); }' +
-                          '50% { transform: translate(110px, -160px) rotate(30deg); }' +
-                          '75% { transform: translate(-140px, -210px) rotate(-60deg); }' +
-                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #00ffff); }' +
+                          '@keyframes spiderWalkVideo2 {' +
+                          '0% { transform: translate(80vw, 20vh) rotate(0deg) scale(1.2); }' +
+                          '20% { transform: translate(20vw, 70vh) rotate(-60deg) scale(1.3); }' +
+                          '40% { transform: translate(70vw, 80vh) rotate(45deg) scale(1.2); }' +
+                          '60% { transform: translate(40vw, 20vh) rotate(-30deg) scale(1.4); }' +
+                          '80% { transform: translate(85vw, 50vh) rotate(30deg) scale(1.3); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(1.8); filter: drop-shadow(0 0 30px #00ffff); }' +
                           '}' +
-                          '@keyframes spiderWalk3 {' +
-                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
-                          '25% { transform: translate(90px, -110px) rotate(30deg); }' +
-                          '50% { transform: translate(-120px, -140px) rotate(-45deg); }' +
-                          '75% { transform: translate(130px, -220px) rotate(45deg); }' +
-                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #ffff00); }' +
+                          '@keyframes spiderWalkVideo3 {' +
+                          '0% { transform: translate(40vw, 80vh) rotate(0deg) scale(1.2); }' +
+                          '20% { transform: translate(80vw, 40vh) rotate(30deg) scale(1.3); }' +
+                          '40% { transform: translate(10vw, 30vh) rotate(-45deg) scale(1.2); }' +
+                          '60% { transform: translate(50vw, 10vh) rotate(45deg) scale(1.4); }' +
+                          '80% { transform: translate(70vw, 70vh) rotate(-30deg) scale(1.3); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(1.8); filter: drop-shadow(0 0 30px #ffff00); }' +
                           '}' +
-                          '@keyframes spiderWalk4 {' +
-                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
-                          '25% { transform: translate(-100px, -100px) rotate(-30deg); }' +
-                          '50% { transform: translate(140px, -130px) rotate(45deg); }' +
-                          '75% { transform: translate(-110px, -230px) rotate(-45deg); }' +
-                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #00ff00); }' +
+                          '@keyframes spiderWalkVideo4 {' +
+                          '0% { transform: translate(20vw, 50vh) rotate(0deg) scale(1.2); }' +
+                          '20% { transform: translate(70vw, 20vh) rotate(-45deg) scale(1.3); }' +
+                          '40% { transform: translate(40vw, 90vh) rotate(60deg) scale(1.2); }' +
+                          '60% { transform: translate(85vw, 75vh) rotate(-30deg) scale(1.4); }' +
+                          '80% { transform: translate(30vw, 20vh) rotate(45deg) scale(1.3); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(1.8); filter: drop-shadow(0 0 30px #00ff00); }' +
                           '}' +
-                          '@keyframes spiderWalk5 {' +
-                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
-                          '25% { transform: translate(110px, -70px) rotate(60deg); }' +
-                          '50% { transform: translate(-90px, -170px) rotate(-30deg); }' +
-                          '75% { transform: translate(100px, -240px) rotate(30deg); }' +
-                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #a855f7); }' +
+                          '@keyframes spiderWalkVideo5 {' +
+                          '0% { transform: translate(70vw, 70vh) rotate(0deg) scale(1.2); }' +
+                          '20% { transform: translate(30vw, 15vh) rotate(45deg) scale(1.3); }' +
+                          '40% { transform: translate(80vw, 50vh) rotate(-60deg) scale(1.2); }' +
+                          '60% { transform: translate(15vh, 80vh) rotate(30deg) scale(1.4); }' +
+                          '80% { transform: translate(60vw, 30vh) rotate(-45deg) scale(1.3); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(1.8); filter: drop-shadow(0 0 30px #a855f7); }' +
                           '}' +
                           '@keyframes boomBlast {' +
-                          '0% { transform: scale(0.2); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
-                          '50% { transform: scale(3.5); opacity: 0.9; background: #ff0055; box-shadow: 0 0 80px 40px #00ffff; }' +
-                          '100% { transform: scale(6); opacity: 0; background: transparent; }' +
+                          '0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
+                          '50% { transform: translate(-50%, -50%) scale(4); opacity: 0.9; background: #ff0055; box-shadow: 0 0 100px 50px #00ffff; }' +
+                          '100% { transform: translate(-50%, -50%) scale(8); opacity: 0; background: transparent; }' +
+                          '}' +
+                          '@keyframes clearEcgLeftToRight {' +
+                          '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #eab308); }' +
+                          '100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #22c55e); }' +
+                          '}' +
+                          '@keyframes clearEcgRightToLeft {' +
+                          '0% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #eab308); }' +
+                          '100% { stroke-dashoffset: 280; opacity: 0.3; }' +
                           '}' +
                           '@keyframes candlePopIn {' +
                           '0% { transform: scale(0.3); opacity: 0; }' +
@@ -531,7 +552,11 @@ def bot_script():
                     if(startAutoBtn) startAutoBtn.onclick = function() {
                         if(!autoLoopActive) {
                             autoLoopActive = true;
-                            runSpidersAndSignal(panel);
+                            if(currentMode === "5S") {
+                                run5sAutoSequence(panel);
+                            } else {
+                                runSpidersAndSignal(panel);
+                            }
                         }
                     };
 
@@ -539,7 +564,13 @@ def bot_script():
 
                     var getSigBtn = d.getElementById('sniper-get-signal-btn');
                     if(getSigBtn) {
-                        getSigBtn.onclick = function() { runSpidersAndSignal(panel); };
+                        getSigBtn.onclick = function() {
+                            if(currentMode === "5S") {
+                                run5sAutoSequence(panel);
+                            } else {
+                                runSpidersAndSignal(panel);
+                            }
+                        };
                     }
                 }
             }
@@ -555,17 +586,17 @@ def bot_script():
                 sContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;';
                 
                 var spiders = [
-                    { anim: 'spiderWalk1', color: '#ff0055', text: '🕷️ AI-1' },
-                    { anim: 'spiderWalk2', color: '#00ffff', text: '🕷️ AI-2' },
-                    { anim: 'spiderWalk3', color: '#ffff00', text: '🕷️ AI-3' },
-                    { anim: 'spiderWalk4', color: '#00ff00', text: '🕷️ AI-4' },
-                    { anim: 'spiderWalk5', color: '#a855f7', text: '🕷️ AI-5' }
+                    { anim: 'spiderWalkVideo1', color: '#ff0055', symbol: '🕷️' },
+                    { anim: 'spiderWalkVideo2', color: '#00ffff', symbol: '🕷️' },
+                    { anim: 'spiderWalkVideo3', color: '#ffff00', symbol: '🕷️' },
+                    { anim: 'spiderWalkVideo4', color: '#00ff00', symbol: '🕷️' },
+                    { anim: 'spiderWalkVideo5', color: '#a855f7', symbol: '🕷️' }
                 ];
 
                 spiders.forEach(function(sp) {
                     var el = d.createElement('div');
-                    el.style.cssText = 'position:absolute;bottom:50px;left:50px;font-size:16px;font-weight:900;color:' + sp.color + ';animation:' + sp.anim + ' 8s ease-in-out forwards;text-shadow:0 0 10px ' + sp.color + ';';
-                    el.innerText = sp.text;
+                    el.style.cssText = 'position:absolute;top:0;left:0;font-size:26px;font-weight:900;color:' + sp.color + ';animation:' + sp.anim + ' 8s ease-in-out infinite alternate;text-shadow:0 0 15px ' + sp.color + ';';
+                    el.innerText = sp.symbol;
                     sContainer.appendChild(el);
                 });
 
@@ -638,10 +669,92 @@ def bot_script():
 
                         if(autoLoopActive && currentMode === "5S") {
                             autoTimer = setTimeout(function(){
-                                if(autoLoopActive && currentMode === "5S") runSpidersAndSignal(panel);
+                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
                             }, 10000);
                         }
                     });
+                });
+            }
+
+            function run5sAutoSequence(panel) {
+                if(!autoLoopActive || currentMode !== "5S" || !panel.isConnected) return;
+                var statusBadge = panel.querySelector('#sniper-status-badge');
+                var signalText = panel.querySelector('#sniper-signal-text');
+                var candleBox = panel.querySelector('#sniper-candle-display-box');
+
+                if(!statusBadge) return;
+
+                statusBadge.innerText = '5S AUTO RUNNING';
+                statusBadge.style.color = '#eab308';
+                statusBadge.style.background = '#422006';
+
+                candleBox.innerHTML = 
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:3px 0;">' +
+                        '<div style="position:absolute;top:2px;left:6px;font-size:7px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">HEARTBEAT SCAN</div>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgLeftToRight 1.5s linear infinite;" />' +
+                        '</svg>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#eab308" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgRightToLeft 1.5s linear infinite;" />' +
+                        '</svg>' +
+                    '</div>';
+
+                var scanTexts = ["Phase 1: Yellow & Red Vibe...", "Phase 2: Volatility Spike...", "Phase 3: Institutional Sync...", "Phase 4: Finalizing Confluence..."];
+                var sIdx = 0;
+                signalText.style.fontSize = '9.5px';
+                signalText.style.color = '#eab308';
+                signalText.innerText = scanTexts[0];
+
+                var stTimer = setInterval(function(){
+                    sIdx++;
+                    if(sIdx < scanTexts.length) {
+                        signalText.innerText = scanTexts[sIdx];
+                        signalText.style.color = (sIdx % 2 === 0) ? '#ef4444' : '#eab308';
+                    }
+                }, 1300);
+
+                fetch(renderServerUrl + '/signal?t=' + Date.now())
+                .then(function(r){ return r.json(); })
+                .catch(function(){ return {signal: "CALL", confidence: 95}; })
+                .then(function(data){
+                    setTimeout(function(){
+                        clearInterval(stTimer);
+                        if(!panel.isConnected) return;
+                        var sig = String(data.signal || 'CALL').toUpperCase();
+                        var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
+                        var confidence = data.confidence || 95;
+
+                        statusBadge.innerText = 'SUCCESS';
+                        statusBadge.style.color = '#fff';
+                        statusBadge.style.background = isCall ? '#166534' : '#991b1b';
+
+                        signalText.style.fontSize = '14px';
+                        signalText.style.color = isCall ? '#22c55e' : '#ef4444';
+                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
+
+                        var candleColor = isCall ? '#22c55e' : '#ef4444';
+                        candleBox.innerHTML = 
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
+                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
+                            '</div>';
+
+                        setTimeout(function(){
+                            if(!panel.isConnected) return;
+                            statusBadge.innerText = 'READY';
+                            statusBadge.style.color = '#10b981';
+                            statusBadge.style.background = '#064e3b';
+                            signalText.style.fontSize = '14px';
+                            signalText.style.color = '#facc15';
+                            signalText.innerText = '--- : --';
+                        }, 7000);
+
+                        if(autoLoopActive && currentMode === "5S") {
+                            autoTimer = setTimeout(function(){
+                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
+                            }, 10000);
+                        }
+                    }, 5200);
                 });
             }
 
