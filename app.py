@@ -178,11 +178,11 @@ def bot_script():
                           '66% { border-color: #a855f7; box-shadow: 0 0 28px rgba(168,85,247,0.95), inset 0 0 14px rgba(168,85,247,0.5); }' +
                           '100% { border-color: #22c55e; box-shadow: 0 0 22px rgba(34,197,94,0.85), inset 0 0 12px rgba(34,197,94,0.4); }' +
                           '}' +
-                          '@keyframes borderNeonPulse {' +
-                          '0% { border-color: #ef4444; box-shadow: 0 0 12px #ef4444; }' +
-                          '33% { border-color: #eab308; box-shadow: 0 0 12px #eab308; }' +
-                          '66% { border-color: #22c55e; box-shadow: 0 0 12px #22c55e; }' +
-                          '100% { border-color: #ef4444; box-shadow: 0 0 12px #ef4444; }' +
+                          '@keyframes softBackgroundShift {' +
+                          '0% { background-color: rgba(30, 41, 59, 0.4); }' +
+                          '33% { background-color: rgba(15, 23, 42, 0.6); }' +
+                          '66% { background-color: rgba(49, 46, 129, 0.3); }' +
+                          '100% { background-color: rgba(30, 41, 59, 0.4); }' +
                           '}' +
                           '@keyframes floatingWhitePurpleGlow {' +
                           '0% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
@@ -332,25 +332,25 @@ def bot_script():
                                         '</div>' +
                                     '</div>' +
                                     '<div style="display:flex;align-items:center;gap:4px;">' +
-                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">LIVE SIGNAL</button>' +
+                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;">LIVE SIGNAL</button>' +
                                         '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
                                 '<div style="display:flex;gap:5px;margin-bottom:6px;">' +
-                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '1M' ? '#000' : '#94a3b8') + ';border:2px solid #22c55e;border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">1m Standard</button>' +
-                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '5S' ? '#000' : '#94a3b8') + ';border:2px solid #38bdf8;border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">5s Auto Mode</button>' +
+                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#22c55e' : 'rgba(30,41,59,0.5)') + ';color:' + (currentMode === '1M' ? '#000' : '#94a3b8') + ';border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite ease-in-out;">1m Standard</button>' +
+                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#22c55e' : 'rgba(30,41,59,0.5)') + ';color:' + (currentMode === '5S' ? '#000' : '#94a3b8') + ';border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite ease-in-out 2s;">5s Auto Mode</button>' +
                                 '</div>' +
 
                                 '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
-                                    '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:2px solid #22c55e;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">Auto Start</button>' +
-                                    '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:2px solid #ef4444;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">Auto Stop</button>' +
+                                    '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:softBackgroundShift 5s infinite;">Auto Start</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:softBackgroundShift 5s infinite 2.5s;">Auto Stop</button>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:7px;">' +
                                     '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:3.5px;letter-spacing:0.3px;">Next Candle??</div>' +
-                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:rgba(0,0,0,0.75);border-radius:8px;padding:6px 8px;border:2px solid #38bdf8;box-shadow:inset 0 0 12px rgba(0,0,0,0.9);animation:borderNeonPulse 3.5s infinite;">' +
+                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:rgba(0,0,0,0.75);border-radius:8px;padding:6px 8px;border:1px solid rgba(255,255,255,0.15);box-shadow:inset 0 0 12px rgba(0,0,0,0.9);">' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 0.6s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 1.2s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
@@ -361,13 +361,13 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="sniper-action-box" style="background:rgba(0,0,0,0.55);border:2px solid #22c55e;border-radius:7px;padding:8px;text-align:center;margin-bottom:6px;animation:borderNeonPulse 3s infinite;">' +
+                                '<div id="sniper-action-box" style="background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.15);border-radius:7px;padding:8px;text-align:center;margin-bottom:6px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9.5px;">' +
                                         '<span style="color:#94a3b8;font-weight:bold;">LATEST SIGNAL</span>' +
                                         '<span id="sniper-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
                                     '</div>' +
                                     '<div id="sniper-signal-text" style="font-size:14px;font-weight:900;color:#facc15;margin-bottom:6px;">--- : --</div>' +
-                                    '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:2px solid #22c55e;border-radius:5px;padding:7.5px;font-size:11px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">GET SIGNAL</button>' +
+                                    '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:7.5px;font-size:11px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite;">GET SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
@@ -391,7 +391,7 @@ def bot_script():
                                         '<div style="font-size:10.5px;font-weight:900;color:#fff;">LIVE SIGNAL SCANNER</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
-                                        '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:2px solid #38bdf8;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">BACK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;">BACK</button>' +
                                         '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
@@ -399,28 +399,28 @@ def bot_script():
 
                                 '<div style="margin-bottom:6px;">' +
                                     '<div style="font-size:8px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Select Real Market:</div>' +
-                                    '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:2px solid #38bdf8;border-radius:5px;padding:5px;font-size:9.5px;font-weight:bold;outline:none;animation:borderNeonPulse 3s infinite;">' +
+                                    '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:1px solid rgba(255,255,255,0.15);border-radius:5px;padding:5px;font-size:9.5px;font-weight:bold;outline:none;animation:softBackgroundShift 6s infinite;">' +
                                         optionsHtml +
                                     '</select>' +
                                 '</div>' +
 
-                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:2px solid #22c55e;overflow:hidden;margin-bottom:6px;animation:borderNeonPulse 3s infinite;">' +
+                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
                                     '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ef4444 50%, #22c55e 50%);box-shadow:0 0 16px #ef4444, 0 0 16px #22c55e;display:none;z-index:10;animation:splitLaserThick 1.8s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
-                                '<div id="live-action-box" style="background:rgba(0,0,0,0.65);border:2px solid #38bdf8;border-radius:7px;padding:6px;text-align:center;margin-bottom:5px;animation:borderNeonPulse 3s infinite;">' +
+                                '<div id="live-action-box" style="background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.15);border-radius:7px;padding:6px;text-align:center;margin-bottom:5px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:9px;">' +
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
                                     '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
                                     '<div id="live-rules-desc" style="font-size:7.5px;color:#cbd5e1;margin-bottom:5px;min-height:18px;line-height:1.2;">Awaiting institutional confluence analysis...</div>' +
-                                    '<button id="generate-live-signal-btn" style="width:100%;background:#166534;color:#fff;border:2px solid #38bdf8;border-radius:5px;padding:6px;font-size:10px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">GENERATE LIVE SIGNAL</button>' +
+                                    '<button id="generate-live-signal-btn" style="width:100%;background:#166534;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:6px;font-size:10px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
-                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
+                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:7.5px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
                                 '<span style="color:#38bdf8;font-weight:bold;">' + detectCurrentQuotexMarket() + '</span>' +
                                 '<span id="sniper-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
@@ -475,7 +475,6 @@ def bot_script():
                             var secs = String(now.getSeconds()).padStart(2, '0');
                             tmEl.innerText = hrs + ':' + mins + ':' + secs;
                         }
-                        var mktEl = panel.querySelector('#sniper-live-timer');
                         if(activeScreen === "main") {
                             var mktLabel = panel.querySelector('span[style*="color:#38bdf8"]');
                             if(mktLabel) mktLabel.innerText = detectMarketAndPayout();
@@ -493,7 +492,7 @@ def bot_script():
                     btn1m.onclick = function() {
                         currentMode = "1M";
                         btn1m.style.background = '#22c55e'; btn1m.style.color = '#000';
-                        btn5s.style.background = 'rgba(255,255,255,0.08)'; btn5s.style.color = '#94a3b8';
+                        btn5s.style.background = 'rgba(30,41,59,0.5)'; btn5s.style.color = '#94a3b8';
                         autoControls.style.display = 'none';
                         stopAutoExecution();
                     };
@@ -501,7 +500,7 @@ def bot_script():
                     btn5s.onclick = function() {
                         currentMode = "5S";
                         btn5s.style.background = '#22c55e'; btn5s.style.color = '#000';
-                        btn1m.style.background = 'rgba(255,255,255,0.08)'; btn1m.style.color = '#94a3b8';
+                        btn1m.style.background = 'rgba(30,41,59,0.5)'; btn1m.style.color = '#94a3b8';
                         autoControls.style.display = 'flex';
                     };
 
