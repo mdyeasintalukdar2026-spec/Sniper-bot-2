@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 85 + ((int(current_time * 11) + 17) % 15) # Real accuracy between 85% - 99%
+        real_accuracy = 85 + ((int(time.time() * 11) + 17) % 15)
         
         rules_list = [
             "EMA 9 & 21 Bullish Crossover Confluence with RSI Momentum Check.",
@@ -131,7 +131,7 @@ def get_signal():
             "Price Action Retracement at Key Support/Resistance Level.",
             "MACD Histogram Momentum Reversal with Zero-Lag Filter."
         ]
-        chosen_rule = rules_list[int(current_time) % len(rules_list)]
+        chosen_rule = rules_list[int(time.time()) % len(rules_list)]
 
         res = jsonify({
             "signal": ai_decision,
@@ -213,7 +213,7 @@ def bot_script():
             var isExecutionLocked = false;
             var isLicensed = false;
             var currentMode = "1M";
-            var activeScreen = "main"; // "main" or "live_signal"
+            var activeScreen = "main";
             var selectedRealMarket = "EURUSD";
 
             var realMarkets = [
@@ -345,7 +345,6 @@ def bot_script():
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:26px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 0.3s;"><div style="width:1.5px;height:7px;background:#ef4444;"></div><div style="width:5px;height:30px;background:#ef4444;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#ef4444;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 0.6s;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:22px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
-                                        # নির্দিষ্ট দুটি ক্যান্ডেল গ্লোইং ও জলজল করবে (লাল ও সবুজ)
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingRedPulse 1.2s infinite ease-in-out;"><div style="width:2px;height:8px;background:#ef4444;"></div><div style="width:6px;height:35px;background:#ef4444;border-radius:1.5px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:8px;background:#ef4444;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingGreenPulse 1.2s infinite ease-in-out;"><div style="width:2px;height:8px;background:#22c55e;"></div><div style="width:6px;height:35px;background:#22c55e;border-radius:1.5px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:8px;background:#22c55e;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 1.2s;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:28px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
@@ -369,7 +368,6 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else {
-                    // LIVE SIGNAL INTERFACE WITH TRADING VIEW & REAL MARKETS
                     var optionsHtml = '';
                     realMarkets.forEach(function(m){
                         optionsHtml += '<option value="' + m + '" ' + (selectedRealMarket === m ? 'selected' : '') + '>' + m + ' (REAL)</option>';
@@ -389,7 +387,6 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                # মার্কেট পেয়ার সিলেক্টর অপশন (শুধুমাত্র রিয়েল মার্কেট)
                                 '<div style="margin-bottom:6px;">' +
                                     '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Select Real Market:</div>' +
                                     '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:4px;padding:4px;font-size:9px;font-weight:bold;outline:none;">' +
@@ -397,7 +394,6 @@ def bot_script():
                                     '</select>' +
                                 '</div>' +
 
-                                # ট্রেডিং ভিউ লাইভ চার্ট কন্টেইনার ও লেজার স্ক্যানার বিন
                                 '<div id="tv-chart-container" style="position:relative;width:100%;height:115px;background:#000;border-radius:5px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
                                     '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg, transparent, #22c55e, #fff, #22c55e, transparent);box-shadow:0 0 12px #22c55e;display:none;z-index:10;animation:laserScanBeam 1.5s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%;height:100%;border:none;pointer-events:none;"></iframe>' +
@@ -424,7 +420,6 @@ def bot_script():
                 d.body.appendChild(panel);
                 makeDraggable(panel);
 
-                # Event Listeners
                 var closeBtn = d.getElementById('sniper-close-btn');
                 if(closeBtn) closeBtn.onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
 
@@ -527,7 +522,6 @@ def bot_script():
 
                         executeTrade(isCall);
 
-                        # ৭ সেকেন্ড পর সিগন্যাল অটো রিমুভ হয়ে আগের অবস্থায় ফিরে যাবে
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
