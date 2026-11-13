@@ -178,81 +178,60 @@ def bot_script():
                           '66% { border-color: #a855f7; box-shadow: 0 0 28px rgba(168,85,247,0.95), inset 0 0 14px rgba(168,85,247,0.5); }' +
                           '100% { border-color: #22c55e; box-shadow: 0 0 22px rgba(34,197,94,0.85), inset 0 0 12px rgba(34,197,94,0.4); }' +
                           '}' +
-                          '@keyframes softBackgroundShift {' +
-                          '0% { background-color: rgba(30, 41, 59, 0.4); }' +
-                          '33% { background-color: rgba(15, 23, 42, 0.6); }' +
-                          '66% { background-color: rgba(49, 46, 129, 0.3); }' +
-                          '100% { background-color: rgba(30, 41, 59, 0.4); }' +
-                          '}' +
                           '@keyframes floatingWhitePurpleGlow {' +
                           '0% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
                           '50% { box-shadow: 0 0 20px #38bdf8, 0 0 35px #fff; border-color: #38bdf8; }' +
                           '100% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
                           '}' +
-                          '@keyframes glowingRedMassive {' +
-                          '0% { filter: drop-shadow(0 0 6px #ef4444); opacity: 0.9; transform: scale(1); }' +
-                          '50% { filter: drop-shadow(0 0 22px #ef4444); opacity: 1; transform: scale(1.1); }' +
-                          '100% { filter: drop-shadow(0 0 6px #ef4444); opacity: 0.9; transform: scale(1); }' +
-                          '}' +
-                          '@keyframes glowingGreenMassive {' +
-                          '0% { filter: drop-shadow(0 0 6px #22c55e); opacity: 0.9; transform: scale(1); }' +
-                          '50% { filter: drop-shadow(0 0 22px #22c55e); opacity: 1; transform: scale(1.1); }' +
-                          '100% { filter: drop-shadow(0 0 6px #22c55e); opacity: 0.9; transform: scale(1); }' +
-                          '}' +
-                          '@keyframes splitLaserThick {' +
-                          '0% { top: 0%; opacity: 0.95; }' +
-                          '50% { top: 100%; opacity: 1; }' +
-                          '100% { top: 0%; opacity: 0.95; }' +
-                          '}' +
                           '@keyframes gentleSideSway {' +
                           '0% { transform: translateX(0px) scaleY(1); }' +
-                          '50% { transform: translateX(2.5px) scaleY(1.05); }' +
+                          '50% { transform: translateX(2px) scaleY(1.03); }' +
                           '100% { transform: translateX(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes spiderWalkVideo1 {' +
-                          '0% { transform: translate(10vw, 10vh) rotate(0deg) scale(1.2); }' +
-                          '20% { transform: translate(60vw, 30vh) rotate(45deg) scale(1.3); }' +
-                          '40% { transform: translate(30vw, 70vh) rotate(-30deg) scale(1.2); }' +
-                          '60% { transform: translate(75vw, 60vh) rotate(60deg) scale(1.4); }' +
-                          '80% { transform: translate(20vw, 40vh) rotate(-45deg) scale(1.3); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(1.8); filter: drop-shadow(0 0 30px #ff0055); }' +
+                          '@keyframes spiderWalkReal1 {' +
+                          '0% { transform: translate(5vw, 10vh) rotate(0deg) scale(1.5); }' +
+                          '25% { transform: translate(50vw, 25vh) rotate(35deg) scale(1.6); filter: drop-shadow(0 0 15px #ff0055); }' +
+                          '50% { transform: translate(20vw, 65vh) rotate(-20deg) scale(1.5); filter: drop-shadow(0 0 15px #00ffff); }' +
+                          '75% { transform: translate(75vw, 55vh) rotate(45deg) scale(1.7); filter: drop-shadow(0 0 15px #ffff00); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(2.2); filter: drop-shadow(0 0 35px #ff0055); }' +
                           '}' +
-                          '@keyframes spiderWalkVideo2 {' +
-                          '0% { transform: translate(80vw, 20vh) rotate(0deg) scale(1.2); }' +
-                          '20% { transform: translate(20vw, 70vh) rotate(-60deg) scale(1.3); }' +
-                          '40% { transform: translate(70vw, 80vh) rotate(45deg) scale(1.2); }' +
-                          '60% { transform: translate(40vw, 20vh) rotate(-30deg) scale(1.4); }' +
-                          '80% { transform: translate(85vw, 50vh) rotate(30deg) scale(1.3); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(1.8); filter: drop-shadow(0 0 30px #00ffff); }' +
+                          '@keyframes spiderWalkReal2 {' +
+                          '0% { transform: translate(85vw, 15vh) rotate(0deg) scale(1.5); }' +
+                          '25% { transform: translate(30vw, 60vh) rotate(-45deg) scale(1.6); filter: drop-shadow(0 0 15px #00ff00); }' +
+                          '50% { transform: translate(70vw, 75vh) rotate(30deg) scale(1.5); filter: drop-shadow(0 0 15px #a855f7); }' +
+                          '75% { transform: translate(35vw, 25vh) rotate(-30deg) scale(1.7); filter: drop-shadow(0 0 15px #ff0055); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(2.2); filter: drop-shadow(0 0 35px #00ffff); }' +
                           '}' +
-                          '@keyframes spiderWalkVideo3 {' +
-                          '0% { transform: translate(40vw, 80vh) rotate(0deg) scale(1.2); }' +
-                          '20% { transform: translate(80vw, 40vh) rotate(30deg) scale(1.3); }' +
-                          '40% { transform: translate(10vw, 30vh) rotate(-45deg) scale(1.2); }' +
-                          '60% { transform: translate(50vw, 10vh) rotate(45deg) scale(1.4); }' +
-                          '80% { transform: translate(70vw, 70vh) rotate(-30deg) scale(1.3); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(1.8); filter: drop-shadow(0 0 30px #ffff00); }' +
+                          '@keyframes spiderWalkReal3 {' +
+                          '0% { transform: translate(45vw, 85vh) rotate(0deg) scale(1.5); }' +
+                          '25% { transform: translate(80vw, 35vh) rotate(25deg) scale(1.6); filter: drop-shadow(0 0 15px #ffff00); }' +
+                          '50% { transform: translate(15vw, 30vh) rotate(-35deg) scale(1.5); filter: drop-shadow(0 0 15px #ff0055); }' +
+                          '75% { transform: translate(60vw, 70vh) rotate(50deg) scale(1.7); filter: drop-shadow(0 0 15px #00ff00); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(2.2); filter: drop-shadow(0 0 35px #ffff00); }' +
                           '}' +
-                          '@keyframes spiderWalkVideo4 {' +
-                          '0% { transform: translate(20vw, 50vh) rotate(0deg) scale(1.2); }' +
-                          '20% { transform: translate(70vw, 20vh) rotate(-45deg) scale(1.3); }' +
-                          '40% { transform: translate(40vw, 90vh) rotate(60deg) scale(1.2); }' +
-                          '60% { transform: translate(85vw, 75vh) rotate(-30deg) scale(1.4); }' +
-                          '80% { transform: translate(30vw, 20vh) rotate(45deg) scale(1.3); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(1.8); filter: drop-shadow(0 0 30px #00ff00); }' +
+                          '@keyframes spiderWalkReal4 {' +
+                          '0% { transform: translate(15vw, 45vh) rotate(0deg) scale(1.5); }' +
+                          '25% { transform: translate(65vw, 15vh) rotate(-30deg) scale(1.6); filter: drop-shadow(0 0 15px #a855f7); }' +
+                          '50% { transform: translate(40vw, 80vh) rotate(40deg) scale(1.5); filter: drop-shadow(0 0 15px #00ffff); }' +
+                          '75% { transform: translate(80vw, 65vh) rotate(-50deg) scale(1.7); filter: drop-shadow(0 0 15px #ff0055); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(2.2); filter: drop-shadow(0 0 35px #00ff00); }' +
                           '}' +
-                          '@keyframes spiderWalkVideo5 {' +
-                          '0% { transform: translate(70vw, 70vh) rotate(0deg) scale(1.2); }' +
-                          '20% { transform: translate(30vw, 15vh) rotate(45deg) scale(1.3); }' +
-                          '40% { transform: translate(80vw, 50vh) rotate(-60deg) scale(1.2); }' +
-                          '60% { transform: translate(15vh, 80vh) rotate(30deg) scale(1.4); }' +
-                          '80% { transform: translate(60vw, 30vh) rotate(-45deg) scale(1.3); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(1.8); filter: drop-shadow(0 0 30px #a855f7); }' +
+                          '@keyframes spiderWalkReal5 {' +
+                          '0% { transform: translate(75vw, 75vh) rotate(0deg) scale(1.5); }' +
+                          '25% { transform: translate(25vw, 20vh) rotate(45deg) scale(1.6); filter: drop-shadow(0 0 15px #00ffff); }' +
+                          '50% { transform: translate(85vw, 45vh) rotate(-40deg) scale(1.5); filter: drop-shadow(0 0 15px #ffff00); }' +
+                          '75% { transform: translate(10vw, 70vh) rotate(30deg) scale(1.7); filter: drop-shadow(0 0 15px #a855f7); }' +
+                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(2.2); filter: drop-shadow(0 0 35px #a855f7); }' +
                           '}' +
-                          '@keyframes boomBlast {' +
+                          '@keyframes spiderWebNetAnim {' +
+                          '0% { opacity: 0; transform: scale(0.2); }' +
+                          '50% { opacity: 0.85; transform: scale(1.1); }' +
+                          '100% { opacity: 0.3; transform: scale(1); }' +
+                          '}' +
+                          '@keyframes boomBlastFinal {' +
                           '0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
-                          '50% { transform: translate(-50%, -50%) scale(4); opacity: 0.9; background: #ff0055; box-shadow: 0 0 100px 50px #00ffff; }' +
-                          '100% { transform: translate(-50%, -50%) scale(8); opacity: 0; background: transparent; }' +
+                          '50% { transform: translate(-50%, -50%) scale(5); opacity: 0.95; background: #ff0055; box-shadow: 0 0 120px 60px #00ffff; }' +
+                          '100% { transform: translate(-50%, -50%) scale(10); opacity: 0; background: transparent; }' +
                           '}' +
                           '@keyframes clearEcgLeftToRight {' +
                           '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
@@ -339,6 +318,29 @@ def bot_script():
                 return marketName + " " + payout;
             }
 
+            function executeQuotexTrade(isCall) {
+                try {
+                    var btnSelector = isCall ? '.btn-call, .deal_call, [class*="call"], button.success' : '.btn-put, .deal_put, [class*="put"], button.danger';
+                    var tradeBtn = d.querySelector(btnSelector);
+                    if(tradeBtn) {
+                        tradeBtn.click();
+                        console.log("SNIPER BOT: Auto Trade Executed -> " + (isCall ? "CALL (BUY)" : "PUT (SELL)"));
+                    } else {
+                        var buttons = d.querySelectorAll('button');
+                        for(var i=0; i<buttons.length; i++) {
+                            var bTxt = buttons[i].innerText.toUpperCase();
+                            if(isCall && (bTxt.includes('CALL') || bTxt.includes('UP') || bTxt.includes('HIGHER'))) {
+                                buttons[i].click(); break;
+                            } else if(!isCall && (bTxt.includes('PUT') || bTxt.includes('DOWN') || bTxt.includes('LOWER'))) {
+                                buttons[i].click(); break;
+                            }
+                        }
+                    }
+                } catch(err) {
+                    console.error("Auto Trade Error:", err);
+                }
+            }
+
             function toggleSniperPanel() {
                 var existing = d.getElementById('sniper-bot-panel');
                 var floatingBtn = d.getElementById('sniper-bot-btn');
@@ -396,13 +398,13 @@ def bot_script():
                                 '<div style="text-align:center;margin-bottom:7px;">' +
                                     '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:3.5px;letter-spacing:0.3px;">Next Candle??</div>' +
                                     '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;box-shadow:inset 0 0 12px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 0.6s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 1.2s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingRedMassive 2.2s infinite ease-in-out;"><div style="width:2.5px;height:10px;background:#ef4444;"></div><div style="width:8px;height:48px;background:#ef4444;border-radius:2px;box-shadow:0 0 20px #ef4444;"></div><div style="width:2.5px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingGreenMassive 2.2s infinite ease-in-out;"><div style="width:2.5px;height:10px;background:#22c55e;"></div><div style="width:8px;height:48px;background:#22c55e;border-radius:2px;box-shadow:0 0 20px #22c55e;"></div><div style="width:2.5px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 1.8s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 2.4s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:32px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out 0.4s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:32px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out 0.8s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:32px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out 1.2s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:32px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out 1.6s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:32px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out 2.0s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:32px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4s infinite ease-in-out 2.4s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:32px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -580,31 +582,45 @@ def bot_script():
                 if(autoTimer) clearTimeout(autoTimer);
             }
 
-            function triggerSpiderScanAnimation(callback) {
+            function triggerRealSpiderAnimation(callback) {
                 var sContainer = d.createElement('div');
                 sContainer.id = 'sniper-spider-container';
                 sContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;';
                 
-                var spiders = [
-                    { anim: 'spiderWalkVideo1', color: '#ff0055', symbol: '🕷️' },
-                    { anim: 'spiderWalkVideo2', color: '#00ffff', symbol: '🕷️' },
-                    { anim: 'spiderWalkVideo3', color: '#ffff00', symbol: '🕷️' },
-                    { anim: 'spiderWalkVideo4', color: '#00ff00', symbol: '🕷️' },
-                    { anim: 'spiderWalkVideo5', color: '#a855f7', symbol: '🕷️' }
+                var spidersList = [
+                    { anim: 'spiderWalkReal1', color: '#ff0055' },
+                    { anim: 'spiderWalkReal2', color: '#00ffff' },
+                    { anim: 'spiderWalkReal3', color: '#ffff00' },
+                    { anim: 'spiderWalkReal4', color: '#00ff00' },
+                    { anim: 'spiderWalkReal5', color: '#a855f7' },
+                    { anim: 'spiderWalkReal1', color: '#38bdf8' },
+                    { anim: 'spiderWalkReal2', color: '#facc15' },
+                    { anim: 'spiderWalkReal3', color: '#ef4444' },
+                    { anim: 'spiderWalkReal4', color: '#22c55e' },
+                    { anim: 'spiderWalkReal5', color: '#ec4899' },
+                    { anim: 'spiderWalkReal1', color: '#eab308' },
+                    { anim: 'spiderWalkReal2', color: '#06b6d4' },
+                    { anim: 'spiderWalkReal3', color: '#84cc16' },
+                    { anim: 'spiderWalkReal4', color: '#f97316' },
+                    { anim: 'spiderWalkReal5', color: '#6366f1' }
                 ];
 
-                spiders.forEach(function(sp) {
+                spidersList.forEach(function(sp) {
                     var el = d.createElement('div');
-                    el.style.cssText = 'position:absolute;top:0;left:0;font-size:26px;font-weight:900;color:' + sp.color + ';animation:' + sp.anim + ' 8s ease-in-out infinite alternate;text-shadow:0 0 15px ' + sp.color + ';';
-                    el.innerText = sp.symbol;
+                    el.style.cssText = 'position:absolute;top:0;left:0;font-size:28px;font-weight:900;color:' + sp.color + ';animation:' + sp.anim + ' 10s ease-in-out infinite alternate;text-shadow:0 0 15px ' + sp.color + ';';
+                    el.innerText = '🕷️';
                     sContainer.appendChild(el);
                 });
+
+                var webNet = d.createElement('div');
+                webNet.style.cssText = 'position:absolute;top:50%;left:50%;width:85vw;height:85vh;border:3px dashed rgba(255,255,255,0.4);border-radius:50%;transform:translate(-50%, -50%);animation:spiderWebNetAnim 10s ease-in-out forwards;box-shadow:inset 0 0 50px rgba(0,255,255,0.3);';
+                sContainer.appendChild(webNet);
 
                 d.body.appendChild(sContainer);
 
                 setTimeout(function(){
                     var boom = d.createElement('div');
-                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:80px;height:80px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:boomBlast 1s ease-out forwards;pointer-events:none;';
+                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:90px;height:90px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:boomBlastFinal 1s ease-out forwards;pointer-events:none;';
                     d.body.appendChild(boom);
 
                     setTimeout(function(){
@@ -612,7 +628,7 @@ def bot_script():
                         if(boom.isConnected) boom.remove();
                         if(typeof callback === 'function') callback();
                     }, 1000);
-                }, 8000);
+                }, 10000);
             }
 
             function runSpidersAndSignal(panel) {
@@ -622,17 +638,17 @@ def bot_script():
 
                 if(!statusBadge) return;
 
-                statusBadge.innerText = 'SPIDERS SCANNING';
+                statusBadge.innerText = '15+ SPIDERS SCAN';
                 statusBadge.style.color = '#38bdf8';
                 statusBadge.style.background = '#0c4a6e';
-                signalText.innerText = "Spiders Crawling on Chart...";
+                signalText.innerText = "15 Spiders Crawling & Webbing...";
 
                 candleBox.innerHTML = 
                     '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#38bdf8;font-size:10px;font-weight:bold;text-align:center;">' +
-                        '🕷️ Multi-Spider Live Chart Scanning... (8s)' +
+                        '🕷️ 15 Real Spiders Scanning Chart... (10s)' +
                     '</div>';
 
-                triggerSpiderScanAnimation(function(){
+                triggerRealSpiderAnimation(function(){
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "CALL", confidence: 95}; })
@@ -656,6 +672,8 @@ def bot_script():
                                 '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
                                 '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
                             '</div>';
+
+                        executeQuotexTrade(isCall);
 
                         setTimeout(function(){
                             if(!panel.isConnected) return;
@@ -769,11 +787,11 @@ def bot_script():
                 if(!laser) return;
                 laser.style.display = 'block';
                 statusLbl.innerText = "STATUS: SCANNING";
-                sigDisplay.innerText = "Spiders Crawling on Live Chart...";
+                sigDisplay.innerText = "15 Spiders Crawling on Live Chart...";
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
-                triggerSpiderScanAnimation(function(){
+                triggerRealSpiderAnimation(function(){
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "CALL", confidence: 94, rule: "Standard Volume Spike Confluence."}; })
