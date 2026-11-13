@@ -413,7 +413,7 @@ def bot_script():
 
                                 '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:5px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
                                     '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg, transparent, #22c55e, #fff, #22c55e, transparent);box-shadow:0 0 12px #22c55e;display:none;z-index:10;animation:laserScanBeam 1.5s linear infinite;"></div>' +
-                                    '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%;height:100%;border:none;pointer-events:none;"></iframe>' +
+                                    '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
                                 '<div id="live-action-box" style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:6px;text-align:center;margin-bottom:5px;">' +
