@@ -173,10 +173,10 @@ def bot_script():
             var s = d.createElement('style');
             s.id = 'sniper-bot-style';
             s.innerHTML = '@keyframes multiColorBorderShift {' +
-                          '0% { border-color: #22c55e; box-shadow: 0 0 20px rgba(34,197,94,0.8), inset 0 0 12px rgba(34,197,94,0.4); }' +
-                          '33% { border-color: #38bdf8; box-shadow: 0 0 26px rgba(56,189,248,0.9), inset 0 0 14px rgba(56,189,248,0.5); }' +
-                          '66% { border-color: #a855f7; box-shadow: 0 0 26px rgba(168,85,247,0.9), inset 0 0 14px rgba(168,85,247,0.5); }' +
-                          '100% { border-color: #22c55e; box-shadow: 0 0 20px rgba(34,197,94,0.8), inset 0 0 12px rgba(34,197,94,0.4); }' +
+                          '0% { border-color: #22c55e; box-shadow: 0 0 22px rgba(34,197,94,0.85), inset 0 0 12px rgba(34,197,94,0.4); }' +
+                          '33% { border-color: #38bdf8; box-shadow: 0 0 28px rgba(56,189,248,0.95), inset 0 0 14px rgba(56,189,248,0.5); }' +
+                          '66% { border-color: #a855f7; box-shadow: 0 0 28px rgba(168,85,247,0.95), inset 0 0 14px rgba(168,85,247,0.5); }' +
+                          '100% { border-color: #22c55e; box-shadow: 0 0 22px rgba(34,197,94,0.85), inset 0 0 12px rgba(34,197,94,0.4); }' +
                           '}' +
                           '@keyframes borderNeonPulse {' +
                           '0% { border-color: #ef4444; box-shadow: 0 0 12px #ef4444; }' +
@@ -189,30 +189,35 @@ def bot_script():
                           '50% { box-shadow: 0 0 20px #38bdf8, 0 0 35px #fff; border-color: #38bdf8; }' +
                           '100% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
                           '}' +
-                          '@keyframes glowingRedIntense {' +
-                          '0% { filter: drop-shadow(0 0 4px #ef4444); opacity: 0.9; transform: scale(1); }' +
-                          '50% { filter: drop-shadow(0 0 16px #ef4444); opacity: 1; transform: scale(1.08); }' +
-                          '100% { filter: drop-shadow(0 0 4px #ef4444); opacity: 0.9; transform: scale(1); }' +
+                          '@keyframes glowingRedMassive {' +
+                          '0% { filter: drop-shadow(0 0 6px #ef4444); opacity: 0.9; transform: scale(1); }' +
+                          '50% { filter: drop-shadow(0 0 22px #ef4444); opacity: 1; transform: scale(1.1); }' +
+                          '100% { filter: drop-shadow(0 0 6px #ef4444); opacity: 0.9; transform: scale(1); }' +
                           '}' +
-                          '@keyframes glowingGreenIntense {' +
-                          '0% { filter: drop-shadow(0 0 4px #22c55e); opacity: 0.9; transform: scale(1); }' +
-                          '50% { filter: drop-shadow(0 0 16px #22c55e); opacity: 1; transform: scale(1.08); }' +
-                          '100% { filter: drop-shadow(0 0 4px #22c55e); opacity: 0.9; transform: scale(1); }' +
+                          '@keyframes glowingGreenMassive {' +
+                          '0% { filter: drop-shadow(0 0 6px #22c55e); opacity: 0.9; transform: scale(1); }' +
+                          '50% { filter: drop-shadow(0 0 22px #22c55e); opacity: 1; transform: scale(1.1); }' +
+                          '100% { filter: drop-shadow(0 0 6px #22c55e); opacity: 0.9; transform: scale(1); }' +
                           '}' +
                           '@keyframes splitLaserThick {' +
                           '0% { top: 0%; opacity: 0.95; }' +
                           '50% { top: 100%; opacity: 1; }' +
                           '100% { top: 0%; opacity: 0.95; }' +
                           '}' +
-                          '@keyframes slowUniformCandle {' +
-                          '0% { transform: scaleY(0.8); }' +
-                          '50% { transform: scaleY(1.15); }' +
-                          '100% { transform: scaleY(0.8); }' +
+                          '@keyframes gentleSideSway {' +
+                          '0% { transform: translateX(0px) scaleY(1); }' +
+                          '50% { transform: translateX(2.5px) scaleY(1.05); }' +
+                          '100% { transform: translateX(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes circularNeuralSpin {' +
-                          '0% { transform: rotate(0deg) scale(1); }' +
-                          '50% { transform: rotate(180deg) scale(1.05); }' +
-                          '100% { transform: rotate(360deg) scale(1); }' +
+                          '@keyframes clearEcgLeftToRight {' +
+                          '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #eab308); }' +
+                          '100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #22c55e); }' +
+                          '}' +
+                          '@keyframes clearEcgRightToLeft {' +
+                          '0% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #eab308); }' +
+                          '100% { stroke-dashoffset: 280; opacity: 0.3; }' +
                           '}' +
                           '@keyframes candlePopIn {' +
                           '0% { transform: scale(0.3); opacity: 0; }' +
@@ -263,9 +268,29 @@ def bot_script():
             createBotIcon();
             toggleSniperPanel();
 
+            function detectCurrentQuotexMarket() {
+                try {
+                    var assetEl = d.querySelector('.asset-name, .current-asset, .asset-select__button, [class*="asset"]');
+                    if(assetEl) {
+                        var txt = assetEl.innerText.trim();
+                        if(txt && txt.length < 15) {
+                            return txt.replace(/[^a-zA-Z0-9]/g, '').toUpperCase() + " (REAL)";
+                        }
+                    }
+                } catch(e){}
+                return selectedRealMarket + " (REAL)";
+            }
+
             function detectMarketAndPayout() {
-                var marketName = selectedRealMarket + " (REAL)";
+                var marketName = detectCurrentQuotexMarket();
                 var payout = "92%";
+                try {
+                    var payoutEl = d.querySelector('.payout-value, [class*="payout"]');
+                    if(payoutEl) {
+                        var pTxt = payoutEl.innerText.trim();
+                        if(pTxt.includes('%')) payout = pTxt;
+                    }
+                } catch(e){}
                 return marketName + " " + payout;
             }
 
@@ -283,7 +308,7 @@ def bot_script():
 
                 var panel = d.createElement('div');
                 panel.id = 'sniper-bot-panel';
-                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:280px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:3px solid #22c55e;border-radius:14px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
+                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:295px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:3.5px solid #22c55e;border-radius:16px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
 
                 renderPanelContent(panel);
             }
@@ -294,55 +319,55 @@ def bot_script():
 
                 if(activeScreen === "main") {
                     panel.innerHTML = 
-                        '<div style="padding:11px 10px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
+                        '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
                                 '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:6px;margin-bottom:7px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
-                                        '<img src="' + botMainLogo + '" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
+                                        '<img src="' + botMainLogo + '" style="width:19px;height:19px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
                                         '<div>' +
-                                            '<div style="font-size:10.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
+                                            '<div style="font-size:11px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
                                             '<div style="display:flex;align-items:center;gap:3px;font-size:7.5px;color:#22c55e;font-weight:700;">' +
                                                 '<span style="width:3.5px;height:3.5px;background:#22c55e;border-radius:50%;display:inline-block;"></span> AI ONLINE' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div style="display:flex;align-items:center;gap:4px;">' +
-                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 5px;font-size:7px;font-weight:900;cursor:pointer;">LIVE SIGNAL</button>' +
+                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">LIVE SIGNAL</button>' +
                                         '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:flex;gap:4px;margin-bottom:6px;">' +
-                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '1M' ? '#000' : '#94a3b8') + ';border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">1m Standard</button>' +
-                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '5S' ? '#000' : '#94a3b8') + ';border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
+                                '<div style="display:flex;gap:5px;margin-bottom:6px;">' +
+                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '1M' ? '#000' : '#94a3b8') + ';border:2px solid #22c55e;border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">1m Standard</button>' +
+                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '5S' ? '#000' : '#94a3b8') + ';border:2px solid #38bdf8;border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">5s Auto Mode</button>' +
                                 '</div>' +
 
                                 '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
-                                    '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:3px;padding:3px;font-size:7px;font-weight:900;cursor:pointer;">Auto Start</button>' +
-                                    '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:none;border-radius:3px;padding:3px;font-size:7px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
+                                    '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:2px solid #22c55e;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">Auto Start</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:2px solid #ef4444;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">Auto Stop</button>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:7px;">' +
-                                    '<div style="font-size:9px;font-weight:700;color:#22c55e;margin-bottom:3.5px;letter-spacing:0.3px;">Next Candle??</div>' +
-                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:65px;background:rgba(0,0,0,0.7);border-radius:6px;padding:5px 7px;border:1px solid rgba(56,189,248,0.45);box-shadow:inset 0 0 10px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowUniformCandle 4s infinite ease-in-out;"><div style="width:2px;height:7px;background:#22c55e;"></div><div style="width:6px;height:26px;background:#22c55e;border-radius:1.5px;box-shadow:0 0 10px #22c55e;"></div><div style="width:2px;height:7px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowUniformCandle 4s infinite ease-in-out 0.5s;"><div style="width:2px;height:7px;background:#ef4444;"></div><div style="width:6px;height:26px;background:#ef4444;border-radius:1.5px;box-shadow:0 0 10px #ef4444;"></div><div style="width:2px;height:7px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowUniformCandle 4s infinite ease-in-out 1.0s;"><div style="width:2px;height:7px;background:#22c55e;"></div><div style="width:6px;height:26px;background:#22c55e;border-radius:1.5px;box-shadow:0 0 10px #22c55e;"></div><div style="width:2px;height:7px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingRedIntense 2.2s infinite ease-in-out;"><div style="width:2px;height:8px;background:#ef4444;"></div><div style="width:6px;height:32px;background:#ef4444;border-radius:1.5px;box-shadow:0 0 16px #ef4444;"></div><div style="width:2px;height:8px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingGreenIntense 2.2s infinite ease-in-out;"><div style="width:2px;height:8px;background:#22c55e;"></div><div style="width:6px;height:32px;background:#22c55e;border-radius:1.5px;box-shadow:0 0 16px #22c55e;"></div><div style="width:2px;height:8px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowUniformCandle 4s infinite ease-in-out 1.5s;"><div style="width:2px;height:7px;background:#22c55e;"></div><div style="width:6px;height:26px;background:#22c55e;border-radius:1.5px;box-shadow:0 0 10px #22c55e;"></div><div style="width:2px;height:7px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowUniformCandle 4s infinite ease-in-out 2.0s;"><div style="width:2px;height:7px;background:#ef4444;"></div><div style="width:6px;height:26px;background:#ef4444;border-radius:1.5px;box-shadow:0 0 10px #ef4444;"></div><div style="width:2px;height:7px;background:#ef4444;"></div></div>' +
+                                    '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:3.5px;letter-spacing:0.3px;">Next Candle??</div>' +
+                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:rgba(0,0,0,0.75);border-radius:8px;padding:6px 8px;border:2px solid #38bdf8;box-shadow:inset 0 0 12px rgba(0,0,0,0.9);animation:borderNeonPulse 3.5s infinite;">' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 0.6s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 1.2s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingRedMassive 2.2s infinite ease-in-out;"><div style="width:2.5px;height:10px;background:#ef4444;"></div><div style="width:8px;height:48px;background:#ef4444;border-radius:2px;box-shadow:0 0 20px #ef4444;"></div><div style="width:2.5px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingGreenMassive 2.2s infinite ease-in-out;"><div style="width:2.5px;height:10px;background:#22c55e;"></div><div style="width:8px;height:48px;background:#22c55e;border-radius:2px;box-shadow:0 0 20px #22c55e;"></div><div style="width:2.5px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 1.8s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 2.4s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="sniper-action-box" style="background:rgba(0,0,0,0.5);border:2px solid #22c55e;border-radius:6px;padding:8px;text-align:center;margin-bottom:6px;animation:borderNeonPulse 3s infinite;">' +
-                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9px;">' +
+                                '<div id="sniper-action-box" style="background:rgba(0,0,0,0.55);border:2px solid #22c55e;border-radius:7px;padding:8px;text-align:center;margin-bottom:6px;animation:borderNeonPulse 3s infinite;">' +
+                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9.5px;">' +
                                         '<span style="color:#94a3b8;font-weight:bold;">LATEST SIGNAL</span>' +
                                         '<span id="sniper-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
                                     '</div>' +
                                     '<div id="sniper-signal-text" style="font-size:14px;font-weight:900;color:#facc15;margin-bottom:6px;">--- : --</div>' +
-                                    '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:4.5px;padding:7.5px;font-size:10.5px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
+                                    '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:2px solid #22c55e;border-radius:5px;padding:7.5px;font-size:11px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">GET SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
@@ -358,45 +383,45 @@ def bot_script():
                     });
 
                     panel.innerHTML = 
-                        '<div style="padding:11px 10px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
+                        '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
                                 '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:6px;margin-bottom:6px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
-                                        '<img src="' + botMainLogo + '" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
-                                        '<div style="font-size:10px;font-weight:900;color:#fff;">LIVE SIGNAL SCANNER</div>' +
+                                        '<img src="' + botMainLogo + '" style="width:19px;height:19px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
+                                        '<div style="font-size:10.5px;font-weight:900;color:#fff;">LIVE SIGNAL SCANNER</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
-                                        '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7px;font-weight:900;cursor:pointer;">BACK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:2px solid #38bdf8;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">BACK</button>' +
                                         '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
                                 '<div style="margin-bottom:6px;">' +
-                                    '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Select Real Market:</div>' +
-                                    '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:4px;padding:4px;font-size:9px;font-weight:bold;outline:none;">' +
+                                    '<div style="font-size:8px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Select Real Market:</div>' +
+                                    '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:2px solid #38bdf8;border-radius:5px;padding:5px;font-size:9.5px;font-weight:bold;outline:none;animation:borderNeonPulse 3s infinite;">' +
                                         optionsHtml +
                                     '</select>' +
                                 '</div>' +
 
-                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:5px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
-                                    '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ef4444 50%, #22c55e 50%);box-shadow:0 0 14px #ef4444, 0 0 14px #22c55e;display:none;z-index:10;animation:splitLaserThick 1.8s linear infinite;"></div>' +
+                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:2px solid #22c55e;overflow:hidden;margin-bottom:6px;animation:borderNeonPulse 3s infinite;">' +
+                                    '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ef4444 50%, #22c55e 50%);box-shadow:0 0 16px #ef4444, 0 0 16px #22c55e;display:none;z-index:10;animation:splitLaserThick 1.8s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
-                                '<div id="live-action-box" style="background:rgba(0,0,0,0.6);border:2px solid #38bdf8;border-radius:6px;padding:6px;text-align:center;margin-bottom:5px;animation:borderNeonPulse 3s infinite;">' +
-                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:8.5px;">' +
+                                '<div id="live-action-box" style="background:rgba(0,0,0,0.65);border:2px solid #38bdf8;border-radius:7px;padding:6px;text-align:center;margin-bottom:5px;animation:borderNeonPulse 3s infinite;">' +
+                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:9px;">' +
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
-                                    '<div id="live-signal-display" style="font-size:12.5px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:7px;color:#cbd5e1;margin-bottom:5px;min-height:18px;line-height:1.2;">Awaiting institutional confluence analysis...</div>' +
-                                    '<button id="generate-live-signal-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:4px;padding:6px;font-size:9.5px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
+                                    '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
+                                    '<div id="live-rules-desc" style="font-size:7.5px;color:#cbd5e1;margin-bottom:5px;min-height:18px;line-height:1.2;">Awaiting institutional confluence analysis...</div>' +
+                                    '<button id="generate-live-signal-btn" style="width:100%;background:#166534;color:#fff;border:2px solid #38bdf8;border-radius:5px;padding:6px;font-size:10px;font-weight:900;cursor:pointer;animation:borderNeonPulse 3s infinite;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
-                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:7.5px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;">' + selectedRealMarket + ' (REAL)</span>' +
+                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
+                                '<span style="color:#38bdf8;font-weight:bold;">' + detectCurrentQuotexMarket() + '</span>' +
                                 '<span id="sniper-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
@@ -449,6 +474,11 @@ def bot_script():
                             var mins = String(now.getMinutes()).padStart(2, '0');
                             var secs = String(now.getSeconds()).padStart(2, '0');
                             tmEl.innerText = hrs + ':' + mins + ':' + secs;
+                        }
+                        var mktEl = panel.querySelector('#sniper-live-timer');
+                        if(activeScreen === "main") {
+                            var mktLabel = panel.querySelector('span[style*="color:#38bdf8"]');
+                            if(mktLabel) mktLabel.innerText = detectMarketAndPayout();
                         }
                     }, 1000);
                 }
@@ -512,14 +542,19 @@ def bot_script():
                 statusBadge.style.background = '#422006';
 
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#05070d;border-radius:5px;overflow:hidden;">' +
-                        '<div style="position:absolute;top:2px;left:6px;font-size:6.5px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">MULTI-COLOR SCAN</div>' +
-                        '<div style="width:34px;height:34px;border:3px dashed #eab308;border-radius:50%;animation:circularNeuralSpin 1.8s linear infinite;border-top-color:#ef4444;border-bottom-color:#22c55e;"></div>' +
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:3px 0;">' +
+                        '<div style="position:absolute;top:2px;left:6px;font-size:7px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">HEARTBEAT SCAN</div>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgLeftToRight 1.5s linear infinite;" />' +
+                        '</svg>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#eab308" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgRightToLeft 1.5s linear infinite;" />' +
+                        '</svg>' +
                     '</div>';
 
-                var scanTexts = ["Scanning Yellow & Red Vibe...", "Phase 2: Volatility Spike...", "Phase 3: Institutional Sync...", "Phase 4: Finalizing Confluence..."];
+                var scanTexts = ["Phase 1: Yellow & Red Vibe...", "Phase 2: Volatility Spike...", "Phase 3: Institutional Sync...", "Phase 4: Finalizing Confluence..."];
                 var sIdx = 0;
-                signalText.style.fontSize = '9px';
+                signalText.style.fontSize = '9.5px';
                 signalText.style.color = '#eab308';
                 signalText.innerText = scanTexts[0];
 
@@ -546,15 +581,15 @@ def bot_script():
                         statusBadge.style.color = '#fff';
                         statusBadge.style.background = isCall ? '#166534' : '#991b1b';
 
-                        signalText.style.fontSize = '13px';
+                        signalText.style.fontSize = '14px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:2.5px;height:42px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:16px;height:28px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 12px ' + candleColor + ';"></div>' +
+                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         setTimeout(function(){
@@ -628,11 +663,16 @@ def bot_script():
                 statusBadge.innerText = 'SCANNING';
                 statusBadge.style.color = '#d97706';
                 statusBadge.style.background = '#78350f';
-                signalText.innerText = "Neural Scanning Active...";
+                signalText.innerText = "Heartbeat Scan Active...";
 
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#05070d;border-radius:5px;overflow:hidden;">' +
-                        '<div style="width:36px;height:36px;border:3px solid #38bdf8;border-top-color:transparent;border-radius:50%;animation:circularNeuralSpin 1.2s linear infinite;"></div>' +
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:3px 0;">' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgLeftToRight 1.5s linear infinite;" />' +
+                        '</svg>' +
+                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgRightToLeft 1.5s linear infinite;" />' +
+                        '</svg>' +
                     '</div>';
 
                 fetch(renderServerUrl + '/signal?t=' + Date.now())
@@ -649,15 +689,15 @@ def bot_script():
                         statusBadge.style.color = '#fff';
                         statusBadge.style.background = isCall ? '#166534' : '#991b1b';
 
-                        signalText.style.fontSize = '13px';
+                        signalText.style.fontSize = '14px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:2.5px;height:42px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:16px;height:28px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 12px ' + candleColor + ';"></div>' +
+                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         setTimeout(function(){
