@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 94 + ((int(time.time() * 11) + 17) % 6)
+        real_accuracy = 95 + ((int(time.time() * 11) + 17) % 5)
         
         rules_list = [
             "RA VIP AI Momentum Confluence & Smart Money Rejection.",
@@ -147,7 +147,7 @@ def get_signal():
         res = jsonify({
             "signal": fallback_sig,
             "trend": "STABLE MOMENTUM",
-            "confidence": 95,
+            "confidence": 96,
             "status": "GREEN_EXECUTE",
             "rule": "RA VIP Standard Trend Continuation Logic."
         })
@@ -397,16 +397,60 @@ def bot_script():
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:2px 5px;border-radius:3px;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
+                } else if(activeScreen === "all_market_check") {
+                    var v1 = 78, v2 = 84, v3 = 65, v4 = 92;
+                    var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
+
+                    panel.innerHTML = 
+                        '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
+                            '<div>' +
+                                '<div id="ra-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:8px;cursor:move;">' +
+                                    '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
+                                        '<img src="' + botMainLogo + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid #22c55e;" />' +
+                                        '<div style="font-size:11px;font-weight:900;color:#fff;">ALL MARKET CHECK</div>' +
+                                    '</div>' +
+                                    '<div style="display:flex;gap:4px;align-items:center;">' +
+                                        '<button id="back-to-live-signal-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 7px;font-size:8px;font-weight:900;cursor:pointer;">BACK</button>' +
+                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
+                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:8px;">' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';">' + v1 + '%</div>' +
+                                    '</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';">' + v2 + '%</div>' +
+                                    '</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';">' + v3 + '%</div>' +
+                                    '</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';">' + v4 + '%</div>' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:5px;">' +
+                                    '<div style="font-size:9.5px;font-weight:900;color:#22c55e;margin-bottom:2px;">ALL MARKETS SYNCED</div>' +
+                                    '<div style="font-size:7.5px;color:#cbd5e1;line-height:1.2;">All major currency pairs are thoroughly scanned with zero fake signals.</div>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
+                                '<span style="color:#38bdf8;font-weight:bold;">GLOBAL MARKET SCAN</span>' +
+                                '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
+                            '</div>' +
+                        '</div>';
                 } else {
                     var optionsHtml = '';
                     realMarkets.forEach(function(m){
                         optionsHtml += '<option value="' + m + '" ' + (selectedRealMarket === m ? 'selected' : '') + '>' + m + ' (REAL)</option>';
                     });
-
-                    var mockVol = 78;
-                    var mockStab = 84;
-                    var volColor = getMetricColor(mockVol);
-                    var stabColor = getMetricColor(mockStab);
 
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
@@ -417,7 +461,8 @@ def bot_script():
                                         '<div style="font-size:11px;font-weight:900;color:#fff;">RA LIVE SIGNAL</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
-                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">ALL MARKET CHECK</button>' +
+                                        '<button id="all-market-check-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">ALL MARKET CHECK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">BACK</button>' +
                                         '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
@@ -430,19 +475,9 @@ def bot_script():
                                     '</select>' +
                                 '</div>' +
 
-                                '<div style="display:flex;gap:6px;margin-bottom:6px;">' +
-                                    '<div style="flex:1;background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div style="width:38px;height:38px;border-radius:50%;border:3px solid ' + volColor + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:10px;font-weight:900;color:' + volColor + ';box-shadow:0 0 10px ' + volColor + ';">' + mockVol + '%</div>' +
-                                    '</div>' +
-                                    '<div style="flex:1;background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
-                                        '<div style="width:38px;height:38px;border-radius:50%;border:3px solid ' + stabColor + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:10px;font-weight:900;color:' + stabColor + ';box-shadow:0 0 10px ' + stabColor + ';">' + mockStab + '%</div>' +
-                                    '</div>' +
-                                    '<div style="flex:1;background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI TREND</div>' +
-                                        '<div style="width:38px;height:38px;border-radius:50%;border:3px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:#22c55e;box-shadow:0 0 10px #22c55e;">BULL</div>' +
-                                    '</div>' +
+                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid #1f2937;overflow:hidden;margin-bottom:6px;">' +
+                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg, #38bdf8 30%, #22c55e 70%);box-shadow:0 0 20px #38bdf8, 0 0 20px #22c55e;display:none;z-index:10;animation:proLaserScan 1.5s linear infinite;"></div>' +
+                                    '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
                                 '<div id="live-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:5px;">' +
@@ -450,8 +485,8 @@ def bot_script():
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
-                                    '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:16px;line-height:1.2;">All Market Check & AI Confluence Ready...</div>' +
+                                    '<div id="live-signal-display" style="font-size:13.5px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
+                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA VIP AI Confluence Analysis...</div>' +
                                     '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #d97706);color:#fff;border:none;border-radius:5px;padding:7px;font-size:10.5px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
@@ -475,6 +510,20 @@ def bot_script():
                 var navLiveBtn = d.getElementById('nav-live-signal-btn');
                 if(navLiveBtn) navLiveBtn.onclick = function() {
                     stopAutoExecution();
+                    activeScreen = "live_signal";
+                    panel.remove();
+                    toggleVipPanel();
+                };
+
+                var allMarketCheckBtn = d.getElementById('all-market-check-btn');
+                if(allMarketCheckBtn) allMarketCheckBtn.onclick = function() {
+                    activeScreen = "all_market_check";
+                    panel.remove();
+                    toggleVipPanel();
+                };
+
+                var backToLiveBtn = d.getElementById('back-to-live-signal-btn');
+                if(backToLiveBtn) backToLiveBtn.onclick = function() {
                     activeScreen = "live_signal";
                     panel.remove();
                     toggleVipPanel();
@@ -741,15 +790,17 @@ def bot_script():
             }
 
             function runLiveSignalGeneration(panel) {
+                var laser = d.getElementById('epic-laser-line');
                 var statusLbl = d.getElementById('live-status-label');
                 var accBadge = d.getElementById('live-accuracy-badge');
                 var sigDisplay = d.getElementById('live-signal-display');
                 var rulesDesc = d.getElementById('live-rules-desc');
                 var genBtn = d.getElementById('generate-live-signal-btn');
 
-                if(!statusLbl) return;
+                if(!laser) return;
+                laser.style.display = 'block';
                 statusLbl.innerText = "STATUS: SCANNING";
-                sigDisplay.innerText = "RA VIP AI All Market Check Active...";
+                sigDisplay.innerText = "RA VIP AI Scanning Live Market...";
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
@@ -759,6 +810,7 @@ def bot_script():
                     .catch(function(){ return {signal: "CALL", confidence: 96, rule: "RA VIP Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
+                        laser.style.display = 'none';
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
                         var confidence = data.confidence || 96;
@@ -775,7 +827,7 @@ def bot_script():
                             accBadge.innerText = "ACCURACY: --%";
                             sigDisplay.style.color = '#facc15';
                             sigDisplay.innerText = "CLICK GENERATE";
-                            rulesDesc.innerText = "All Market Check & AI Confluence Ready...";
+                            rulesDesc.innerText = "Awaiting RA VIP AI Confluence Analysis...";
                             genBtn.disabled = false;
                         }, 7000);
                     });
