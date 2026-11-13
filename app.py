@@ -162,7 +162,7 @@ def bot_script():
         try {
             var d = document;
             
-            ["sniper-bot-panel", "sniper-bot-btn", "sniper-bot-style"].forEach(function(i){
+            ["sniper-bot-panel", "sniper-bot-btn", "sniper-bot-style", "sniper-spider-container"].forEach(function(i){
                 var e = d.getElementById(i);
                 if(e) e.remove();
             });
@@ -177,12 +177,6 @@ def bot_script():
                           '33% { border-color: #38bdf8; box-shadow: 0 0 28px rgba(56,189,248,0.95), inset 0 0 14px rgba(56,189,248,0.5); }' +
                           '66% { border-color: #a855f7; box-shadow: 0 0 28px rgba(168,85,247,0.95), inset 0 0 14px rgba(168,85,247,0.5); }' +
                           '100% { border-color: #22c55e; box-shadow: 0 0 22px rgba(34,197,94,0.85), inset 0 0 12px rgba(34,197,94,0.4); }' +
-                          '}' +
-                          '@keyframes softBackgroundShift {' +
-                          '0% { background-color: rgba(30, 41, 59, 0.4); }' +
-                          '33% { background-color: rgba(15, 23, 42, 0.6); }' +
-                          '66% { background-color: rgba(49, 46, 129, 0.3); }' +
-                          '100% { background-color: rgba(30, 41, 59, 0.4); }' +
                           '}' +
                           '@keyframes floatingWhitePurpleGlow {' +
                           '0% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
@@ -209,15 +203,45 @@ def bot_script():
                           '50% { transform: translateX(2.5px) scaleY(1.05); }' +
                           '100% { transform: translateX(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes clearEcgLeftToRight {' +
-                          '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
-                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #eab308); }' +
-                          '100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #22c55e); }' +
+                          '@keyframes spiderWalk1 {' +
+                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
+                          '25% { transform: translate(120px, -80px) rotate(45deg); }' +
+                          '50% { transform: translate(-100px, -150px) rotate(-30deg); }' +
+                          '75% { transform: translate(150px, -200px) rotate(60deg); }' +
+                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #ff0055); }' +
                           '}' +
-                          '@keyframes clearEcgRightToLeft {' +
-                          '0% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }' +
-                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #eab308); }' +
-                          '100% { stroke-dashoffset: 280; opacity: 0.3; }' +
+                          '@keyframes spiderWalk2 {' +
+                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
+                          '25% { transform: translate(-130px, -90px) rotate(-45deg); }' +
+                          '50% { transform: translate(110px, -160px) rotate(30deg); }' +
+                          '75% { transform: translate(-140px, -210px) rotate(-60deg); }' +
+                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #00ffff); }' +
+                          '}' +
+                          '@keyframes spiderWalk3 {' +
+                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
+                          '25% { transform: translate(90px, -110px) rotate(30deg); }' +
+                          '50% { transform: translate(-120px, -140px) rotate(-45deg); }' +
+                          '75% { transform: translate(130px, -220px) rotate(45deg); }' +
+                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #ffff00); }' +
+                          '}' +
+                          '@keyframes spiderWalk4 {' +
+                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
+                          '25% { transform: translate(-100px, -100px) rotate(-30deg); }' +
+                          '50% { transform: translate(140px, -130px) rotate(45deg); }' +
+                          '75% { transform: translate(-110px, -230px) rotate(-45deg); }' +
+                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #00ff00); }' +
+                          '}' +
+                          '@keyframes spiderWalk5 {' +
+                          '0% { transform: translate(0px, 0px) rotate(0deg); }' +
+                          '25% { transform: translate(110px, -70px) rotate(60deg); }' +
+                          '50% { transform: translate(-90px, -170px) rotate(-30deg); }' +
+                          '75% { transform: translate(100px, -240px) rotate(30deg); }' +
+                          '100% { transform: translate(0px, -280px) scale(1.5); filter: drop-shadow(0 0 25px #a855f7); }' +
+                          '}' +
+                          '@keyframes boomBlast {' +
+                          '0% { transform: scale(0.2); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
+                          '50% { transform: scale(3.5); opacity: 0.9; background: #ff0055; box-shadow: 0 0 80px 40px #00ffff; }' +
+                          '100% { transform: scale(6); opacity: 0; background: transparent; }' +
                           '}' +
                           '@keyframes candlePopIn {' +
                           '0% { transform: scale(0.3); opacity: 0; }' +
@@ -339,18 +363,18 @@ def bot_script():
                                 '</div>' +
 
                                 '<div style="display:flex;gap:5px;margin-bottom:6px;">' +
-                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#22c55e' : 'rgba(30,41,59,0.5)') + ';color:' + (currentMode === '1M' ? '#000' : '#94a3b8') + ';border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite ease-in-out;">1m Standard</button>' +
-                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#22c55e' : 'rgba(30,41,59,0.5)') + ';color:' + (currentMode === '5S' ? '#000' : '#94a3b8') + ';border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite ease-in-out 2s;">5s Auto Mode</button>' +
+                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#10b981' : '#3b82f6') + ';color:#fff;border:none;border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;">1m Standard</button>' +
+                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#10b981' : '#8b5cf6') + ';color:#fff;border:none;border-radius:5px;padding:6px;font-size:8.5px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
                                 '</div>' +
 
                                 '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
-                                    '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:softBackgroundShift 5s infinite;">Auto Start</button>' +
-                                    '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;animation:softBackgroundShift 5s infinite 2.5s;">Auto Stop</button>' +
+                                    '<button id="start-auto-btn" style="flex:1;background:#059669;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">Auto Start</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:#dc2626;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:7px;">' +
                                     '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:3.5px;letter-spacing:0.3px;">Next Candle??</div>' +
-                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:rgba(0,0,0,0.75);border-radius:8px;padding:6px 8px;border:1px solid rgba(255,255,255,0.15);box-shadow:inset 0 0 12px rgba(0,0,0,0.9);">' +
+                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;box-shadow:inset 0 0 12px rgba(0,0,0,0.9);">' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 0.6s;"><div style="width:2px;height:9px;background:#ef4444;"></div><div style="width:7px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:9px;background:#ef4444;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:gentleSideSway 4.5s infinite ease-in-out 1.2s;"><div style="width:2px;height:9px;background:#22c55e;"></div><div style="width:7px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:9px;background:#22c55e;"></div></div>' +
@@ -361,13 +385,13 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="sniper-action-box" style="background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.15);border-radius:7px;padding:8px;text-align:center;margin-bottom:6px;">' +
+                                '<div id="sniper-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:8px;text-align:center;margin-bottom:6px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9.5px;">' +
                                         '<span style="color:#94a3b8;font-weight:bold;">LATEST SIGNAL</span>' +
                                         '<span id="sniper-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
                                     '</div>' +
                                     '<div id="sniper-signal-text" style="font-size:14px;font-weight:900;color:#facc15;margin-bottom:6px;">--- : --</div>' +
-                                    '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:7.5px;font-size:11px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite;">GET SIGNAL</button>' +
+                                    '<button id="sniper-get-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #2563eb);color:#fff;border:none;border-radius:5px;padding:7.5px;font-size:11px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
@@ -391,7 +415,7 @@ def bot_script():
                                         '<div style="font-size:10.5px;font-weight:900;color:#fff;">LIVE SIGNAL SCANNER</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
-                                        '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;">BACK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;">BACK</button>' +
                                         '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
@@ -399,24 +423,24 @@ def bot_script():
 
                                 '<div style="margin-bottom:6px;">' +
                                     '<div style="font-size:8px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">Select Real Market:</div>' +
-                                    '<select id="real-market-selector" style="width:100%;background:#0f172a;color:#38bdf8;border:1px solid rgba(255,255,255,0.15);border-radius:5px;padding:5px;font-size:9.5px;font-weight:bold;outline:none;animation:softBackgroundShift 6s infinite;">' +
+                                    '<select id="real-market-selector" style="width:100%;background:#1e293b;color:#38bdf8;border:1px solid #475569;border-radius:5px;padding:5px;font-size:9.5px;font-weight:bold;outline:none;">' +
                                         optionsHtml +
                                     '</select>' +
                                 '</div>' +
 
-                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
+                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid #1f2937;overflow:hidden;margin-bottom:6px;">' +
                                     '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ef4444 50%, #22c55e 50%);box-shadow:0 0 16px #ef4444, 0 0 16px #22c55e;display:none;z-index:10;animation:splitLaserThick 1.8s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
-                                '<div id="live-action-box" style="background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.15);border-radius:7px;padding:6px;text-align:center;margin-bottom:5px;">' +
+                                '<div id="live-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:6px;text-align:center;margin-bottom:5px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:9px;">' +
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
                                     '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
                                     '<div id="live-rules-desc" style="font-size:7.5px;color:#cbd5e1;margin-bottom:5px;min-height:18px;line-height:1.2;">Awaiting institutional confluence analysis...</div>' +
-                                    '<button id="generate-live-signal-btn" style="width:100%;background:#166534;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:6px;font-size:10px;font-weight:900;cursor:pointer;animation:softBackgroundShift 6s infinite;">GENERATE LIVE SIGNAL</button>' +
+                                    '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #d97706);color:#fff;border:none;border-radius:5px;padding:6px;font-size:10px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
@@ -491,23 +515,23 @@ def bot_script():
 
                     btn1m.onclick = function() {
                         currentMode = "1M";
-                        btn1m.style.background = '#22c55e'; btn1m.style.color = '#000';
-                        btn5s.style.background = 'rgba(30,41,59,0.5)'; btn5s.style.color = '#94a3b8';
+                        btn1m.style.background = '#10b981';
+                        btn5s.style.background = '#8b5cf6';
                         autoControls.style.display = 'none';
                         stopAutoExecution();
                     };
 
                     btn5s.onclick = function() {
                         currentMode = "5S";
-                        btn5s.style.background = '#22c55e'; btn5s.style.color = '#000';
-                        btn1m.style.background = 'rgba(30,41,59,0.5)'; btn1m.style.color = '#94a3b8';
+                        btn5s.style.background = '#10b981';
+                        btn1m.style.background = '#3b82f6';
                         autoControls.style.display = 'flex';
                     };
 
                     if(startAutoBtn) startAutoBtn.onclick = function() {
                         if(!autoLoopActive) {
                             autoLoopActive = true;
-                            run5sAutoSequence(panel);
+                            runSpidersAndSignal(panel);
                         }
                     };
 
@@ -515,10 +539,7 @@ def bot_script():
 
                     var getSigBtn = d.getElementById('sniper-get-signal-btn');
                     if(getSigBtn) {
-                        getSigBtn.onclick = function() {
-                            if(currentMode === "5S") { run5sAutoSequence(panel); }
-                            else { runMainSignalSequence(panel); }
-                        };
+                        getSigBtn.onclick = function() { runSpidersAndSignal(panel); };
                     }
                 }
             }
@@ -528,49 +549,63 @@ def bot_script():
                 if(autoTimer) clearTimeout(autoTimer);
             }
 
-            function run5sAutoSequence(panel) {
-                if(!autoLoopActive || currentMode !== "5S" || !panel.isConnected) return;
+            function triggerSpiderScanAnimation(callback) {
+                var sContainer = d.createElement('div');
+                sContainer.id = 'sniper-spider-container';
+                sContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;';
+                
+                var spiders = [
+                    { anim: 'spiderWalk1', color: '#ff0055', text: '🕷️ AI-1' },
+                    { anim: 'spiderWalk2', color: '#00ffff', text: '🕷️ AI-2' },
+                    { anim: 'spiderWalk3', color: '#ffff00', text: '🕷️ AI-3' },
+                    { anim: 'spiderWalk4', color: '#00ff00', text: '🕷️ AI-4' },
+                    { anim: 'spiderWalk5', color: '#a855f7', text: '🕷️ AI-5' }
+                ];
+
+                spiders.forEach(function(sp) {
+                    var el = d.createElement('div');
+                    el.style.cssText = 'position:absolute;bottom:50px;left:50px;font-size:16px;font-weight:900;color:' + sp.color + ';animation:' + sp.anim + ' 8s ease-in-out forwards;text-shadow:0 0 10px ' + sp.color + ';';
+                    el.innerText = sp.text;
+                    sContainer.appendChild(el);
+                });
+
+                d.body.appendChild(sContainer);
+
+                setTimeout(function(){
+                    var boom = d.createElement('div');
+                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:80px;height:80px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:boomBlast 1s ease-out forwards;pointer-events:none;';
+                    d.body.appendChild(boom);
+
+                    setTimeout(function(){
+                        if(sContainer.isConnected) sContainer.remove();
+                        if(boom.isConnected) boom.remove();
+                        if(typeof callback === 'function') callback();
+                    }, 1000);
+                }, 8000);
+            }
+
+            function runSpidersAndSignal(panel) {
                 var statusBadge = panel.querySelector('#sniper-status-badge');
                 var signalText = panel.querySelector('#sniper-signal-text');
                 var candleBox = panel.querySelector('#sniper-candle-display-box');
 
                 if(!statusBadge) return;
 
-                statusBadge.innerText = '5S AUTO RUNNING';
-                statusBadge.style.color = '#eab308';
-                statusBadge.style.background = '#422006';
+                statusBadge.innerText = 'SPIDERS SCANNING';
+                statusBadge.style.color = '#38bdf8';
+                statusBadge.style.background = '#0c4a6e';
+                signalText.innerText = "Spiders Crawling on Chart...";
 
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:3px 0;">' +
-                        '<div style="position:absolute;top:2px;left:6px;font-size:7px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">HEARTBEAT SCAN</div>' +
-                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
-                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgLeftToRight 1.5s linear infinite;" />' +
-                        '</svg>' +
-                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
-                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#eab308" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgRightToLeft 1.5s linear infinite;" />' +
-                        '</svg>' +
+                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#38bdf8;font-size:10px;font-weight:bold;text-align:center;">' +
+                        '🕷️ Multi-Spider Live Chart Scanning... (8s)' +
                     '</div>';
 
-                var scanTexts = ["Phase 1: Yellow & Red Vibe...", "Phase 2: Volatility Spike...", "Phase 3: Institutional Sync...", "Phase 4: Finalizing Confluence..."];
-                var sIdx = 0;
-                signalText.style.fontSize = '9.5px';
-                signalText.style.color = '#eab308';
-                signalText.innerText = scanTexts[0];
-
-                var stTimer = setInterval(function(){
-                    sIdx++;
-                    if(sIdx < scanTexts.length) {
-                        signalText.innerText = scanTexts[sIdx];
-                        signalText.style.color = (sIdx % 2 === 0) ? '#ef4444' : '#eab308';
-                    }
-                }, 1300);
-
-                fetch(renderServerUrl + '/signal?t=' + Date.now())
-                .then(function(r){ return r.json(); })
-                .catch(function(){ return {signal: "CALL", confidence: 95}; })
-                .then(function(data){
-                    setTimeout(function(){
-                        clearInterval(stTimer);
+                triggerSpiderScanAnimation(function(){
+                    fetch(renderServerUrl + '/signal?t=' + Date.now())
+                    .then(function(r){ return r.json(); })
+                    .catch(function(){ return {signal: "CALL", confidence: 95}; })
+                    .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
@@ -603,10 +638,10 @@ def bot_script():
 
                         if(autoLoopActive && currentMode === "5S") {
                             autoTimer = setTimeout(function(){
-                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
+                                if(autoLoopActive && currentMode === "5S") runSpidersAndSignal(panel);
                             }, 10000);
                         }
-                    }, 5200);
+                    });
                 });
             }
 
@@ -621,15 +656,16 @@ def bot_script():
                 if(!laser) return;
                 laser.style.display = 'block';
                 statusLbl.innerText = "STATUS: SCANNING";
-                sigDisplay.innerText = "Scanning Order Book & Charts...";
+                sigDisplay.innerText = "Spiders Crawling on Live Chart...";
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
-                fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
-                .then(function(r){ return r.json(); })
-                .catch(function(){ return {signal: "CALL", confidence: 94, rule: "Standard Volume Spike Confluence."}; })
-                .then(function(data){
-                    setTimeout(function(){
+                triggerSpiderScanAnimation(function(){
+                    fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
+                    .then(function(r){ return r.json(); })
+                    .catch(function(){ return {signal: "CALL", confidence: 94, rule: "Standard Volume Spike Confluence."}; })
+                    .then(function(data){
+                        if(!panel.isConnected) return;
                         laser.style.display = 'none';
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
@@ -650,65 +686,7 @@ def bot_script():
                             rulesDesc.innerText = "Awaiting institutional confluence analysis...";
                             genBtn.disabled = false;
                         }, 7000);
-                    }, 5000);
-                });
-            }
-
-            function runMainSignalSequence(panel) {
-                var statusBadge = panel.querySelector('#sniper-status-badge');
-                var signalText = panel.querySelector('#sniper-signal-text');
-                var candleBox = panel.querySelector('#sniper-candle-display-box');
-
-                statusBadge.innerText = 'SCANNING';
-                statusBadge.style.color = '#d97706';
-                statusBadge.style.background = '#78350f';
-                signalText.innerText = "Heartbeat Scan Active...";
-
-                candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:3px 0;">' +
-                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
-                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgLeftToRight 1.5s linear infinite;" />' +
-                        '</svg>' +
-                        '<svg width="100%" height="24" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
-                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:clearEcgRightToLeft 1.5s linear infinite;" />' +
-                        '</svg>' +
-                    '</div>';
-
-                fetch(renderServerUrl + '/signal?t=' + Date.now())
-                .then(function(r){ return r.json(); })
-                .catch(function(){ return {signal: "CALL", confidence: 95}; })
-                .then(function(data){
-                    setTimeout(function(){
-                        if(!panel.isConnected) return;
-                        var sig = String(data.signal || 'CALL').toUpperCase();
-                        var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 95;
-
-                        statusBadge.innerText = 'SUCCESS';
-                        statusBadge.style.color = '#fff';
-                        statusBadge.style.background = isCall ? '#166534' : '#991b1b';
-
-                        signalText.style.fontSize = '14px';
-                        signalText.style.color = isCall ? '#22c55e' : '#ef4444';
-                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
-
-                        var candleColor = isCall ? '#22c55e' : '#ef4444';
-                        candleBox.innerHTML = 
-                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:18px;height:35px;background:' + candleColor + ';border-radius:3px;z-index:2;box-shadow:0 0 16px ' + candleColor + ';"></div>' +
-                            '</div>';
-
-                        setTimeout(function(){
-                            if(!panel.isConnected) return;
-                            statusBadge.innerText = 'READY';
-                            statusBadge.style.color = '#10b981';
-                            statusBadge.style.background = '#064e3b';
-                            signalText.style.fontSize = '14px';
-                            signalText.style.color = '#facc15';
-                            signalText.innerText = '--- : --';
-                        }, 7000);
-                    }, 5000);
+                    });
                 });
             }
 
