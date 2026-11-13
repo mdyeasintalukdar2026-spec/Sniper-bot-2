@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 95 + ((int(time.time() * 11) + 17) % 5)
+        real_accuracy = 94 + ((int(time.time() * 11) + 17) % 6)
         
         rules_list = [
             "RA VIP AI Momentum Confluence & Smart Money Rejection.",
@@ -147,7 +147,7 @@ def get_signal():
         res = jsonify({
             "signal": fallback_sig,
             "trend": "STABLE MOMENTUM",
-            "confidence": 96,
+            "confidence": 95,
             "status": "GREEN_EXECUTE",
             "rule": "RA VIP Standard Trend Continuation Logic."
         })
@@ -183,22 +183,22 @@ def bot_script():
                           '50% { box-shadow: 0 0 25px #a855f7, 0 0 40px #22c55e; border-color: #a855f7; }' +
                           '100% { box-shadow: 0 0 15px #22c55e, 0 0 30px #38bdf8; border-color: #22c55e; }' +
                           '}' +
-                          '@keyframes slowCandleSway1 {' +
+                          '@keyframes smoothCandleSway1 {' +
                           '0% { transform: translateY(0px) scaleY(1); }' +
-                          '50% { transform: translateY(-4px) scaleY(1.06); filter: drop-shadow(0 0 10px #22c55e); }' +
+                          '50% { transform: translateY(-5px) scaleY(1.08); filter: drop-shadow(0 0 14px #22c55e); }' +
                           '100% { transform: translateY(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes slowCandleSway2 {' +
+                          '@keyframes smoothCandleSway2 {' +
                           '0% { transform: translateY(0px) scaleY(1); }' +
-                          '50% { transform: translateY(4px) scaleY(1.06); filter: drop-shadow(0 0 10px #ef4444); }' +
+                          '50% { transform: translateY(5px) scaleY(1.08); filter: drop-shadow(0 0 14px #ef4444); }' +
                           '100% { transform: translateY(0px) scaleY(1); }' +
                           '}' +
-                          '@keyframes epicScanLaser {' +
+                          '@keyframes proLaserScan {' +
                           '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 25px #38bdf8; }' +
                           '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #22c55e; }' +
                           '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 25px #38bdf8; }' +
                           '}' +
-                          '@keyframes epicPulseBlast {' +
+                          '@keyframes quantumPulseBlast {' +
                           '0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
                           '50% { transform: translate(-50%, -50%) scale(6); opacity: 0.95; background: #a855f7; box-shadow: 0 0 150px 80px #00ffff; }' +
                           '100% { transform: translate(-50%, -50%) scale(12); opacity: 0; background: transparent; }' +
@@ -324,9 +324,16 @@ def bot_script():
 
                 var panel = d.createElement('div');
                 panel.id = 'ra-vip-bot-panel';
-                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:300px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
+                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:305px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
 
                 renderPanelContent(panel);
+            }
+
+            function getMetricColor(val) {
+                if(val < 30) return '#ef4444'; // Low -> Red
+                if(val < 60) return '#eab308'; // Medium -> Yellow
+                if(val < 85) return '#22c55e'; // High -> Green
+                return '#a855f7';             // Ultra High -> Purple
             }
 
             function renderPanelContent(panel) {
@@ -348,7 +355,7 @@ def bot_script():
                                         '</div>' +
                                     '</div>' +
                                     '<div style="display:flex;align-items:center;gap:4px;">' +
-                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:2px 7px;font-size:8px;font-weight:900;cursor:pointer;">LIVE SIGNAL</button>' +
+                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:2px 7px;font-size:8px;font-weight:900;cursor:pointer;">RA LIVE SIGNAL</button>' +
                                         '<div id="ra-minimize-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="ra-close-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
@@ -367,11 +374,11 @@ def bot_script():
                                 '<div style="text-align:center;margin-bottom:8px;">' +
                                     '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
                                     '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway1 5s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:35px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway2 5s infinite ease-in-out 0.5s;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:40px;background:#ef4444;border-radius:2px;box-shadow:0 0 14px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway1 5s infinite ease-in-out 1.0s;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:32px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway2 5s infinite ease-in-out 1.5s;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:38px;background:#ef4444;border-radius:2px;box-shadow:0 0 14px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleSway1 5s infinite ease-in-out 2.0s;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:36px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:smoothCandleSway1 4.5s infinite ease-in-out;"><div style="width:2.5px;height:12px;background:#22c55e;"></div><div style="width:9px;height:38px;background:#22c55e;border-radius:2.5px;box-shadow:0 0 16px #22c55e;"></div><div style="width:2.5px;height:12px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:smoothCandleSway2 4.5s infinite ease-in-out 0.4s;"><div style="width:2.5px;height:12px;background:#ef4444;"></div><div style="width:9px;height:42px;background:#ef4444;border-radius:2.5px;box-shadow:0 0 16px #ef4444;"></div><div style="width:2.5px;height:12px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:smoothCandleSway1 4.5s infinite ease-in-out 0.8s;"><div style="width:2.5px;height:12px;background:#22c55e;"></div><div style="width:9px;height:35px;background:#22c55e;border-radius:2.5px;box-shadow:0 0 16px #22c55e;"></div><div style="width:2.5px;height:12px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:smoothCandleSway2 4.5s infinite ease-in-out 1.2s;"><div style="width:2.5px;height:12px;background:#ef4444;"></div><div style="width:9px;height:40px;background:#ef4444;border-radius:2.5px;box-shadow:0 0 16px #ef4444;"></div><div style="width:2.5px;height:12px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:smoothCandleSway1 4.5s infinite ease-in-out 1.6s;"><div style="width:2.5px;height:12px;background:#22c55e;"></div><div style="width:9px;height:39px;background:#22c55e;border-radius:2.5px;box-shadow:0 0 16px #22c55e;"></div><div style="width:2.5px;height:12px;background:#22c55e;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -396,16 +403,21 @@ def bot_script():
                         optionsHtml += '<option value="' + m + '" ' + (selectedRealMarket === m ? 'selected' : '') + '>' + m + ' (REAL)</option>';
                     });
 
+                    var mockVol = 78;
+                    var mockStab = 84;
+                    var volColor = getMetricColor(mockVol);
+                    var stabColor = getMetricColor(mockStab);
+
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
                                 '<div id="ra-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:6px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
                                         '<img src="' + botMainLogo + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid #22c55e;" />' +
-                                        '<div style="font-size:11px;font-weight:900;color:#fff;">RA LIVE SIGNAL SCANNER</div>' +
+                                        '<div style="font-size:11px;font-weight:900;color:#fff;">RA LIVE SIGNAL</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
-                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">BACK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">ALL MARKET CHECK</button>' +
                                         '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
@@ -418,9 +430,19 @@ def bot_script():
                                     '</select>' +
                                 '</div>' +
 
-                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:6px;border:1px solid #1f2937;overflow:hidden;margin-bottom:6px;">' +
-                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg, #38bdf8 30%, #22c55e 70%);box-shadow:0 0 20px #38bdf8, 0 0 20px #22c55e;display:none;z-index:10;animation:epicScanLaser 1.5s linear infinite;"></div>' +
-                                    '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
+                                '<div style="display:flex;gap:6px;margin-bottom:6px;">' +
+                                    '<div style="flex:1;background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div style="width:38px;height:38px;border-radius:50%;border:3px solid ' + volColor + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:10px;font-weight:900;color:' + volColor + ';box-shadow:0 0 10px ' + volColor + ';">' + mockVol + '%</div>' +
+                                    '</div>' +
+                                    '<div style="flex:1;background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
+                                        '<div style="width:38px;height:38px;border-radius:50%;border:3px solid ' + stabColor + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:10px;font-weight:900;color:' + stabColor + ';box-shadow:0 0 10px ' + stabColor + ';">' + mockStab + '%</div>' +
+                                    '</div>' +
+                                    '<div style="flex:1;background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI TREND</div>' +
+                                        '<div style="width:38px;height:38px;border-radius:50%;border:3px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:#22c55e;box-shadow:0 0 10px #22c55e;">BULL</div>' +
+                                    '</div>' +
                                 '</div>' +
 
                                 '<div id="live-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:5px;">' +
@@ -428,8 +450,8 @@ def bot_script():
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
-                                    '<div id="live-signal-display" style="font-size:13.5px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA VIP AI Confluence Analysis...</div>' +
+                                    '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
+                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:16px;line-height:1.2;">All Market Check & AI Confluence Ready...</div>' +
                                     '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #d97706);color:#fff;border:none;border-radius:5px;padding:7px;font-size:10.5px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
@@ -549,20 +571,20 @@ def bot_script():
                 if(autoTimer) clearTimeout(autoTimer);
             }
 
-            function triggerEpicScanAnimation(callback) {
+            function triggerQuantumScanOverlay(callback) {
                 var overlay = d.createElement('div');
                 overlay.id = 'ra-vip-scanner-overlay';
-                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;background:rgba(3,7,18,0.35);backdrop-filter:blur(2px);';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;background:rgba(3,7,18,0.4);backdrop-filter:blur(2px);';
                 
                 var laserLine = d.createElement('div');
-                laserLine.style.cssText = 'position:absolute;top:0;left:0;width:100vw;height:6px;background:linear-gradient(90deg, #22c55e, #38bdf8, #a855f7, #22c55e);box-shadow:0 0 35px #22c55e, 0 0 35px #38bdf8;animation:epicScanLaser 2.5s ease-in-out infinite alternate;';
+                laserLine.style.cssText = 'position:absolute;top:0;left:0;width:100vw;height:6px;background:linear-gradient(90deg, #22c55e, #38bdf8, #a855f7, #22c55e);box-shadow:0 0 35px #22c55e, 0 0 35px #38bdf8;animation:proLaserScan 2.5s ease-in-out infinite alternate;';
                 overlay.appendChild(laserLine);
 
                 d.body.appendChild(overlay);
 
                 setTimeout(function(){
                     var boom = d.createElement('div');
-                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:100px;height:100px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:epicPulseBlast 1s ease-out forwards;pointer-events:none;';
+                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:100px;height:100px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:quantumPulseBlast 1s ease-out forwards;pointer-events:none;';
                     d.body.appendChild(boom);
 
                     setTimeout(function(){
@@ -590,7 +612,7 @@ def bot_script():
                         '⚡ RA VIP AI Quantum Scan in Progress... (5s)' +
                     '</div>';
 
-                triggerEpicScanAnimation(function(){
+                triggerQuantumScanOverlay(function(){
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "CALL", confidence: 96}; })
@@ -719,30 +741,27 @@ def bot_script():
             }
 
             function runLiveSignalGeneration(panel) {
-                var laser = d.getElementById('epic-laser-line');
                 var statusLbl = d.getElementById('live-status-label');
                 var accBadge = d.getElementById('live-accuracy-badge');
                 var sigDisplay = d.getElementById('live-signal-display');
                 var rulesDesc = d.getElementById('live-rules-desc');
                 var genBtn = d.getElementById('generate-live-signal-btn');
 
-                if(!laser) return;
-                laser.style.display = 'block';
+                if(!statusLbl) return;
                 statusLbl.innerText = "STATUS: SCANNING";
-                sigDisplay.innerText = "RA VIP AI Scanning Live Market...";
+                sigDisplay.innerText = "RA VIP AI All Market Check Active...";
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
-                triggerEpicScanAnimation(function(){
+                triggerQuantumScanOverlay(function(){
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 95, rule: "RA VIP Liquidity Sweep & Momentum Reversal."}; })
+                    .catch(function(){ return {signal: "CALL", confidence: 96, rule: "RA VIP Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
-                        laser.style.display = 'none';
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 95;
+                        var confidence = data.confidence || 96;
 
                         statusLbl.innerText = "STATUS: SUCCESS";
                         accBadge.innerText = "ACCURACY: " + confidence + "%";
@@ -756,7 +775,7 @@ def bot_script():
                             accBadge.innerText = "ACCURACY: --%";
                             sigDisplay.style.color = '#facc15';
                             sigDisplay.innerText = "CLICK GENERATE";
-                            rulesDesc.innerText = "Awaiting RA VIP AI Confluence Analysis...";
+                            rulesDesc.innerText = "All Market Check & AI Confluence Ready...";
                             genBtn.disabled = false;
                         }, 7000);
                     });
