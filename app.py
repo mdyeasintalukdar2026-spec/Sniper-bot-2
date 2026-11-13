@@ -177,10 +177,10 @@ def bot_script():
                           '50% { box-shadow: 0 0 20px #38bdf8, 0 0 35px #fff; border-color: #38bdf8; }' +
                           '100% { box-shadow: 0 0 12px #fff, 0 0 22px #a855f7; border-color: #fff; }' +
                           '}' +
-                          '@keyframes whiteLightningScan {' +
-                          '0% { transform: translateY(-100%); opacity: 0.2; filter: drop-shadow(0 0 4px #fff); }' +
-                          '50% { opacity: 1; filter: drop-shadow(0 0 12px #fff) drop-shadow(0 0 20px #38bdf8); }' +
-                          '100% { transform: translateY(300%); opacity: 0.2; filter: drop-shadow(0 0 4px #fff); }' +
+                          '@keyframes fullPanelLightningScan {' +
+                          '0% { top: 0%; opacity: 0.3; filter: drop-shadow(0 0 6px #fff); }' +
+                          '50% { top: 90%; opacity: 1; filter: drop-shadow(0 0 16px #fff) drop-shadow(0 0 25px #38bdf8); }' +
+                          '100% { top: 0%; opacity: 0.3; filter: drop-shadow(0 0 6px #fff); }' +
                           '}' +
                           '@keyframes ultraSmoothCandle {' +
                           '0% { transform: scaleY(0.75); }' +
@@ -203,7 +203,7 @@ def bot_script():
             function createBotIcon() {
                 var wrap = d.getElementById('sniper-bot-btn') || d.createElement('div');
                 wrap.id = 'sniper-bot-btn';
-                wrap.style.cssText = 'position:fixed;bottom:75px;left:18px;width:58px;height:58px;border-radius:50%;background:#080c16;display:flex;align-items:center;justify-content:center;border:2.5px solid #fff;animation:floatingWhitePurpleGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;';
+                wrap.style.cssText = 'position:fixed;bottom:75px;left:18px;width:56px;height:56px;border-radius:50%;background:#080c16;display:flex;align-items:center;justify-content:center;border:2.5px solid #fff;animation:floatingWhitePurpleGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;';
                 wrap.innerHTML = '<img src="' + botMainLogo + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;pointer-events:none;" />';
 
                 if(!d.body.contains(wrap)) d.body.appendChild(wrap);
@@ -283,24 +283,24 @@ def bot_script():
                 var marketInfo = detectMarketAndPayout();
                 var panel = d.createElement('div');
                 panel.id = 'sniper-bot-panel';
-                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:235px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:2.5px solid #22c55e;border-radius:12px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
+                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:220px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:2.5px solid #22c55e;border-radius:11px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
 
                 if(!isLicensed) {
                     panel.innerHTML = 
-                        '<div style="padding:12px;box-sizing:border-box;position:relative;">' +
-                            '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:5px;margin-bottom:8px;cursor:move;">' +
-                                '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
-                                    '<img src="' + botMainLogo + '" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
-                                    '<div style="font-size:10px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
+                        '<div style="padding:10px;box-sizing:border-box;position:relative;">' +
+                            '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:4px;margin-bottom:6px;cursor:move;">' +
+                                '<div style="display:flex;align-items:center;gap:4px;pointer-events:none;">' +
+                                    '<img src="' + botMainLogo + '" style="width:16px;height:16px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
+                                    '<div style="font-size:9.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
                                 '</div>' +
-                                '<div style="display:flex;gap:4px;align-items:center;">' +
-                                    '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.06);font-weight:bold;">—</div>' +
-                                    '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.06);">✕</div>' +
+                                '<div style="display:flex;gap:3px;align-items:center;">' +
+                                    '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:10px;color:#94a3b8;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.06);font-weight:bold;">—</div>' +
+                                    '<div id="sniper-close-btn" style="cursor:pointer;font-size:10px;color:#94a3b8;padding:1px 3px;border-radius:3px;background:rgba(255,255,255,0.06);">✕</div>' +
                                 '</div>' +
                             '</div>' +
-                            '<div style="font-size:9px;font-weight:700;color:#94a3b8;margin-bottom:4px;">Password / Key:</div>' +
-                            '<input id="sniper-license-input" type="text" placeholder="Key..." style="width:100%;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:6px;color:#fff;font-size:9px;margin-bottom:6px;box-sizing:border-box;outline:none;" />' +
-                            '<button id="sniper-verify-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:4px;padding:6px;font-size:10px;font-weight:900;cursor:pointer;">VERIFY</button>' +
+                            '<div style="font-size:8.5px;font-weight:700;color:#94a3b8;margin-bottom:3px;">Password / Key:</div>' +
+                            '<input id="sniper-license-input" type="text" placeholder="Key..." style="width:100%;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:5px;color:#fff;font-size:8.5px;margin-bottom:5px;box-sizing:border-box;outline:none;" />' +
+                            '<button id="sniper-verify-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:3.5px;padding:5px;font-size:9.5px;font-weight:900;cursor:pointer;">VERIFY</button>' +
                         '</div>';
 
                     d.body.appendChild(panel);
@@ -327,38 +327,38 @@ def bot_script():
                 }
 
                 panel.innerHTML = 
-                    '<div style="padding:10px 9px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
+                    '<div style="padding:8px 7px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                         '<div>' +
-                            '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:5px;margin-bottom:6px;cursor:move;">' +
-                                '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
-                                    '<img src="' + botMainLogo + '" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
+                            '<div id="sniper-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:4px;margin-bottom:5px;cursor:move;">' +
+                                '<div style="display:flex;align-items:center;gap:4px;pointer-events:none;">' +
+                                    '<img src="' + botMainLogo + '" style="width:16px;height:16px;border-radius:50%;object-fit:cover;border:1px solid #fff;" />' +
                                     '<div>' +
-                                        '<div style="font-size:10px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
-                                        '<div style="display:flex;align-items:center;gap:2px;font-size:7px;color:#22c55e;font-weight:700;">' +
+                                        '<div style="font-size:9.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">SNIPER BOT</div>' +
+                                        '<div style="display:flex;align-items:center;gap:2px;font-size:6.5px;color:#22c55e;font-weight:700;">' +
                                             '<span style="width:3px;height:3px;background:#22c55e;border-radius:50%;display:inline-block;"></span> AI ONLINE' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div style="display:flex;align-items:center;gap:4px;">' +
-                                    '<button id="open-live-signal-tab" style="background:rgba(56,189,248,0.2);color:#38bdf8;font-size:7px;font-weight:900;padding:2px 5px;border-radius:3px;border:1px solid #38bdf8;cursor:pointer;">Live Signal</button>' +
-                                    '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.06);font-weight:bold;">—</div>' +
-                                    '<div id="sniper-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.06);">✕</div>' +
+                                '<div style="display:flex;align-items:center;gap:3px;">' +
+                                    '<button id="open-live-signal-tab" style="background:rgba(56,189,248,0.2);color:#38bdf8;font-size:6.5px;font-weight:900;padding:2px 4px;border-radius:3px;border:1px solid #38bdf8;cursor:pointer;">Live Signal</button>' +
+                                    '<div id="sniper-minimize-btn" style="cursor:pointer;font-size:10px;color:#94a3b8;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.06);font-weight:bold;">—</div>' +
+                                    '<div id="sniper-close-btn" style="cursor:pointer;font-size:10px;color:#94a3b8;padding:1px 3px;border-radius:3px;background:rgba(255,255,255,0.06);">✕</div>' +
                                 '</div>' +
                             '</div>' +
 
-                            '<div style="display:flex;gap:4px;margin-bottom:5px;">' +
-                                '<button id="mode-1m" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:4px;padding:4px;font-size:7.5px;font-weight:900;cursor:pointer;">1m Standard</button>' +
-                                '<button id="mode-5s" style="flex:1;background:rgba(255,255,255,0.08);color:#94a3b8;border:none;border-radius:4px;padding:4px;font-size:7.5px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
+                            '<div style="display:flex;gap:3px;margin-bottom:4px;">' +
+                                '<button id="mode-1m" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:3.5px;padding:3.5px;font-size:7px;font-weight:900;cursor:pointer;">1m Standard</button>' +
+                                '<button id="mode-5s" style="flex:1;background:rgba(255,255,255,0.08);color:#94a3b8;border:none;border-radius:3.5px;padding:3.5px;font-size:7px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
                             '</div>' +
 
-                            '<div id="auto-controls-container" style="display:none;gap:4px;margin-bottom:5px;">' +
-                                '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:3px;padding:3px 4px;font-size:6.5px;font-weight:900;cursor:pointer;">Auto Start</button>' +
-                                '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:none;border-radius:3px;padding:3px 4px;font-size:6.5px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
+                            '<div id="auto-controls-container" style="display:none;gap:3px;margin-bottom:4px;">' +
+                                '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:2px;padding:2px 3px;font-size:5.5px;font-weight:900;cursor:pointer;">Auto Start</button>' +
+                                '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:none;border-radius:2px;padding:2px 3px;font-size:5.5px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
                             '</div>' +
 
-                            '<div style="text-align:center;margin-bottom:6px;">' +
-                                '<div style="font-size:8.5px;font-weight:700;color:#22c55e;margin-bottom:3px;letter-spacing:0.3px;">Next Candle?</div>' +
-                                '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:56px;background:rgba(0,0,0,0.7);border-radius:6px;padding:4px 6px;border:1px solid rgba(56,189,248,0.45);box-shadow:inset 0 0 10px rgba(0,0,0,0.9);">' +
+                            '<div style="text-align:center;margin-bottom:5px;">' +
+                                '<div style="font-size:8px;font-weight:700;color:#22c55e;margin-bottom:2px;letter-spacing:0.3px;">Next Candle?</div>' +
+                                '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:52px;background:rgba(0,0,0,0.7);border-radius:5px;padding:4px 6px;border:1px solid rgba(56,189,248,0.45);box-shadow:inset 0 0 10px rgba(0,0,0,0.9);">' +
                                     '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:26px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
                                     '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 0.3s;"><div style="width:1.5px;height:7px;background:#ef4444;"></div><div style="width:5px;height:30px;background:#ef4444;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#ef4444;"></div></div>' +
                                     '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 0.6s;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:22px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
@@ -370,19 +370,19 @@ def bot_script():
                                 '</div>' +
                             '</div>' +
 
-                            '<div id="sniper-action-box" style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:7px;text-align:center;margin-bottom:5px;">' +
-                                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:8.5px;">' +
+                            '<div id="sniper-action-box" style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:6px;text-align:center;margin-bottom:4px;">' +
+                                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;font-size:8px;">' +
                                     '<span style="color:#94a3b8;font-weight:bold;">LATEST SIGNAL</span>' +
-                                    '<span id="sniper-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;letter-spacing:0.3px;">READY</span>' +
+                                    '<span id="sniper-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:1.5px 5px;border-radius:3px;border:1px solid #059669;letter-spacing:0.3px;">READY</span>' +
                                 '</div>' +
-                                '<div id="sniper-signal-text" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:5px;letter-spacing:0.5px;">--- : --</div>' +
-                                '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:4px;padding:7px;font-size:10px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
+                                '<div id="sniper-signal-text" style="font-size:12px;font-weight:900;color:#facc15;margin-bottom:4px;letter-spacing:0.5px;">--- : --</div>' +
+                                '<button id="sniper-get-signal-btn" style="width:100%;background:#166534;color:#fff;border:none;border-radius:4px;padding:6px;font-size:9.5px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
                             '</div>' +
                         '</div>' +
 
-                        '<div style="display:flex;justify-content:space-between;align-items:center;font-size:7.5px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:3px;">' +
                             '<span id="sniper-market-display" style="color:#38bdf8;font-weight:bold;">' + marketInfo + '</span>' +
-                            '<span id="sniper-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:1px 4px;border-radius:3px;">15:40:33</span>' +
+                            '<span id="sniper-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:1px 3px;border-radius:2.5px;">15:40:33</span>' +
                         '</div>' +
                     '</div>';
 
@@ -474,24 +474,24 @@ def bot_script():
 
                 var livePanel = d.createElement('div');
                 livePanel.id = 'live-signal-panel';
-                livePanel.style.cssText = 'position:fixed;top:48%;left:50%;transform:translate(-50%, -50%);width:420px;height:450px;background:linear-gradient(180deg, rgba(8, 13, 24, 0.99), rgba(3, 6, 12, 0.99));border:2.5px solid #38bdf8;border-radius:14px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 40px rgba(0,0,0,0.8);';
+                livePanel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:320px;max-height:90vh;background:linear-gradient(180deg, rgba(8, 13, 24, 0.99), rgba(3, 6, 12, 0.99));border:2.5px solid #38bdf8;border-radius:12px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 40px rgba(0,0,0,0.8);';
 
                 livePanel.innerHTML = 
-                    '<div id="live-panel-header" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08);cursor:move;">' +
-                        '<div style="display:flex;align-items:center;gap:6px;">' +
-                            '<img src="' + botMainLogo + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid #38bdf8;" />' +
-                            '<div style="font-size:11px;font-weight:900;letter-spacing:0.5px;color:#38bdf8;">LIVE SIGNAL & ANALYZER</div>' +
+                    '<div id="live-panel-header" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08);cursor:move;position:relative;z-index:20;">' +
+                        '<div style="display:flex;align-items:center;gap:5px;">' +
+                            '<img src="' + botMainLogo + '" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid #38bdf8;" />' +
+                            '<div style="font-size:9.5px;font-weight:900;letter-spacing:0.5px;color:#38bdf8;">LIVE SIGNAL & ANALYZER</div>' +
                         '</div>' +
-                        '<div style="display:flex;gap:5px;align-items:center;">' +
-                            '<button id="back-to-sniper-btn" style="background:rgba(34,197,94,0.2);color:#22c55e;font-size:8px;font-weight:900;padding:2px 6px;border-radius:3px;border:1px solid #22c55e;cursor:pointer;">Sniper Bot</button>' +
-                            '<div id="live-close-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.06);">✕</div>' +
+                        '<div style="display:flex;gap:4px;align-items:center;">' +
+                            '<button id="back-to-sniper-btn" style="background:rgba(34,197,94,0.2);color:#22c55e;font-size:7.5px;font-weight:900;padding:2px 5px;border-radius:3px;border:1px solid #22c55e;cursor:pointer;">Sniper Bot</button>' +
+                            '<div id="live-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,0.06);">✕</div>' +
                         '</div>' +
                     '</div>' +
 
-                    '<div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;flex:1;overflow-y:auto;">' +
-                        '<div style="display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);">' +
-                            '<div style="font-size:9px;font-weight:bold;color:#94a3b8;">Market Pair:</div>' +
-                            '<select id="live-market-selector" style="background:#0f172a;color:#38bdf8;border:1px solid #38bdf8;border-radius:4px;padding:3px 6px;font-size:9px;font-weight:bold;outline:none;">' +
+                    '<div style="padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1;overflow-y:auto;position:relative;z-index:5;">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);padding:5px 8px;border-radius:5px;border:1px solid rgba(255,255,255,0.1);">' +
+                            '<div style="font-size:8px;font-weight:bold;color:#94a3b8;">Market Pair:</div>' +
+                            '<select id="live-market-selector" style="background:#0f172a;color:#38bdf8;border:1px solid #38bdf8;border-radius:4px;padding:2px 5px;font-size:8px;font-weight:bold;outline:none;">' +
                                 '<option value="EURUSD">EUR/USD (OTC)</option>' +
                                 '<option value="GBPUSD">GBP/USD (OTC)</option>' +
                                 '<option value="USDJPY">USD/JPY (OTC)</option>' +
@@ -500,27 +500,27 @@ def bot_script():
                             '</select>' +
                         '</div>' +
 
-                        '<div style="position:relative;width:100%;height:160px;background:#030712;border-radius:6px;border:1px solid rgba(56,189,248,0.3);overflow:hidden;display:flex;align-items:center;justify-content:center;">' +
-                            '<div id="live-chart-container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:10px;font-weight:bold;">' +
+                        '<div style="position:relative;width:100%;height:115px;background:#030712;border-radius:5px;border:1px solid rgba(56,189,248,0.3);overflow:hidden;display:flex;align-items:center;justify-content:center;">' +
+                            '<div id="live-chart-container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:9px;font-weight:bold;">' +
                                 '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX%3AEURUSD&interval=1&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%;height:100%;border:none;pointer-events:auto;"></iframe>' +
                             '</div>' +
-                            '<div id="white-lightning-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, transparent, #ffffff, transparent);box-shadow:0 0 15px #ffffff, 0 0 30px #38bdf8;display:none;z-index:10;"></div>' +
                         '</div>' +
 
-                        '<div style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:8px;text-align:center;">' +
-                            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9px;">' +
+                        '<div style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:6px;text-align:center;">' +
+                            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:8px;">' +
                                 '<span style="color:#94a3b8;font-weight:bold;">LIVE ARBITER STATUS</span>' +
-                                '<span id="live-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
+                                '<span id="live-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:1.5px 5px;border-radius:3px;border:1px solid #059669;">READY</span>' +
                             '</div>' +
-                            '<div id="live-signal-output" style="font-size:14px;font-weight:900;color:#facc15;margin-bottom:6px;letter-spacing:0.5px;">CLICK GENERATE BELOW</div>' +
-                            '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #2563eb, #1d4ed8);color:#fff;border:none;border-radius:5px;padding:8px;font-size:11px;font-weight:900;cursor:pointer;box-shadow:0 0 12px rgba(37,99,235,0.5);">⚡ GENERATE LIVE SIGNAL</button>' +
+                            '<div id="live-signal-output" style="font-size:12px;font-weight:900;color:#facc15;margin-bottom:5px;letter-spacing:0.5px;">CLICK GENERATE BELOW</div>' +
+                            '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #2563eb, #1d4ed8);color:#fff;border:none;border-radius:4px;padding:7px;font-size:9.5px;font-weight:900;cursor:pointer;box-shadow:0 0 10px rgba(37,99,235,0.5);">⚡ GENERATE LIVE SIGNAL</button>' +
                         '</div>' +
                     '</div>' +
 
-                    '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;padding:6px 12px;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06);">' +
-                        '<span style="color:#38bdf8;font-weight:bold;">Institutional 549 Rules Active</span>' +
+                    '<div style="display:flex;justify-content:space-between;align-items:center;font-size:7.5px;color:#94a3b8;padding:5px 10px;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:20;">' +
+                        '<span style="color:#38bdf8;font-weight:bold;">549 Rules Active</span>' +
                         '<span id="live-panel-timer" style="color:#22c55e;font-weight:900;">00:00:00</span>' +
-                    '</div>';
+                    '</div>' +
+                    '<div id="full-panel-lightning-scanner" style="position:absolute;left:0;width:100%;height:4px;background:linear-gradient(90deg, transparent, #ffffff, transparent);box-shadow:0 0 15px #ffffff, 0 0 30px #38bdf8;display:none;z-index:30;pointer-events:none;"></div>';
 
                 d.body.appendChild(livePanel);
                 makeDraggable(livePanel, 'live-panel-header');
@@ -553,7 +553,7 @@ def bot_script():
                 d.getElementById('generate-live-signal-btn').onclick = function() {
                     var statusBadge = d.getElementById('live-status-badge');
                     var signalOutput = d.getElementById('live-signal-output');
-                    var lightningBar = d.getElementById('white-lightning-scanner');
+                    var lightningBar = d.getElementById('full-panel-lightning-scanner');
                     var genBtn = d.getElementById('generate-live-signal-btn');
 
                     genBtn.disabled = true;
@@ -563,7 +563,7 @@ def bot_script():
                     statusBadge.style.border = '1px solid #38bdf8';
 
                     lightningBar.style.display = 'block';
-                    lightningBar.style.animation = 'whiteLightningScan 1.2s infinite linear';
+                    lightningBar.style.animation = 'fullPanelLightningScan 1.2s infinite linear';
 
                     var scanSteps = [
                         "Analyzing Order Book & Liquidity...",
@@ -605,7 +605,7 @@ def bot_script():
                             signalOutput.style.color = isCall ? '#22c55e' : '#ef4444';
                             signalOutput.innerText = (isCall ? '📈 CALL / UP (' : '📉 PUT / DOWN (') + confidence + '%)';
 
-                            // Auto disappear / hide signal after 10 seconds to ready state
+                            # Auto disappear / hide signal after 10 seconds to ready state
                             setTimeout(function(){
                                 if(livePanel.isConnected) {
                                     statusBadge.innerText = 'READY';
