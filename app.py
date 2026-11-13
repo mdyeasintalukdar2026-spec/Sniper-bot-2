@@ -283,7 +283,6 @@ def bot_script():
                 var marketInfo = detectMarketAndPayout();
                 var panel = d.createElement('div');
                 panel.id = 'sniper-bot-panel';
-                # নির্দিষ্ট সুষম মাপ: Width: 260px, Min-Height: 315px (উভয় প্যানেল একদম সমান সাইজের জন্য)
                 panel.style.cssText = 'position:fixed;top:45%;left:50%;transform:translate(-50%, -50%);width:260px;min-height:315px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:2.5px solid #22c55e;border-radius:11px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);display:flex;flex-direction:column;justify-content:space-between;';
 
                 if(!isLicensed) {
@@ -475,7 +474,6 @@ def bot_script():
 
                 var livePanel = d.createElement('div');
                 livePanel.id = 'live-signal-panel';
-                # স্নাইপার প্যানেলের সাথে একদম হুবহু সমান সাইজ: Width: 260px, Min-Height: 315px
                 livePanel.style.cssText = 'position:fixed;top:45%;left:50%;transform:translate(-50%, -50%);width:260px;min-height:315px;background:linear-gradient(180deg, rgba(8, 13, 24, 0.99), rgba(3, 6, 12, 0.99));border:2.5px solid #38bdf8;border-radius:11px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 40px rgba(0,0,0,0.8);';
 
                 livePanel.innerHTML = 
@@ -756,7 +754,7 @@ def bot_script():
                 ];
 
                 var idx = 0;
-                signalText.signalTextStyle = '9px';
+                signalText.style.fontSize = '9px';
                 signalText.style.color = '#38bdf8';
 
                 var timer = setInterval(function() {
@@ -800,7 +798,7 @@ def bot_script():
                 isExecutionLocked = true;
 
                 var targetBtn = null;
-                var buttons = d.querySelectorAll('button, div[role="button"], span[class*="btn"]');
+                var buttons = d.querySelectorAll('button, div[role="button'], span[class*="btn"]');
                 
                 for(var i=0; i<buttons.length; i++){
                     var btn = buttons[i];
