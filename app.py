@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__, static_folder=None)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
-logger = logging.getLogger("RJ_SURESHOT_FORENSIC_MASTER")
+logger = logging.getLogger("RA_VIP_BOT_MASTER")
 
 # --- MASTER API CREDENTIALS & BACKEND PIPELINE ---
 QX_API_KEY = os.environ.get("QX_API_KEY", "qx_live_1xxOcsg5_3vEavHfZwAkGufh9NLLWJhUqG3T6H6oCEuoDWeJV")
@@ -87,7 +87,7 @@ class GroqAIArbiter:
 
 @app.route('/')
 def home():
-    res = make_response("RJ SURESHOT FORENSIC MASTER ACTIVE - READY!")
+    res = make_response("RA VIP BOT FORENSIC MASTER ACTIVE - READY!")
     res.headers.add("Access-Control-Allow-Origin", "*")
     return res
 
@@ -125,7 +125,7 @@ def get_signal():
         real_accuracy = 97 + ((int(time.time() * 11) + 17) % 3)
         
         rules_list = [
-            "RJ Forensic Deep Candle Extraction & Multi-Pair Auto Confluence.",
+            "RA VIP Deep Candle Extraction & Multi-Pair Auto Confluence.",
             "Order Flow Liquidity Sweep with Zero-Lag AI Validation.",
             "Institutional Volume Profile Sync & Momentum Reversal Match.",
             "Dynamic Web Laser Extraction & SureShot Price Action Validation."
@@ -134,7 +134,7 @@ def get_signal():
 
         res = jsonify({
             "signal": ai_decision,
-            "trend": "RJ_SURESHOT_VERIFIED",
+            "trend": "RA_VIP_VERIFIED",
             "confidence": real_accuracy,
             "status": "GREEN_EXECUTE",
             "rule": chosen_rule
@@ -148,7 +148,7 @@ def get_signal():
             "trend": "STABLE MOMENTUM",
             "confidence": 98,
             "status": "GREEN_EXECUTE",
-            "rule": "SureShot Forensic Standard Trend Confluence."
+            "rule": "RA VIP Standard Trend Confluence."
         })
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
@@ -161,7 +161,7 @@ def bot_script():
         try {
             var d = document;
             
-            ["rj-forensic-master-panel", "rj-master-float-btn", "rj-forensic-master-style", "rj-spider-container"].forEach(function(i){
+            ["ra-vip-master-panel", "ra-master-float-btn", "ra-vip-master-style", "ra-scanner-overlay-container"].forEach(function(i){
                 var e = d.getElementById(i);
                 if(e) e.remove();
             });
@@ -170,7 +170,7 @@ def bot_script():
             var renderServerUrl = window.location.origin;
 
             var s = d.createElement('style');
-            s.id = 'rj-forensic-master-style';
+            s.id = 'ra-vip-master-style';
             s.innerHTML = '@keyframes masterBorderGlow {' +
                           '0% { border-color: #38bdf8; box-shadow: 0 0 35px rgba(56,189,248,0.85), inset 0 0 18px rgba(56,189,248,0.4); }' +
                           '50% { border-color: #9333ea; box-shadow: 0 0 45px rgba(147,51,234,0.95), inset 0 0 22px rgba(147,51,234,0.5); }' +
@@ -181,29 +181,35 @@ def bot_script():
                           '50% { box-shadow: 0 0 25px #22c55e, 0 0 45px #38bdf8; border-color: #22c55e; }' +
                           '100% { box-shadow: 0 0 15px #38bdf8, 0 0 30px #9333ea; border-color: #38bdf8; }' +
                           '}' +
-                          '@keyframes videoSpiderStyle1 {' +
-                          '0% { transform: translate(5vw, 10vh) rotate(0deg) scale(1.5); }' +
-                          '25% { transform: translate(55vw, 25vh) rotate(45deg) scale(1.6); filter: drop-shadow(0 0 22px #38bdf8); }' +
-                          '50% { transform: translate(25vw, 75vh) rotate(-30deg) scale(1.5); filter: drop-shadow(0 0 22px #22c55e); }' +
-                          '75% { transform: translate(75vw, 60vh) rotate(60deg) scale(1.7); filter: drop-shadow(0 0 22px #eab308); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(360deg) scale(2.4); filter: drop-shadow(0 0 45px #9333ea); }' +
+                          '@keyframes slowCandleMove1 {' +
+                          '0% { transform: translateY(0px) scale(1); }' +
+                          '50% { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 0 10px #22c55e); }' +
+                          '100% { transform: translateY(0px) scale(1); }' +
                           '}' +
-                          '@keyframes videoSpiderStyle2 {' +
-                          '0% { transform: translate(85vw, 15vh) rotate(0deg) scale(1.5); }' +
-                          '25% { transform: translate(30vw, 65vh) rotate(-45deg) scale(1.6); filter: drop-shadow(0 0 22px #ef4444); }' +
-                          '50% { transform: translate(70vw, 80vh) rotate(30deg) scale(1.5); filter: drop-shadow(0 0 22px #38bdf8); }' +
-                          '75% { transform: translate(35vw, 25vh) rotate(-60deg) scale(1.7); filter: drop-shadow(0 0 22px #22c55e); }' +
-                          '100% { transform: translate(45vw, 45vh) rotate(-360deg) scale(2.4); filter: drop-shadow(0 0 45px #eab308); }' +
+                          '@keyframes slowCandleMove2 {' +
+                          '0% { transform: translateY(0px) scale(1); }' +
+                          '50% { transform: translateY(4px) scale(1.03); filter: drop-shadow(0 0 10px #ef4444); }' +
+                          '100% { transform: translateY(0px) scale(1); }' +
                           '}' +
-                          '@keyframes dataStreamPacket {' +
-                          '0% { opacity: 0; transform: translateY(0) scale(0.6); }' +
-                          '50% { opacity: 1; transform: translateY(-45px) scale(1.3); color: #38bdf8; }' +
-                          '100% { opacity: 0; transform: translateY(-90px) scale(1); }' +
+                          '@keyframes laserBeamScan {' +
+                          '0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }' +
+                          '50% { opacity: 1; }' +
+                          '100% { transform: translateX(200%) rotate(25deg); opacity: 0; }' +
                           '}' +
-                          '@keyframes masterBoomFinal {' +
-                          '0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
-                          '50% { transform: translate(-50%, -50%) scale(6); opacity: 0.95; background: #38bdf8; box-shadow: 0 0 160px 80px #9333ea; }' +
-                          '100% { transform: translate(-50%, -50%) scale(12); opacity: 0; background: transparent; }' +
+                          '@keyframes heartbeatLeftToRight {' +
+                          '0% { transform: translateX(-100%) scaleY(0.5); opacity: 0.2; }' +
+                          '50% { opacity: 1; transform: translateX(0%) scaleY(1.4); filter: drop-shadow(0 0 12px #38bdf8); }' +
+                          '100% { transform: translateX(100%) scaleY(0.5); opacity: 0.2; }' +
+                          '}' +
+                          '@keyframes heartbeatRightToLeft {' +
+                          '0% { transform: translateX(100%) scaleY(0.5); opacity: 0.2; }' +
+                          '50% { opacity: 1; transform: translateX(0%) scaleY(1.4); filter: drop-shadow(0 0 12px #22c55e); }' +
+                          '100% { transform: translateX(-100%) scaleY(0.5); opacity: 0.2; }' +
+                          '}' +
+                          '@keyframes epicVipRadar {' +
+                          '0% { transform: scale(0.2); opacity: 1; border-color: #38bdf8; box-shadow: 0 0 0 0 rgba(56,189,248,0.8); }' +
+                          '50% { transform: scale(3.5); opacity: 0.8; border-color: #9333ea; box-shadow: 0 0 80px 40px rgba(147,51,234,0.6); }' +
+                          '100% { transform: scale(7); opacity: 0; border-color: #22c55e; }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
@@ -220,10 +226,11 @@ def bot_script():
             ];
 
             function createFloatButton() {
-                var wrap = d.getElementById('rj-master-float-btn') || d.createElement('div');
-                wrap.id = 'rj-master-float-btn';
-                wrap.style.cssText = 'position:fixed;bottom:75px;left:18px;width:58px;height:58px;border-radius:50%;background:#080c16;display:flex;align-items:center;justify-content:center;border:2.5px solid #38bdf8;animation:floatMasterGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;';
-                wrap.innerHTML = '<img src="' + botMainLogo + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;pointer-events:none;" />';
+                var wrap = d.getElementById('ra-master-float-btn') || d.createElement('div');
+                wrap.id = 'ra-master-float-btn';
+                wrap.style.cssText = 'position:fixed;bottom:75px;left:18px;width:150px;height:48px;border-radius:26px;background:linear-gradient(135deg, #080c16, #1e1b4b);display:flex;align-items:center;padding:0 8px;gap:8px;border:2px solid #38bdf8;animation:floatMasterGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;';
+                wrap.innerHTML = '<img src="' + botMainLogo + '" style="width:34px;height:34px;object-fit:cover;border-radius:50%;border:1.5px solid #38bdf8;pointer-events:none;" />' +
+                                 '<div style="display:flex;flex-direction:column;pointer-events:none;"><span style="font-size:10px;font-weight:900;color:#fff;letter-spacing:0.5px;line-height:1.1;">RA VIP BOT</span><span style="font-size:7.5px;color:#38bdf8;font-weight:700;">COMMUNITY</span></div>';
 
                 if(!d.body.contains(wrap)) d.body.appendChild(wrap);
 
@@ -280,7 +287,7 @@ def bot_script():
                     var tradeBtn = d.querySelector(btnSelector);
                     if(tradeBtn) {
                         tradeBtn.click();
-                        console.log("RJ SURESHOT MASTER: Auto Trade Executed -> " + (isCall ? "CALL" : "PUT"));
+                        console.log("RA VIP BOT: Auto Trade Executed -> " + (isCall ? "CALL" : "PUT"));
                     }
                 } catch(err) {
                     console.error("Auto Trade Error:", err);
@@ -288,8 +295,8 @@ def bot_script():
             }
 
             function toggleMasterDashboard() {
-                var existing = d.getElementById('rj-forensic-master-panel');
-                var floatBtn = d.getElementById('rj-master-float-btn');
+                var existing = d.getElementById('ra-vip-master-panel');
+                var floatBtn = d.getElementById('ra-master-float-btn');
                 
                 if(existing) { 
                     existing.remove(); 
@@ -300,7 +307,7 @@ def bot_script():
                 if(floatBtn) floatBtn.style.display = 'none';
 
                 var panel = d.createElement('div');
-                panel.id = 'rj-forensic-master-panel';
+                panel.id = 'ra-vip-master-panel';
                 panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:325px;background:linear-gradient(180deg, rgba(4, 7, 15, 0.99), rgba(1, 3, 8, 0.99));border:3.5px solid #38bdf8;border-radius:20px;animation:masterBorderGlow 6s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(12px);';
 
                 renderMasterContent(panel);
@@ -308,59 +315,59 @@ def bot_script():
 
             function renderMasterContent(panel) {
                 var marketInfo = detectMarketAndPayout();
-                var floatBtn = d.getElementById('rj-master-float-btn');
+                var floatBtn = d.getElementById('ra-master-float-btn');
 
                 if(activeScreen === "main") {
                     panel.innerHTML = 
                         '<div style="padding:14px 12px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
-                                '<div id="rj-master-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:7px;margin-bottom:8px;cursor:move;">' +
+                                '<div id="ra-master-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:7px;margin-bottom:8px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
                                         '<img src="' + botMainLogo + '" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid #38bdf8;" />' +
                                         '<div>' +
-                                            '<div style="font-size:12px;font-weight:900;letter-spacing:1px;color:#fff;">RJ SURESHOT FORENSIC</div>' +
-                                            '<div style="display:flex;align-items:center;gap:3px;font-size:8px;color:#38bdf8;font-weight:700;">' +
-                                                '<span style="width:4px;height:4px;background:#38bdf8;border-radius:50%;display:inline-block;"></span> AUTO SPIDER AI ACTIVE' +
+                                            '<div style="font-size:12px;font-weight:900;letter-spacing:1px;color:#fff;">RA VIP AI BOT</div>' +
+                                            '<div style="display:flex;align-items:center;gap:3px;font-size:8px;color:#22c55e;font-weight:700;">' +
+                                                '<span style="width:4px;height:4px;background:#22c55e;border-radius:50%;display:inline-block;"></span> COMMUNITY ACTIVE' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div style="display:flex;align-items:center;gap:4px;">' +
                                         '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:3px 8px;font-size:8px;font-weight:900;cursor:pointer;">LIVE CHART</button>' +
-                                        '<div id="rj-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
-                                        '<div id="rj-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
+                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
+                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
                                 '<div style="display:flex;gap:6px;margin-bottom:8px;">' +
-                                    '<div style="flex:1;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:6px;padding:7px;text-align:center;font-size:9.5px;font-weight:900;color:#38bdf8;">UNLIMITED DATA EXTRACTION SPHERE</div>' +
+                                    '<div style="flex:1;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:6px;padding:7px;text-align:center;font-size:9.5px;font-weight:900;color:#38bdf8;">RA COMMUNITY AI SIGNAL ENGINE</div>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:8px;">' +
-                                    '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.4px;">Health: 144 Ticks/sec (FRESH) | Auto-Scan</div>' +
-                                    '<div id="rj-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#020617;border-radius:9px;padding:6px 8px;border:1px solid #1e293b;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:40px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:45px;background:#ef4444;border-radius:2px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:10px;background:#eab308;"></div><div style="width:8px;height:50px;background:#eab308;border-radius:2px;box-shadow:0 0 15px #eab308;"></div><div style="width:2px;height:10px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:42px;background:#22c55e;border-radius:2px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                    '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.4px;">Market Flow: Ultra Slow Motion Scan</div>' +
+                                    '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#020617;border-radius:9px;padding:6px 8px;border:1px solid #1e293b;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove1 4s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:40px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove2 3.5s infinite ease-in-out;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:45px;background:#ef4444;border-radius:2px;box-shadow:0 0 14px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove1 4.5s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:38px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove2 3.8s infinite ease-in-out;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:8px;height:50px;background:#ef4444;border-radius:2px;box-shadow:0 0 16px #ef4444;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowCandleMove1 4.2s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:8px;height:42px;background:#22c55e;border-radius:2px;box-shadow:0 0 14px #22c55e;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="rj-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:9px;text-align:center;margin-bottom:8px;">' +
+                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:9px;text-align:center;margin-bottom:8px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:10px;">' +
-                                        '<span style="color:#94a3b8;font-weight:bold;">AUTO SURESHOT STATUS</span>' +
-                                        '<span id="rj-status-badge" style="color:' + (autoTradingActive ? '#22c55e' : '#38bdf8') + ';font-weight:900;background:' + (autoTradingActive ? '#064e3b' : '#0c4a6e') + ';padding:2px 7px;border-radius:3px;border:1px solid ' + (autoTradingActive ? '#059669' : '#0284c7') + ';">' + (autoTradingActive ? 'AUTO RUNNING' : 'READY') + '</span>' +
+                                        '<span style="color:#94a3b8;font-weight:bold;">AUTO VIP STATUS</span>' +
+                                        '<span id="ra-status-badge" style="color:' + (autoTradingActive ? '#22c55e' : '#38bdf8') + ';font-weight:900;background:' + (autoTradingActive ? '#064e3b' : '#0c4a6e') + ';padding:2px 7px;border-radius:3px;border:1px solid ' + (autoTradingActive ? '#059669' : '#0284c7') + ';">' + (autoTradingActive ? 'AUTO RUNNING' : 'READY') + '</span>' +
                                     '</div>' +
-                                    '<div id="rj-signal-text" style="font-size:15px;font-weight:900;color:#facc15;margin-bottom:7px;">--- : --</div>' +
+                                    '<div id="ra-signal-text" style="font-size:15px;font-weight:900;color:#facc15;margin-bottom:7px;">--- : --</div>' +
                                     '<div style="display:flex;gap:5px;">' +
-                                        '<button id="rj-start-auto-btn" style="flex:1;background:linear-gradient(90deg, #16a34a, #0284c7);color:#fff;border:none;border-radius:6px;padding:8px;font-size:10.5px;font-weight:900;cursor:pointer;">' + (autoTradingActive ? 'STOP AUTO' : 'START AUTO SURESHOT') + '</button>' +
+                                        '<button id="ra-start-auto-btn" style="flex:1;background:linear-gradient(90deg, #16a34a, #0284c7);color:#fff;border:none;border-radius:6px;padding:8px;font-size:10.5px;font-weight:900;cursor:pointer;">' + (autoTradingActive ? 'STOP AUTO' : 'START 5S AUTO VIP') + '</button>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8.5px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">' +
                                 '<span style="color:#38bdf8;font-weight:bold;">' + marketInfo + '</span>' +
-                                '<span id="rj-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:1.5px 5px;border-radius:3px;">15:40:33</span>' +
+                                '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:1.5px 5px;border-radius:3px;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
                 } else {
@@ -372,15 +379,15 @@ def bot_script():
                     panel.innerHTML = 
                         '<div style="padding:14px 12px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
-                                '<div id="rj-master-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:7px;margin-bottom:7px;cursor:move;">' +
+                                '<div id="ra-master-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:7px;margin-bottom:7px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:5px;pointer-events:none;">' +
                                         '<img src="' + botMainLogo + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid #38bdf8;" />' +
-                                        '<div style="font-size:11px;font-weight:900;color:#fff;">LIVE FORENSIC TERMINAL</div>' +
+                                        '<div style="font-size:11px;font-weight:900;color:#fff;">RA COMMUNITY LIVE TERMINAL</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:4px;align-items:center;">' +
                                         '<button id="back-to-main-btn" style="background:#334155;color:#fff;border:none;border-radius:3px;padding:2px 6px;font-size:8px;font-weight:900;cursor:pointer;">BACK</button>' +
-                                        '<div id="rj-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
-                                        '<div id="rj-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
+                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
+                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -401,14 +408,14 @@ def bot_script():
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">99% SURESHOT</span>' +
                                     '</div>' +
                                     '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:5px;">AUTO-SCANNING ACTIVE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:7.5px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Spider data extraction active...</div>' +
+                                    '<div id="live-rules-desc" style="font-size:7.5px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">RA VIP Heartbeat scanner active...</div>' +
                                     '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #0284c7, #22c55e);color:#fff;border:none;border-radius:5px;padding:6.5px;font-size:10px;font-weight:900;cursor:pointer;">FORCE EXTRACTION</button>' +
                                 '</div>' +
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
                                 '<span style="color:#38bdf8;font-weight:bold;">' + detectCurrentQuotexMarket() + '</span>' +
-                                '<span id="rj-live-timer" style="color:#38bdf8;font-weight:900;">15:40:33</span>' +
+                                '<span id="ra-live-timer" style="color:#38bdf8;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
                 }
@@ -416,10 +423,10 @@ def bot_script():
                 d.body.appendChild(panel);
                 makeDraggable(panel);
 
-                var closeBtn = d.getElementById('rj-close-btn');
+                var closeBtn = d.getElementById('ra-close-btn');
                 if(closeBtn) closeBtn.onclick = function() { stopMasterAuto(); panel.remove(); if(floatBtn) floatBtn.style.display = 'flex'; };
 
-                var minBtn = d.getElementById('rj-minimize-btn');
+                var minBtn = d.getElementById('ra-minimize-btn');
                 if(minBtn) minBtn.onclick = function() { panel.remove(); if(floatBtn) floatBtn.style.display = 'flex'; };
 
                 var navLiveBtn = d.getElementById('nav-live-signal-btn');
@@ -450,13 +457,13 @@ def bot_script():
                     genBtn.onclick = function() { runMasterExtractionSequence(panel); };
                 }
 
-                var startAutoBtn = panel.querySelector('#rj-start-auto-btn');
+                var startAutoBtn = panel.querySelector('#ra-start-auto-btn');
                 if(startAutoBtn) {
                     startAutoBtn.onclick = function() {
                         if(!autoTradingActive) {
                             autoTradingActive = true;
                             startAutoBtn.innerText = "STOP AUTO";
-                            var stBadge = panel.querySelector('#rj-status-badge');
+                            var stBadge = panel.querySelector('#ra-status-badge');
                             if(stBadge) {
                                 stBadge.innerText = "AUTO RUNNING";
                                 stBadge.style.color = "#22c55e";
@@ -465,8 +472,8 @@ def bot_script():
                             runMasterAutoLoop(panel);
                         } else {
                             stopMasterAuto();
-                            startAutoBtn.innerText = "START AUTO SURESHOT";
-                            var stBadge = panel.querySelector('#rj-status-badge');
+                            startAutoBtn.innerText = "START 5S AUTO VIP";
+                            var stBadge = panel.querySelector('#ra-status-badge');
                             if(stBadge) {
                                 stBadge.innerText = "READY";
                                 stBadge.style.color = "#38bdf8";
@@ -476,9 +483,9 @@ def bot_script():
                     };
                 }
 
-                if(!window.rjMasterTimer) {
-                    window.rjMasterTimer = setInterval(function(){
-                        var tmEl = d.getElementById('rj-live-timer');
+                if(!window.raMasterTimer) {
+                    window.raMasterTimer = setInterval(function(){
+                        var tmEl = d.getElementById('ra-live-timer');
                         if(tmEl) {
                             var now = new Date();
                             var hrs = String(now.getHours()).padStart(2, '0');
@@ -495,57 +502,44 @@ def bot_script():
                 if(autoLoopTimer) clearTimeout(autoLoopTimer);
             }
 
-            function triggerMasterSpiderAnimation(callback) {
+            function triggerHeartbeatAnimation(callback) {
                 var sContainer = d.createElement('div');
-                sContainer.id = 'rj-spider-container';
-                sContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;';
+                sContainer.id = 'ra-scanner-overlay-container';
+                sContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);backdrop-filter:blur(3px);';
                 
-                var spiders = [
-                    { anim: 'videoSpiderStyle1', color: '#38bdf8' },
-                    { anim: 'videoSpiderStyle2', color: '#22c55e' },
-                    { anim: 'videoSpiderStyle1', color: '#ef4444' },
-                    { anim: 'videoSpiderStyle2', color: '#eab308' },
-                    { anim: 'videoSpiderStyle1', color: '#9333ea' },
-                    { anim: 'videoSpiderStyle2', color: '#ec4899' },
-                    { anim: 'videoSpiderStyle1', color: '#84cc16' },
-                    { anim: 'videoSpiderStyle2', color: '#06b6d4' }
-                ];
+                // Two heartbeat wave lines traversing in opposite directions
+                var hb1 = d.createElement('div');
+                hb1.style.cssText = 'position:absolute;width:100%;height:4px;background:linear-gradient(90deg, transparent, #38bdf8, transparent);animation:heartbeatLeftToRight 1.5s infinite linear;box-shadow:0 0 20px #38bdf8;';
+                
+                var hb2 = d.createElement('div');
+                hb2.style.cssText = 'position:absolute;width:100%;height:4px;background:linear-gradient(90deg, transparent, #22c55e, transparent);animation:heartbeatRightToLeft 1.5s infinite linear;box-shadow:0 0 20px #22c55e;';
+                
+                var laserScan = d.createElement('div');
+                laserScan.style.cssText = 'position:absolute;width:3px;height:150vh;background:#facc15;animation:laserBeamScan 1s infinite linear;box-shadow:0 0 25px #facc15;';
 
-                spiders.forEach(function(sp) {
-                    var el = d.createElement('div');
-                    el.style.cssText = 'position:absolute;top:0;left:0;font-size:32px;font-weight:900;color:' + sp.color + ';animation:' + sp.anim + ' 10s ease-in-out infinite alternate;text-shadow:0 0 25px ' + sp.color + ';';
-                    el.innerText = '🕷️';
-                    
-                    var packet = d.createElement('div');
-                    packet.style.cssText = 'position:absolute;font-size:11px;font-weight:900;color:#38bdf8;animation:dataStreamPacket 2s infinite linear;';
-                    packet.innerText = 'DATA EXTRACTED+';
-                    el.appendChild(packet);
+                var pulseRing = d.createElement('div');
+                pulseRing.style.cssText = 'position:absolute;width:100px;height:100px;border:3px solid #38bdf8;border-radius:50%;animation:epicVipRadar 1.5s infinite ease-out;';
 
-                    sContainer.appendChild(el);
-                });
-
+                sContainer.appendChild(hb1);
+                sContainer.appendChild(hb2);
+                sContainer.appendChild(laserScan);
+                sContainer.appendChild(pulseRing);
                 d.body.appendChild(sContainer);
 
+                // Run for 5 seconds as requested
                 setTimeout(function(){
-                    var boom = d.createElement('div');
-                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:120px;height:120px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:masterBoomFinal 1s ease-out forwards;pointer-events:none;';
-                    d.body.appendChild(boom);
-
-                    setTimeout(function(){
-                        if(sContainer.isConnected) sContainer.remove();
-                        if(boom.isConnected) boom.remove();
-                        if(typeof callback === 'function') callback();
-                    }, 1000);
-                }, 8000);
+                    if(sContainer.isConnected) sContainer.remove();
+                    if(typeof callback === 'function') callback();
+                }, 5000);
             }
 
             function runMasterExtractionSequence(panel) {
-                var sigTextEl = panel.querySelector('#rj-signal-text') || panel.querySelector('#live-signal-display');
+                var sigTextEl = panel.querySelector('#ra-signal-text') || panel.querySelector('#live-signal-display');
                 if(!sigTextEl) return;
 
-                sigTextEl.innerText = "Spiders extracting candle data...";
+                sigTextEl.innerText = "RA VIP Heartbeat Scanning...";
 
-                triggerMasterSpiderAnimation(function(){
+                triggerHeartbeatAnimation(function(){
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "CALL", confidence: 99}; })
@@ -561,12 +555,13 @@ def bot_script():
 
                         executeQuotexTrade(isCall);
 
+                        // Signal stays on screen for 5 to 6 seconds then resets
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             sigTextEl.style.fontSize = '14px';
                             sigTextEl.style.color = '#facc15';
                             sigTextEl.innerText = '--- : --';
-                        }, 7000);
+                        }, 6000);
                     });
                 });
             }
@@ -574,7 +569,6 @@ def bot_script():
             function runMasterAutoLoop(panel) {
                 if(!autoTradingActive || !panel.isConnected) return;
 
-                // Auto select best market from list randomly or sequentially
                 var randomMarket = realMarkets[Math.floor(Math.random() * realMarkets.length)];
                 selectedRealMarket = randomMarket;
 
@@ -582,11 +576,11 @@ def bot_script():
 
                 autoLoopTimer = setTimeout(function(){
                     if(autoTradingActive) runMasterAutoLoop(panel);
-                }, 15000);
+                }, 12000);
             }
 
             function makeDraggable(panelEl) {
-                var header = d.getElementById('rj-master-header');
+                var header = d.getElementById('ra-master-header');
                 if(!header) return;
                 var pX = 0, pY = 0, mX = 0, mY = 0;
                 header.onmousedown = header.ontouchstart = function(e) {
@@ -609,7 +603,7 @@ def bot_script():
                 }
             }
 
-        } catch(e) { console.error("RJ Master Terminal Error:", e); }
+        } catch(e) { console.error("RA VIP Master Terminal Error:", e); }
     })();
     """
     res = make_response(js)
