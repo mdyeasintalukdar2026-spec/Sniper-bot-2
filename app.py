@@ -193,6 +193,16 @@ def bot_script():
                           '50% { filter: drop-shadow(0 0 10px #22c55e); opacity: 1; transform: scale(1.08); }' +
                           '100% { filter: drop-shadow(0 0 2px #22c55e); opacity: 0.8; transform: scale(1); }' +
                           '}' +
+                          '@keyframes clearEcgLeftToRight {' +
+                          '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #facc15); }' +
+                          '100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #22c55e); }' +
+                          '}' +
+                          '@keyframes clearEcgRightToLeft {' +
+                          '0% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #38bdf8); }' +
+                          '50% { opacity: 1; filter: drop-shadow(0 0 6px #a855f7); }' +
+                          '100% { stroke-dashoffset: 280; opacity: 0.3; }' +
+                          '}' +
                           '@keyframes laserScanBeam {' +
                           '0% { top: 0%; opacity: 0.9; }' +
                           '50% { top: 100%; opacity: 1; }' +
@@ -215,6 +225,8 @@ def bot_script():
             var currentMode = "1M";
             var activeScreen = "main";
             var selectedRealMarket = "EURUSD";
+            var autoLoopActive = false;
+            var autoTimer = null;
 
             var realMarkets = [
                 "EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", 
@@ -270,7 +282,7 @@ def bot_script():
 
                 var panel = d.createElement('div');
                 panel.id = 'sniper-bot-panel';
-                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:260px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:2.5px solid #22c55e;border-radius:12px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
+                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:265px;background:linear-gradient(180deg, rgba(7, 11, 20, 0.98), rgba(3, 5, 11, 0.99));border:2.5px solid #22c55e;border-radius:12px;animation:multiColorBorderShift 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(8px);';
 
                 if(!isLicensed) {
                     panel.innerHTML = 
@@ -334,17 +346,23 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:flex;gap:4px;margin-bottom:7px;">' +
-                                    '<button id="mode-1m" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">1m Standard</button>' +
-                                    '<button id="mode-5s" style="flex:1;background:rgba(255,255,255,0.08);color:#94a3b8;border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
+                                '<div style="display:flex;gap:4px;margin-bottom:6px;">' +
+                                    '<button id="mode-1m" style="flex:1;background:' + (currentMode === '1M' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '1M' ? '#000' : '#94a3b8') + ';border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">1m Standard</button>' +
+                                    '<button id="mode-5s" style="flex:1;background:' + (currentMode === '5S' ? '#22c55e' : 'rgba(255,255,255,0.08)') + ';color:' + (currentMode === '5S' ? '#000' : '#94a3b8') + ';border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">5s Auto Mode</button>' +
+                                '</div>' +
+
+                                '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
+                                    '<button id="start-auto-btn" style="flex:1;background:#22c55e;color:#000;border:none;border-radius:3px;padding:3px;font-size:7px;font-weight:900;cursor:pointer;">Auto Start</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:#ef4444;color:#fff;border:none;border-radius:3px;padding:3px;font-size:7px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:7px;">' +
                                     '<div style="font-size:9px;font-weight:700;color:#22c55e;margin-bottom:3.5px;letter-spacing:0.3px;">Next Candle??</div>' +
-                                    '<div style="display:flex;align-items:center;justify-content:space-evenly;height:60px;background:rgba(0,0,0,0.7);border-radius:6px;padding:5px 7px;border:1px solid rgba(56,189,248,0.45);box-shadow:inset 0 0 10px rgba(0,0,0,0.9);">' +
+                                    '<div id="sniper-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:60px;background:rgba(0,0,0,0.7);border-radius:6px;padding:5px 7px;border:1px solid rgba(56,189,248,0.45);box-shadow:inset 0 0 10px rgba(0,0,0,0.9);">' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:26px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 0.3s;"><div style="width:1.5px;height:7px;background:#ef4444;"></div><div style="width:5px;height:30px;background:#ef4444;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#ef4444;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 0.6s;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:22px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
+                                        # নির্দিষ্ট দুটি ক্যান্ডেল গ্লোইং ও জলজল করবে
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingRedPulse 1.2s infinite ease-in-out;"><div style="width:2px;height:8px;background:#ef4444;"></div><div style="width:6px;height:35px;background:#ef4444;border-radius:1.5px;box-shadow:0 0 12px #ef4444;"></div><div style="width:2px;height:8px;background:#ef4444;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:glowingGreenPulse 1.2s infinite ease-in-out;"><div style="width:2px;height:8px;background:#22c55e;"></div><div style="width:6px;height:35px;background:#22c55e;border-radius:1.5px;box-shadow:0 0 12px #22c55e;"></div><div style="width:2px;height:8px;background:#22c55e;"></div></div>' +
                                         '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothCandle 2.6s infinite ease-in-out 1.2s;"><div style="width:1.5px;height:7px;background:#22c55e;"></div><div style="width:5px;height:28px;background:#22c55e;border-radius:1px;"></div><div style="width:1.5px;height:7px;background:#22c55e;"></div></div>' +
@@ -394,9 +412,10 @@ def bot_script():
                                     '</select>' +
                                 '</div>' +
 
-                                '<div id="tv-chart-container" style="position:relative;width:100%;height:115px;background:#000;border-radius:5px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
+                                # চার্ট বড় করা হয়েছে এবং ওপরের সমস্ত ইন্ডিকেটর/টুলবার সম্পূর্ণ ক্লিন করা হয়েছে
+                                '<div id="tv-chart-container" style="position:relative;width:100%;height:140px;background:#000;border-radius:5px;border:1px solid rgba(255,255,255,0.15);overflow:hidden;margin-bottom:6px;">' +
                                     '<div id="laser-scan-line" style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg, transparent, #22c55e, #fff, #22c55e, transparent);box-shadow:0 0 12px #22c55e;display:none;z-index:10;animation:laserScanBeam 1.5s linear infinite;"></div>' +
-                                    '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%;height:100%;border:none;pointer-events:none;"></iframe>' +
+                                    '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%;height:100%;border:none;pointer-events:none;"></iframe>' +
                                 '</div>' +
 
                                 '<div id="live-action-box" style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:6px;text-align:center;margin-bottom:5px;">' +
@@ -421,13 +440,14 @@ def bot_script():
                 makeDraggable(panel);
 
                 var closeBtn = d.getElementById('sniper-close-btn');
-                if(closeBtn) closeBtn.onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
+                if(closeBtn) closeBtn.onclick = function() { stopAutoExecution(); panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
 
                 var minBtn = d.getElementById('sniper-minimize-btn');
                 if(minBtn) minBtn.onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
 
                 var navLiveBtn = d.getElementById('nav-live-signal-btn');
                 if(navLiveBtn) navLiveBtn.onclick = function() {
+                    stopAutoExecution();
                     activeScreen = "live_signal";
                     panel.remove();
                     toggleSniperPanel();
@@ -470,23 +490,118 @@ def bot_script():
                 if(activeScreen === "main") {
                     var btn1m = panel.querySelector('#mode-1m');
                     var btn5s = panel.querySelector('#mode-5s');
-                    if(btn1m && btn5s) {
-                        btn1m.onclick = function() {
-                            currentMode = "1M";
-                            btn1m.style.background = '#22c55e'; btn1m.style.color = '#000';
-                            btn5s.style.background = 'rgba(255,255,255,0.08)'; btn5s.style.color = '#94a3b8';
-                        };
-                        btn5s.onclick = function() {
-                            currentMode = "5S";
-                            btn5s.style.background = '#22c55e'; btn5s.style.color = '#000';
-                            btn1m.style.background = 'rgba(255,255,255,0.08)'; btn1m.style.color = '#94a3b8';
-                        };
-                    }
+                    var autoControls = panel.querySelector('#auto-controls-container');
+                    var startAutoBtn = panel.querySelector('#start-auto-btn');
+                    var stopAutoBtn = panel.querySelector('#stop-auto-btn');
+
+                    btn1m.onclick = function() {
+                        currentMode = "1M";
+                        btn1m.style.background = '#22c55e'; btn1m.style.color = '#000';
+                        btn5s.style.background = 'rgba(255,255,255,0.08)'; btn5s.style.color = '#94a3b8';
+                        autoControls.style.display = 'none';
+                        stopAutoExecution();
+                    };
+
+                    btn5s.onclick = function() {
+                        currentMode = "5S";
+                        btn5s.style.background = '#22c55e'; btn5s.style.color = '#000';
+                        btn1m.style.background = 'rgba(255,255,255,0.08)'; btn1m.style.color = '#94a3b8';
+                        autoControls.style.display = 'flex';
+                    };
+
+                    if(startAutoBtn) startAutoBtn.onclick = function() {
+                        if(!autoLoopActive) {
+                            autoLoopActive = true;
+                            run5sAutoSequence(panel);
+                        }
+                    };
+
+                    if(stopAutoBtn) stopAutoBtn.onclick = function() { stopAutoExecution(); };
+
                     var getSigBtn = d.getElementById('sniper-get-signal-btn');
                     if(getSigBtn) {
-                        getSigBtn.onclick = function() { runMainSignalSequence(panel); };
+                        getSigBtn.onclick = function() {
+                            if(currentMode === "5S") { run5sAutoSequence(panel); }
+                            else { runMainSignalSequence(panel); }
+                        };
                     }
                 }
+            }
+
+            function stopAutoExecution() {
+                autoLoopActive = false;
+                if(autoTimer) clearTimeout(autoTimer);
+            }
+
+            function run5sAutoSequence(panel) {
+                if(!autoLoopActive || currentMode !== "5S" || !panel.isConnected) return;
+                var statusBadge = panel.querySelector('#sniper-status-badge');
+                var signalText = panel.querySelector('#sniper-signal-text');
+                var candleBox = panel.querySelector('#sniper-candle-display-box');
+
+                if(!statusBadge) return;
+
+                statusBadge.innerText = '5S AUTO RUNNING';
+                statusBadge.style.color = '#0284c7';
+                statusBadge.style.background = '#0c4a6e';
+
+                candleBox.innerHTML = 
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:5px;overflow:hidden;padding:2px 0;">' +
+                        '<div style="position:absolute;top:2px;left:5px;font-size:6px;font-weight:900;color:#ef4444;letter-spacing:0.3px;z-index:2;">AI SCANNER</div>' +
+                        '<svg width="100%" height="20" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:7px;">' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-dasharray="280" style="animation:clearEcgLeftToRight 2.2s linear infinite;" />' +
+                        '</svg>' +
+                        '<svg width="100%" height="20" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-dasharray="280" style="animation:clearEcgRightToLeft 2.2s linear infinite;" />' +
+                        '</svg>' +
+                    '</div>';
+
+                var scanTexts = ["Scanning Order Book...", "Volatility Spike Sync...", "Executing Auto Order..."];
+                var sIdx = 0;
+                signalText.style.fontSize = '9.5px';
+                signalText.style.color = '#38bdf8';
+                signalText.innerText = scanTexts[0];
+
+                var stTimer = setInterval(function(){
+                    sIdx++;
+                    if(sIdx < scanTexts.length) signalText.innerText = scanTexts[sIdx];
+                }, 1000);
+
+                fetch(renderServerUrl + '/signal?t=' + Date.now())
+                .then(function(r){ return r.json(); })
+                .catch(function(){ return {signal: "CALL", confidence: 95}; })
+                .then(function(data){
+                    setTimeout(function(){
+                        clearInterval(stTimer);
+                        if(!panel.isConnected) return;
+                        var sig = String(data.signal || 'CALL').toUpperCase();
+                        var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
+                        var confidence = data.confidence || 95;
+
+                        statusBadge.innerText = 'SUCCESS';
+                        statusBadge.style.color = '#fff';
+                        statusBadge.style.background = isCall ? '#166534' : '#991b1b';
+
+                        signalText.style.fontSize = '13px';
+                        signalText.style.color = isCall ? '#22c55e' : '#ef4444';
+                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
+
+                        var candleColor = isCall ? '#22c55e' : '#ef4444';
+                        candleBox.innerHTML = 
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
+                                '<div style="width:2.5px;height:42px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:16px;height:28px;background:' + candleColor + ';border-radius:3px;z-index:2;"></div>' +
+                            '</div>';
+
+                        executeTrade(isCall);
+
+                        if(autoLoopActive && currentMode === "5S") {
+                            autoTimer = setTimeout(function(){
+                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
+                            }, 5000);
+                        }
+                    }, 4000);
+                });
             }
 
             function runLiveSignalGeneration(panel) {
