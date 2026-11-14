@@ -160,7 +160,7 @@ def bot_script():
     js = """
     (function(){
         try {
-            console.log("RA SNIPER BOT INITIALIZING...");
+            console.log("RA SNIPER BOT BOOTING UP IN QUOTEX...");
             var d = document;
             
             ["ra-sniper-bot-panel", "ra-sniper-bot-btn", "ra-sniper-bot-style", "ra-grand-quantum-overlay"].forEach(function(i){
@@ -175,6 +175,9 @@ def bot_script():
             var correctPassword = "RA SNIPER BOT";
 
             var renderServerUrl = window.location.origin;
+            if(!renderServerUrl || renderServerUrl === "null") {
+                renderServerUrl = "https://sabbir-trader-bot-122.onrender.com";
+            }
 
             var s = d.createElement('style');
             s.id = 'ra-sniper-bot-style';
@@ -864,7 +867,6 @@ def bot_script():
                 statusBadge.style.color = '#eab308';
                 statusBadge.style.background = '#422006';
 
-                # User requested Scanner Form integration for 5s Auto Mode
                 candleBox.innerHTML = 
                     '<div class="scanner-box" style="width:100%;height:100%;background:rgba(15, 15, 25, 0.95);border:1px solid rgba(255, 0, 85, 0.4);border-radius:6px;padding:6px 10px;box-sizing:border-box;box-shadow:inset 0 0 10px rgba(255, 0, 85, 0.2);display:flex;flex-direction:column;justify-content:space-between;">' +
                         '<div class="scan-header" style="font-size:9.5px;color:#ff0055;font-weight:bold;letter-spacing:1px;text-shadow:0 0 5px rgba(255, 0, 85, 0.5);">RA SINGLE HEARTBEAT SCAN</div>' +
@@ -922,8 +924,8 @@ def bot_script():
                             } else {
                                 openPanel("main");
                             }
-                        }, 7500);
-                    }, 5000);
+                        }, 5000);
+                    }, 4000);
                 });
             }
 
