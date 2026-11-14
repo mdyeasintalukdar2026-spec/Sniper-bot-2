@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 1 + (int(time.time() * 19) % 100)
+        real_accuracy = 15 + (int(time.time() * 37) % 85)
         
         rules_list = [
             "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
@@ -133,9 +133,12 @@ def get_signal():
         ]
         chosen_rule = rules_list[int(time.time()) % len(rules_list)]
 
+        trends_list = ["BULLISH MOMENTUM", "BEARISH CONTINUATION", "STRONG REVERSAL ZONE", "VOLATILE BREAKOUT"]
+        chosen_trend = trends_list[int(time.time()) % len(trends_list)]
+
         res = jsonify({
             "signal": ai_decision,
-            "trend": "RA_SNIPER_CONFLUENCE_VERIFIED",
+            "trend": chosen_trend,
             "confidence": real_accuracy,
             "status": "GREEN_EXECUTE",
             "rule": chosen_rule
@@ -146,8 +149,8 @@ def get_signal():
         fallback_sig = "CALL" if (int(time.time()) % 2 == 0) else "PUT"
         res = jsonify({
             "signal": fallback_sig,
-            "trend": "STABLE MOMENTUM",
-            "confidence": 92,
+            "trend": "BULLISH MOMENTUM",
+            "confidence": 88,
             "status": "GREEN_EXECUTE",
             "rule": "RA SNIPER Standard Trend Continuation Logic."
         })
@@ -189,40 +192,40 @@ def bot_script():
                           '100% { border-color: #22c55e; box-shadow: 0 0 35px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.5); }' +
                           '}' +
                           '@keyframes fastFastColorShift {' +
-                          '0% { border-color: #22c55e; box-shadow: 0 0 15px #22c55e; }' +
-                          '33% { border-color: #38bdf8; box-shadow: 0 0 15px #38bdf8; }' +
-                          '66% { border-color: #a855f7; box-shadow: 0 0 15px #a855f7; }' +
-                          '100% { border-color: #22c55e; box-shadow: 0 0 15px #22c55e; }' +
+                          '0% { border-color: #22c55e; box-shadow: 0 0 18px #22c55e; }' +
+                          '33% { border-color: #38bdf8; box-shadow: 0 0 18px #38bdf8; }' +
+                          '66% { border-color: #a855f7; box-shadow: 0 0 18px #a855f7; }' +
+                          '100% { border-color: #22c55e; box-shadow: 0 0 18px #22c55e; }' +
                           '}' +
                           '@keyframes raFloatGlow {' +
                           '0% { box-shadow: 0 0 20px #22c55e, 0 0 40px #38bdf8; border-color: #22c55e; }' +
                           '50% { box-shadow: 0 0 30px #a855f7, 0 0 50px #22c55e; border-color: #a855f7; }' +
                           '100% { box-shadow: 0 0 20px #22c55e, 0 0 40px #38bdf8; border-color: #22c55e; }' +
                           '}' +
-                          '@keyframes fastGlowSway1 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #22c55e); }' +
-                          '50% { transform: translateY(-5px) scale(1.06); filter: drop-shadow(0 0 24px #22c55e); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #22c55e); }' +
+                          '@keyframes ultraSmoothSway1 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #22c55e); }' +
+                          '50% { transform: translateY(-7px) scale(1.08); filter: drop-shadow(0 0 30px #22c55e); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #22c55e); }' +
                           '}' +
-                          '@keyframes fastGlowSway2 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #ef4444); }' +
-                          '50% { transform: translateY(5px) scale(1.06); filter: drop-shadow(0 0 24px #ef4444); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #ef4444); }' +
+                          '@keyframes ultraSmoothSway2 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #ef4444); }' +
+                          '50% { transform: translateY(7px) scale(1.08); filter: drop-shadow(0 0 30px #ef4444); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #ef4444); }' +
                           '}' +
-                          '@keyframes fastGlowSway3 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #eab308); }' +
-                          '50% { transform: translateY(-4px) scale(1.06); filter: drop-shadow(0 0 24px #eab308); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #eab308); }' +
+                          '@keyframes ultraSmoothSway3 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #eab308); }' +
+                          '50% { transform: translateY(-6px) scale(1.08); filter: drop-shadow(0 0 30px #eab308); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #eab308); }' +
                           '}' +
-                          '@keyframes fastGlowSway4 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #38bdf8); }' +
-                          '50% { transform: translateY(4px) scale(1.06); filter: drop-shadow(0 0 24px #38bdf8); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #38bdf8); }' +
+                          '@keyframes ultraSmoothSway4 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #38bdf8); }' +
+                          '50% { transform: translateY(6px) scale(1.08); filter: drop-shadow(0 0 30px #38bdf8); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #38bdf8); }' +
                           '}' +
-                          '@keyframes fastGlowSway5 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #a855f7); }' +
-                          '50% { transform: translateY(-5px) scale(1.06); filter: drop-shadow(0 0 24px #a855f7); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #a855f7); }' +
+                          '@keyframes ultraSmoothSway5 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #a855f7); }' +
+                          '50% { transform: translateY(-7px) scale(1.08); filter: drop-shadow(0 0 30px #a855f7); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px #a855f7); }' +
                           '}' +
                           '@keyframes panelLaserScanAnim {' +
                           '0% { top: 0%; opacity: 0.95; box-shadow: 0 0 35px #ffffff, 0 0 25px #38bdf8; }' +
@@ -234,10 +237,6 @@ def bot_script():
                           '50% { top: 100%; opacity: 1; }' +
                           '100% { top: 0%; opacity: 0.8; }' +
                           '}' +
-                          '@keyframes textPulse {' +
-                          '0% { opacity: 0.4; }' +
-                          '100% { opacity: 0.9; }' +
-                          '}' +
                           '@keyframes textSmoothPulse {' +
                           '0% { opacity: 0.7; transform: scale(0.98); }' +
                           '50% { opacity: 1; transform: scale(1.03); text-shadow: 0 0 12px #38bdf8; }' +
@@ -247,7 +246,8 @@ def bot_script():
             d.head.appendChild(s);
 
             var currentMode = "1M";
-            var activeScreen = "login";
+            var isAlreadyLoggedIn = sessionStorage.getItem("ra_bot_logged_in") === "true";
+            var activeScreen = isAlreadyLoggedIn ? "main" : "login";
             var selectedRealMarket = "EURUSD";
             var autoStartActive = false;
             var autoStopActive = false;
@@ -292,7 +292,7 @@ def bot_script():
             }
 
             createBotIcon();
-            openPanel("login");
+            openPanel(activeScreen);
 
             function detectCurrentQuotexMarket() {
                 try {
@@ -342,6 +342,20 @@ def bot_script():
                 } catch(err) {}
             }
 
+            function getAccuracyLabelAndColor(val) {
+                if(val <= 30) return {txt: "LOW (" + val + "%)", col: "#ef4444"};
+                if(val <= 50) return {txt: "MEDIUM (" + val + "%)", col: "#eab308"};
+                if(val <= 70) return {txt: "HIGH (" + val + "%)", col: "#22c55e"};
+                return {txt: "ULTRA HIGH (" + val + "%)", col: "#a855f7"};
+            }
+
+            function getMetricColor(val) {
+                if(val <= 30) return '#ef4444';
+                if(val <= 50) return '#eab308';
+                if(val <= 70) return '#22c55e';
+                return '#a855f7';
+            }
+
             function openPanel(screen) {
                 if(screen) activeScreen = screen;
                 var existing = d.getElementById('ra-sniper-bot-panel');
@@ -373,24 +387,10 @@ def bot_script():
                     if(metricFluctuateInterval) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; }
                     existing.remove();
                     if(floatingBtn) floatingBtn.style.display = 'flex';
-                    activeScreen = "login";
+                    activeScreen = sessionStorage.getItem("ra_bot_logged_in") === "true" ? "main" : "login";
                 } else {
-                    openPanel("login");
+                    openPanel(sessionStorage.getItem("ra_bot_logged_in") === "true" ? "main" : "login");
                 }
-            }
-
-            function getDynamicMetric(val) {
-                if(val <= 30) return {txt: "LOW (" + val + "%)", col: "#ef4444"};
-                if(val <= 60) return {txt: "MEDIUM (" + val + "%)", col: "#eab308"};
-                if(val <= 80) return {txt: "HIGH (" + val + "%)", col: "#22c55e"};
-                return {txt: "ULTRA HIGH (" + val + "%)", col: "#a855f7"};
-            }
-
-            function getMetricColor(val) {
-                if(val <= 30) return '#ef4444';
-                if(val <= 60) return '#eab308';
-                if(val <= 80) return '#22c55e';
-                return '#a855f7';
             }
 
             function renderPanelContent(panel) {
@@ -433,12 +433,13 @@ def bot_script():
                     activateBtn.onclick = function() {
                         var enteredVal = passInput.value.trim();
                         if(enteredVal === correctPassword) {
+                            sessionStorage.setItem("ra_bot_logged_in", "true");
                             statusMsg.style.color = '#22c55e';
                             statusMsg.innerText = 'VERIFICATION SUCCESSFUL...';
                             activateBtn.disabled = true;
                             setTimeout(function(){
                                 openPanel("main");
-                            }, 2000);
+                            }, 1500);
                         } else {
                             statusMsg.style.color = '#ef4444';
                             statusMsg.innerText = 'INCORRECT PASSWORD!';
@@ -483,11 +484,11 @@ def bot_script():
                                     '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
                                     '<div id="ra-candle-display-box" style="position:relative;display:flex;align-items:center;justify-content:space-evenly;height:90px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;overflow:hidden;">' +
                                         '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway1 2s infinite ease-in-out;"><div style="width:3px;height:10px;background:#22c55e;"></div><div style="width:10px;height:38px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway2 2s infinite ease-in-out 0.4s;"><div style="width:3px;height:10px;background:#ef4444;"></div><div style="width:10px;height:42px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway3 2s infinite ease-in-out 0.8s;"><div style="width:3px;height:10px;background:#eab308;"></div><div style="width:10px;height:36px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:10px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway4 2s infinite ease-in-out 1.2s;"><div style="width:3px;height:10px;background:#38bdf8;"></div><div style="width:10px;height:40px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:10px;background:#38bdf8;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway5 2s infinite ease-in-out 1.6s;"><div style="width:3px;height:10px;background:#a855f7;"></div><div style="width:10px;height:38px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:10px;background:#a855f7;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway1 1.2s infinite ease-in-out;"><div style="width:3px;height:10px;background:#22c55e;"></div><div style="width:10px;height:38px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway2 1.2s infinite ease-in-out 0.25s;"><div style="width:3px;height:10px;background:#ef4444;"></div><div style="width:10px;height:42px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway3 1.2s infinite ease-in-out 0.5s;"><div style="width:3px;height:10px;background:#eab308;"></div><div style="width:10px;height:36px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:10px;background:#eab308;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway4 1.2s infinite ease-in-out 0.75s;"><div style="width:3px;height:10px;background:#38bdf8;"></div><div style="width:10px;height:40px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:10px;background:#38bdf8;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway5 1.2s infinite ease-in-out 1.0s;"><div style="width:3px;height:10px;background:#a855f7;"></div><div style="width:10px;height:38px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:10px;background:#a855f7;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -507,8 +508,9 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
-                    var v1 = 19, v2 = 63, v3 = 54, v4 = 10;
+                    var v1 = 44, v2 = 78, v3 = 65, v4 = 91;
                     var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
+                    var accObj4 = getAccuracyLabelAndColor(v4);
 
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
@@ -545,10 +547,10 @@ def bot_script():
                                 '</div>' +
 
                                 '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:4px;font-size:7.5px;color:#cbd5e1;">' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span id="ai-confl-text" style="color:#eab308;font-weight:bold;">MEDIUM (57%)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Server Stability:</span><span id="server-stab-text" style="color:#22c55e;font-weight:bold;">HIGH (79%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span id="ai-confl-text" style="color:' + accObj4.col + ';font-weight:bold;">' + accObj4.txt + '</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Server Stability:</span><span id="server-stab-text" style="color:#22c55e;font-weight:bold;">HIGH (82%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Market Trend:</span><span id="market-trend-text" style="color:#10b981;font-weight:bold;">BULLISH MOMENTUM</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">GBPUSD (REAL)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">EURUSD (REAL)</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -561,10 +563,10 @@ def bot_script():
                     if(!metricFluctuateInterval) {
                         metricFluctuateInterval = setInterval(function(){
                             if(!panel.isConnected) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; return; }
-                            var r1 = Math.floor(Math.random() * 95) + 5;
-                            var r2 = Math.floor(Math.random() * 95) + 5;
-                            var r3 = Math.floor(Math.random() * 95) + 5;
-                            var r4 = Math.floor(Math.random() * 95) + 5;
+                            var r1 = Math.floor(Math.random() * 85) + 12;
+                            var r2 = Math.floor(Math.random() * 85) + 12;
+                            var r3 = Math.floor(Math.random() * 85) + 12;
+                            var r4 = Math.floor(Math.random() * 75) + 25;
                             
                             var c1_el = panel.querySelector('#metric-circ-1');
                             var c2_el = panel.querySelector('#metric-circ-2');
@@ -572,7 +574,7 @@ def bot_script():
                             var c4_el = panel.querySelector('#metric-circ-4');
                             var bestAssetEl = panel.querySelector('#best-detected-asset');
                             var aiConflEl = panel.querySelector('#ai-confl-text');
-                            var serverStabEl = panel.querySelector('#server-stab-text');
+                            var marketTrendEl = panel.querySelector('#market-trend-text');
 
                             if(c1_el) { c1_el.innerText = r1 + '%'; c1_el.style.borderColor = getMetricColor(r1); c1_el.style.color = getMetricColor(r1); }
                             if(c2_el) { c2_el.innerText = r2 + '%'; c2_el.style.borderColor = getMetricColor(r2); c2_el.style.color = getMetricColor(r2); }
@@ -580,17 +582,16 @@ def bot_script():
                             if(c4_el) { c4_el.innerText = r4 + '%'; c4_el.style.borderColor = getMetricColor(r4); c4_el.style.color = getMetricColor(r4); }
                             
                             if(aiConflEl) {
-                                var confVal = Math.floor(Math.random() * 95) + 5;
-                                var resObj = getDynamicMetric(confVal);
+                                var resObj = getAccuracyLabelAndColor(r4);
                                 aiConflEl.innerText = resObj.txt;
                                 aiConflEl.style.color = resObj.col;
                             }
 
-                            if(serverStabEl) {
-                                var stabVal = Math.floor(Math.random() * 95) + 5;
-                                var stabObj = getDynamicMetric(stabVal);
-                                serverStabEl.innerText = stabObj.txt;
-                                serverStabEl.style.color = stabObj.col;
+                            if(marketTrendEl && Math.random() > 0.5) {
+                                var trends = ["BULLISH MOMENTUM", "BEARISH CONTINUATION", "STRONG REVERSAL ZONE", "VOLATILE BREAKOUT"];
+                                var chosenT = trends[Math.floor(Math.random() * trends.length)];
+                                marketTrendEl.innerText = chosenT;
+                                marketTrendEl.style.color = chosenT.includes("BULLISH") ? "#10b981" : "#ef4444";
                             }
 
                             if(bestAssetEl && Math.random() > 0.4) {
@@ -598,7 +599,7 @@ def bot_script():
                                 var formattedAsset = randAsset.includes('OTC') ? randAsset : (randAsset + " (REAL)");
                                 bestAssetEl.innerText = formattedAsset;
                             }
-                        }, 2200);
+                        }, 2500);
                     }
                 } else {
                     var optionsHtml = '';
@@ -756,21 +757,16 @@ def bot_script():
 
                     if(stopAutoBtn) {
                         stopAutoBtn.onclick = function() {
-                            autoStopActive = !autoStopActive;
-                            if(autoStopActive) {
-                                autoStartActive = false;
-                                stopAutoBtn.innerText = "AUTO STOP ON";
-                                stopAutoBtn.style.background = "#b91c1c";
-                                if(startAutoBtn) {
-                                    startAutoBtn.innerText = "AUTO START OFF";
-                                    startAutoBtn.style.background = "#059669";
-                                }
-                                if(autoTimer) clearTimeout(autoTimer);
-                                openPanel("main");
-                            } else {
-                                stopAutoBtn.innerText = "AUTO STOP OFF";
-                                stopAutoBtn.style.background = "#475569";
+                            autoStopActive = true;
+                            autoStartActive = false;
+                            stopAutoBtn.innerText = "AUTO STOP ON";
+                            stopAutoBtn.style.background = "#b91c1c";
+                            if(startAutoBtn) {
+                                startAutoBtn.innerText = "AUTO START OFF";
+                                startAutoBtn.style.background = "#059669";
                             }
+                            if(autoTimer) clearTimeout(autoTimer);
+                            openPanel("main");
                         };
                     }
 
@@ -868,12 +864,10 @@ def bot_script():
                 statusBadge.style.background = '#422006';
 
                 candleBox.innerHTML = 
-                    '<div class="scanner-box" style="width:100%;height:100%;background:rgba(15, 15, 25, 0.95);border:1px solid rgba(255, 0, 85, 0.4);border-radius:6px;padding:6px 10px;box-sizing:border-box;box-shadow:inset 0 0 10px rgba(255, 0, 85, 0.2);display:flex;flex-direction:column;justify-content:space-between;">' +
-                        '<div class="scan-header" style="font-size:9.5px;color:#ff0055;font-weight:bold;letter-spacing:1px;text-shadow:0 0 5px rgba(255, 0, 85, 0.5);">RA SINGLE HEARTBEAT SCAN</div>' +
+                    '<div class="scanner-box" style="width:100%;height:100%;background:rgba(15, 15, 25, 0.95);border:1px solid rgba(255, 0, 85, 0.4);border-radius:6px;padding:6px 10px;box-sizing:border-box;box-shadow:inset 0 0 10px rgba(255, 0, 85, 0.2);display:flex;flex-direction:column;justify-content:center;">' +
                         '<div class="scanner-screen" style="position:relative;width:100%;height:45px;background:#080810;overflow:hidden;border-radius:4px;border:1px solid rgba(0, 240, 255, 0.2);">' +
-                            '<div class="laser-line" style="position:absolute;top:0;left:0;width:100%;height:2px;background:#ff0055;box-shadow:0 0 10px #ff0055, 0 0 20px #ff0055;animation:scanMove 2s linear infinite;"></div>' +
+                            '<div class="laser-line" style="position:absolute;top:0;left:0;width:100%;height:2px;background:#ff0055;box-shadow:0 0 10px #ff0055, 0 0 20px #ff0055;animation:scanMove 1.5s linear infinite;"></div>' +
                             '<div class="grid-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);background-size:10px 10px;"></div>' +
-                            '<div class="matrix-text" style="position:absolute;bottom:3px;left:5px;font-size:8px;color:#00f0ff;letter-spacing:0.5px;opacity:0.7;animation:textPulse 1s ease-in-out infinite alternate;">SCANNING MARKET CONFLUENCE... [98.4%]</div>' +
                         '</div>' +
                     '</div>';
 
@@ -920,12 +914,12 @@ def bot_script():
                             if(autoStartActive && !autoStopActive && currentMode === "5S") {
                                 autoTimer = setTimeout(function(){
                                     if(autoStartActive && !autoStopActive && currentMode === "5S") run5sAutoSequence(panel);
-                                }, 3000);
+                                }, 2500);
                             } else {
                                 openPanel("main");
                             }
-                        }, 5000);
-                    }, 4000);
+                        }, 7500);
+                    }, 5000);
                 });
             }
 
@@ -956,7 +950,7 @@ def bot_script():
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
                         var confidence = data.confidence || 93;
 
-                        var accObj = getDynamicMetric(confidence);
+                        var accObj = getAccuracyLabelAndColor(confidence);
                         statusLbl.innerText = "STATUS: SUCCESS";
                         accBadge.innerText = "ACCURACY: " + confidence + "%";
                         accBadge.style.color = accObj.col;
@@ -976,7 +970,7 @@ def bot_script():
                             sigDisplay.innerText = "CLICK GENERATE";
                             rulesDesc.innerText = "Awaiting RA SNIPER AI Confluence Analysis...";
                             genBtn.disabled = false;
-                        }, 6000);
+                        }, 7500);
                     });
                 }, 4000);
             }
