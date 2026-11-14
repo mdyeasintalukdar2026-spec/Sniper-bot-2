@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 1 + (int(time.time() * 13) % 100)
+        real_accuracy = 1 + (int(time.time() * 17) % 100)
         
         rules_list = [
             "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
@@ -178,57 +178,64 @@ def bot_script():
             var s = d.createElement('style');
             s.id = 'ra-sniper-bot-style';
             s.innerHTML = '@keyframes raBorderGlow {' +
-                          '0% { border-color: #22c55e; box-shadow: 0 0 30px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.4); }' +
-                          '33% { border-color: #38bdf8; box-shadow: 0 0 35px rgba(56,189,248,0.95), inset 0 0 20px rgba(56,189,248,0.5); }' +
-                          '66% { border-color: #a855f7; box-shadow: 0 0 35px rgba(168,85,247,0.95), inset 0 0 20px rgba(168,85,247,0.5); }' +
-                          '100% { border-color: #22c55e; box-shadow: 0 0 30px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.4); }' +
+                          '0% { border-color: #22c55e; box-shadow: 0 0 35px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.5); }' +
+                          '25% { border-color: #38bdf8; box-shadow: 0 0 40px rgba(56,189,248,0.95), inset 0 0 20px rgba(56,189,248,0.6); }' +
+                          '50% { border-color: #a855f7; box-shadow: 0 0 40px rgba(168,85,247,0.95), inset 0 0 20px rgba(168,85,247,0.6); }' +
+                          '75% { border-color: #ef4444; box-shadow: 0 0 40px rgba(239,68,68,0.95), inset 0 0 20px rgba(239,68,68,0.6); }' +
+                          '100% { border-color: #22c55e; box-shadow: 0 0 35px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.5); }' +
+                          '}' +
+                          '@keyframes fastFastColorShift {' +
+                          '0% { border-color: #22c55e; box-shadow: 0 0 15px #22c55e; }' +
+                          '33% { border-color: #38bdf8; box-shadow: 0 0 15px #38bdf8; }' +
+                          '66% { border-color: #a855f7; box-shadow: 0 0 15px #a855f7; }' +
+                          '100% { border-color: #22c55e; box-shadow: 0 0 15px #22c55e; }' +
                           '}' +
                           '@keyframes raFloatGlow {' +
                           '0% { box-shadow: 0 0 20px #22c55e, 0 0 40px #38bdf8; border-color: #22c55e; }' +
                           '50% { box-shadow: 0 0 30px #a855f7, 0 0 50px #22c55e; border-color: #a855f7; }' +
                           '100% { box-shadow: 0 0 20px #22c55e, 0 0 40px #38bdf8; border-color: #22c55e; }' +
                           '}' +
-                          '@keyframes slowGlowSway1 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #22c55e); }' +
-                          '50% { transform: translateY(-3px) scale(1.03); filter: drop-shadow(0 0 16px #22c55e); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #22c55e); }' +
+                          '@keyframes fastGlowSway1 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #22c55e); }' +
+                          '50% { transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 22px #22c55e); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #22c55e); }' +
                           '}' +
-                          '@keyframes slowGlowSway2 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #ef4444); }' +
-                          '50% { transform: translateY(3px) scale(1.03); filter: drop-shadow(0 0 16px #ef4444); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #ef4444); }' +
+                          '@keyframes fastGlowSway2 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #ef4444); }' +
+                          '50% { transform: translateY(4px) scale(1.05); filter: drop-shadow(0 0 22px #ef4444); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #ef4444); }' +
                           '}' +
-                          '@keyframes slowGlowSway3 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #eab308); }' +
-                          '50% { transform: translateY(-2px) scale(1.03); filter: drop-shadow(0 0 16px #eab308); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #eab308); }' +
+                          '@keyframes fastGlowSway3 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #eab308); }' +
+                          '50% { transform: translateY(-3px) scale(1.05); filter: drop-shadow(0 0 22px #eab308); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #eab308); }' +
                           '}' +
-                          '@keyframes slowGlowSway4 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #38bdf8); }' +
-                          '50% { transform: translateY(2px) scale(1.03); filter: drop-shadow(0 0 16px #38bdf8); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #38bdf8); }' +
+                          '@keyframes fastGlowSway4 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #38bdf8); }' +
+                          '50% { transform: translateY(3px) scale(1.05); filter: drop-shadow(0 0 22px #38bdf8); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #38bdf8); }' +
                           '}' +
-                          '@keyframes slowGlowSway5 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #a855f7); }' +
-                          '50% { transform: translateY(-3px) scale(1.03); filter: drop-shadow(0 0 16px #a855f7); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #a855f7); }' +
+                          '@keyframes fastGlowSway5 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #a855f7); }' +
+                          '50% { transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 22px #a855f7); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #a855f7); }' +
                           '}' +
                           '@keyframes panelLaserScanAnim {' +
-                          '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 30px #ffffff, 0 0 20px #38bdf8; }' +
-                          '50% { top: 100%; opacity: 1; box-shadow: 0 0 30px #ffffff, 0 0 20px #22c55e; }' +
-                          '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 30px #ffffff, 0 0 20px #38bdf8; }' +
+                          '0% { top: 0%; opacity: 0.95; box-shadow: 0 0 35px #ffffff, 0 0 25px #38bdf8; }' +
+                          '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #ffffff, 0 0 25px #22c55e; }' +
+                          '100% { top: 0%; opacity: 0.95; box-shadow: 0 0 35px #ffffff, 0 0 25px #38bdf8; }' +
                           '}' +
-                          '@keyframes heartbeatLeftToRight {' +
+                          '@keyframes slowHeartbeatLeft {' +
                           '0% { transform: translateX(-100%); }' +
                           '100% { transform: translateX(100%); }' +
                           '}' +
-                          '@keyframes heartbeatRightToLeft {' +
+                          '@keyframes slowHeartbeatRight {' +
                           '0% { transform: translateX(100%); }' +
                           '100% { transform: translateX(-100%); }' +
                           '}' +
                           '@keyframes textSmoothPulse {' +
                           '0% { opacity: 0.7; transform: scale(0.98); }' +
-                          '50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 10px #38bdf8; }' +
+                          '50% { opacity: 1; transform: scale(1.03); text-shadow: 0 0 12px #38bdf8; }' +
                           '100% { opacity: 0.7; transform: scale(0.98); }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
@@ -310,7 +317,7 @@ def bot_script():
             }
 
             function executeQuotexTrade(isCall) {
-                if(autoStopActive) return; // Block trade if auto stop active
+                if(autoStopActive) return;
                 try {
                     var btnSelector = isCall ? '.btn-call, .deal_call, [class*="call"], button.success' : '.btn-put, .deal_put, [class*="put"], button.danger';
                     var tradeBtn = d.querySelector(btnSelector);
@@ -344,7 +351,7 @@ def bot_script():
                     if(floatingBtn) floatingBtn.style.display = 'none';
                     var panel = d.createElement('div');
                     panel.id = 'ra-sniper-bot-panel';
-                    panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:310px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
+                    panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:310px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 3s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
                     d.body.appendChild(panel);
                     renderPanelContent(panel);
                     makeDraggable(panel);
@@ -390,19 +397,19 @@ def bot_script():
                         '<div style="padding:16px 14px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;align-items:center;">' +
                             '<div id="ra-panel-header" style="width:100%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:10px;cursor:move;">' +
                                 '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
-                                    '<img src="' + innerHeaderLogo + '" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;" />' +
+                                    '<img src="' + innerHeaderLogo + '" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;animation:fastFastColorShift 2s infinite ease-in-out;" />' +
                                     '<div style="font-size:12px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
                                 '</div>' +
                                 '<div id="ra-close-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                             '</div>' +
 
-                            '<div style="width:52px;height:52px;border-radius:50%;border:2px solid #22c55e;overflow:hidden;margin-bottom:8px;box-shadow:0 0 15px rgba(34,197,94,0.6);">' +
+                            '<div style="width:52px;height:52px;border-radius:50%;border:2.5px solid #22c55e;overflow:hidden;margin-bottom:8px;animation:fastFastColorShift 1.5s infinite ease-in-out;box-shadow:0 0 15px rgba(34,197,94,0.6);">' +
                                 '<img src="' + commLogo + '" style="width:100%;height:100%;object-fit:cover;" />' +
                             '</div>' +
 
-                            '<a href="' + telegramGroupLink + '" target="_blank" style="width:100%;background:rgba(14,116,144,0.25);border:1px solid #0ea5e9;border-radius:7px;padding:7px;text-align:center;text-decoration:none;display:block;margin-bottom:12px;box-sizing:border-box;">' +
-                                '<div style="font-size:10px;font-weight:900;color:#38bdf8;">R-A Trading Community</div>' +
-                                '<div style="font-size:7.5px;color:#94a3b8;">Click to Join Telegram Channel</div>' +
+                            '<a href="' + telegramGroupLink + '" target="_blank" style="width:92%;background:rgba(14,116,144,0.25);border:1.5px solid #0ea5e9;border-radius:7px;padding:6px;text-align:center;text-decoration:none;display:block;margin-bottom:12px;box-sizing:border-box;animation:fastFastColorShift 2s infinite ease-in-out;">' +
+                                '<div style="font-size:9.5px;font-weight:900;color:#38bdf8;">R-A Trading Community</div>' +
+                                '<div style="font-size:7px;color:#94a3b8;">Click to Join Telegram Channel</div>' +
                             '</a>' +
 
                             '<div style="width:100%;max-width:220px;margin-bottom:8px;">' +
@@ -442,7 +449,7 @@ def bot_script():
                             '<div>' +
                                 '<div id="ra-panel-header" style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:8px;cursor:move;">' +
                                     '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
-                                        '<img src="' + innerHeaderLogo + '" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;" />' +
+                                        '<img src="' + innerHeaderLogo + '" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;animation:fastFastColorShift 2s infinite ease-in-out;" />' +
                                         '<div>' +
                                             '<div style="font-size:11.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
                                             '<div style="display:flex;align-items:center;gap:3px;font-size:8px;color:#22c55e;font-weight:700;">' +
@@ -470,16 +477,16 @@ def bot_script():
                                 '<div style="text-align:center;margin-bottom:8px;position:relative;">' +
                                     '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
                                     '<div id="ra-candle-display-box" style="position:relative;display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;overflow:hidden;">' +
-                                        '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1.2s linear infinite;"></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway1 5s infinite ease-in-out;"><div style="width:3px;height:12px;background:#22c55e;"></div><div style="width:10px;height:40px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:12px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway2 5s infinite ease-in-out 1s;"><div style="width:3px;height:12px;background:#ef4444;"></div><div style="width:10px;height:44px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:12px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway3 5s infinite ease-in-out 2s;"><div style="width:3px;height:12px;background:#eab308;"></div><div style="width:10px;height:38px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:12px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway4 5s infinite ease-in-out 3s;"><div style="width:3px;height:12px;background:#38bdf8;"></div><div style="width:10px;height:42px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:12px;background:#38bdf8;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway5 5s infinite ease-in-out 4s;"><div style="width:3px;height:12px;background:#a855f7;"></div><div style="width:10px;height:40px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:12px;background:#a855f7;"></div></div>' +
+                                        '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway1 2.5s infinite ease-in-out;"><div style="width:3px;height:12px;background:#22c55e;"></div><div style="width:11px;height:42px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:12px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway2 2.5s infinite ease-in-out 0.5s;"><div style="width:3px;height:12px;background:#ef4444;"></div><div style="width:11px;height:46px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:12px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway3 2.5s infinite ease-in-out 1s;"><div style="width:3px;height:12px;background:#eab308;"></div><div style="width:11px;height:40px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:12px;background:#eab308;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway4 2.5s infinite ease-in-out 1.5s;"><div style="width:3px;height:12px;background:#38bdf8;"></div><div style="width:11px;height:44px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:12px;background:#38bdf8;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway5 2.5s infinite ease-in-out 2s;"><div style="width:3px;height:12px;background:#a855f7;"></div><div style="width:11px;height:42px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:12px;background:#a855f7;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px;text-align:center;margin-bottom:6px;">' +
+                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px;text-align:center;margin-bottom:6px;display:' + (currentMode === '5S' ? 'none' : 'block') + ';">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:10px;">' +
                                         '<span style="color:#94a3b8;font-weight:bold;">VIP SIGNAL STATUS</span>' +
                                         '<span id="ra-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
@@ -495,7 +502,7 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
-                    var v1 = 61, v2 = 43, v3 = 51, v4 = 79;
+                    var v1 = 19, v2 = 63, v3 = 54, v4 = 10;
                     var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
 
                     panel.innerHTML = 
@@ -513,30 +520,30 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:5px;margin-bottom:6px;">' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
-                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div id="metric-circ-1" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 6px ' + c1 + ';">' + v1 + '%</div>' +
+                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:6px;">' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div id="metric-circ-1" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';animation:fastFastColorShift 2s infinite;">' + v1 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
-                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">STABILITY</div>' +
-                                        '<div id="metric-circ-2" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 6px ' + c2 + ';">' + v2 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
+                                        '<div id="metric-circ-2" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';animation:fastFastColorShift 2s infinite;">' + v2 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
-                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div id="metric-circ-3" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 6px ' + c3 + ';">' + v3 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
+                                        '<div id="metric-circ-3" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';animation:fastFastColorShift 2s infinite;">' + v3 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
-                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div id="metric-circ-4" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 6px ' + c4 + ';">' + v4 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
+                                        '<div id="metric-circ-4" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';animation:fastFastColorShift 2s infinite;">' + v4 + '%</div>' +
                                     '</div>' +
                                 '</div>' +
 
                                 '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:4px;font-size:7.5px;color:#cbd5e1;">' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span id="ai-confl-text" style="color:#22c55e;font-weight:bold;">ULTRA HIGH (95%)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Server Stability:</span><span id="server-stab-text" style="color:#38bdf8;font-weight:bold;">ULTRA HIGH (91%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span id="ai-confl-text" style="color:#eab308;font-weight:bold;">MEDIUM (57%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Server Stability:</span><span id="server-stab-text" style="color:#22c55e;font-weight:bold;">HIGH (79%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Market Trend:</span><span id="market-trend-text" style="color:#10b981;font-weight:bold;">BULLISH MOMENTUM</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">AUDUSD (REAL)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">GBPUSD (REAL)</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -586,7 +593,7 @@ def bot_script():
                                 var formattedAsset = randAsset.includes('OTC') ? randAsset : (randAsset + " (REAL)");
                                 bestAssetEl.innerText = formattedAsset;
                             }
-                        }, 2000);
+                        }, 1800);
                     }
                 } else {
                     var optionsHtml = '';
@@ -618,7 +625,7 @@ def bot_script():
                                 '</div>' +
 
                                 '<div id="tv-chart-container" style="position:relative;width:100%;height:130px;background:#000;border-radius:6px;border:1px solid #1f2937;overflow:hidden;margin-bottom:6px;">' +
-                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #ef4444 50%, #ffffff 80%);display:none;z-index:10;animation:panelLaserScanAnim 1.2s linear infinite;"></div>' +
+                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #ef4444 50%, #ffffff 80%);display:none;z-index:10;animation:panelLaserScanAnim 1s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
@@ -711,6 +718,7 @@ def bot_script():
                         autoStartActive = false;
                         autoStopActive = false;
                         if(autoTimer) clearTimeout(autoTimer);
+                        openPanel("main");
                     };
 
                     btn5s.onclick = function() {
@@ -718,6 +726,7 @@ def bot_script():
                         btn5s.style.background = '#10b981';
                         btn1m.style.background = '#3b82f6';
                         autoControls.style.display = 'flex';
+                        openPanel("main");
                     };
 
                     if(startAutoBtn) {
@@ -752,6 +761,7 @@ def bot_script():
                                     startAutoBtn.style.background = "#059669";
                                 }
                                 if(autoTimer) clearTimeout(autoTimer);
+                                openPanel("main");
                             } else {
                                 stopAutoBtn.innerText = "AUTO STOP OFF";
                                 stopAutoBtn.style.background = "#475569";
@@ -762,14 +772,16 @@ def bot_script():
                     var getSigBtn = panel.querySelector('#ra-get-signal-btn');
                     if(getSigBtn) {
                         getSigBtn.onclick = function() {
-                            if(currentMode === "1M") {
-                                runGrandQuantumScanAnimation(panel);
-                            } else {
-                                run5sAutoSequence(panel);
-                            }
+                            runGrandQuantumScanAnimation(panel);
                         };
                     }
                 }
+            }
+
+            function stopAutoExecution() {
+                autoStartActive = false;
+                autoStopActive = false;
+                if(autoTimer) clearTimeout(autoTimer);
             }
 
             function runGrandQuantumScanAnimation(panel) {
@@ -786,8 +798,8 @@ def bot_script():
 
                 if(laserScanner) laserScanner.style.display = 'block';
 
-                candleBox.querySelector('div:not(#panel-laser-scanner)').style.opacity = '0.4';
-                signalText.style.animation = 'textSmoothPulse 1s infinite ease-in-out';
+                candleBox.querySelector('div:not(#panel-laser-scanner)').style.opacity = '0.3';
+                signalText.style.animation = 'textSmoothPulse 0.8s infinite ease-in-out';
                 signalText.innerText = "⚡ LIGHT SCANNING...";
 
                 setTimeout(function(){
@@ -817,8 +829,8 @@ def bot_script():
                             innerCandles.style.opacity = '1';
                             innerCandles.innerHTML = 
                                 '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
-                                    '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
-                                    '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 20px ' + candleColor + ';"></div>' +
+                                    '<div style="width:5px;height:70px;background:' + candleColor + ';position:absolute;"></div>' +
+                                    '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                                 '</div>';
                         }
 
@@ -833,13 +845,13 @@ def bot_script():
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
                             openPanel("main");
-                        }, 5000);
+                        }, 7500);
                     });
                 }, 5000);
             }
 
             function run5sAutoSequence(panel) {
-                if(autoStopActive || !panel.isConnected) return;
+                if(autoStopActive || !autoStartActive || currentMode !== "5S" || !panel.isConnected) return;
                 var statusBadge = panel.querySelector('#ra-status-badge');
                 var signalText = panel.querySelector('#ra-signal-text');
                 var candleBox = panel.querySelector('#ra-candle-display-box');
@@ -851,26 +863,26 @@ def bot_script():
                 statusBadge.style.background = '#422006';
 
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:4px 0;">' +
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#030712;border-radius:6px;overflow:hidden;padding:4px 0;">' +
                         '<div style="position:absolute;top:2px;left:6px;font-size:7.5px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">RA DUAL HEARTBEAT SCAN</div>' +
                         '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
-                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:heartbeatLeftToRight 1.5s linear infinite;" />' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatLeft 3.5s linear infinite;" />' +
                         '</svg>' +
                         '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
-                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:heartbeatRightToLeft 1.5s linear infinite;" />' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatRight 3.5s linear infinite;" />' +
                         '</svg>' +
                     '</div>';
 
                 signalText.style.fontSize = '10px';
                 signalText.style.color = '#eab308';
-                signalText.innerText = "Dual Heartbeat Confluence Sync...";
+                signalText.innerText = "Slow Heartbeat Confluence Sync...";
 
                 fetch(renderServerUrl + '/signal?t=' + Date.now())
                 .then(function(r){ return r.json(); })
                 .catch(function(){ return {signal: "CALL", confidence: 89}; })
                 .then(function(data){
                     setTimeout(function(){
-                        if(!panel.isConnected || autoStopActive) return;
+                        if(!panel.isConnected || autoStopActive || !autoStartActive) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
                         var confidence = data.confidence || 89;
@@ -886,8 +898,8 @@ def bot_script():
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
-                                '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 20px ' + candleColor + ';"></div>' +
+                                '<div style="width:5px;height:70px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -908,7 +920,7 @@ def bot_script():
                             } else {
                                 openPanel("main");
                             }
-                        }, 4000);
+                        }, 5000);
                     }, 5000);
                 });
             }
@@ -960,7 +972,7 @@ def bot_script():
                             sigDisplay.innerText = "CLICK GENERATE";
                             rulesDesc.innerText = "Awaiting RA SNIPER AI Confluence Analysis...";
                             genBtn.disabled = false;
-                        }, 5000);
+                        }, 6000);
                     });
                 }, 4000);
             }
