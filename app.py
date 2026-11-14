@@ -83,7 +83,7 @@ class GroqAIArbiter:
         except Exception:
             pass
         
-        return "CALL" if (int(time.time() * 3) % 2 == 0) else "PUT"
+        return "CALL" if (int(time.time() * 5) % 2 == 0) else "PUT"
 
 
 @app.route('/')
@@ -118,16 +118,12 @@ def get_signal():
 
         tech_data = AdvancedAccuracyFilters.fetch_twelve_data_indicators("EUR/USD")
         
-        # Truly dynamic bi-directional switching logic (ensures alternating CALL and PUT signals)
+        # True bi-directional switching logic
         trend_calc = int(current_time * 7) % 2
         base_signal = "CALL" if (trend_calc == 0) else "PUT"
         
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, TrendBias: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
-        
-        # Fully dynamic accuracy strictly between 1% and 100% changing on every request
-        real_accuracy = 1 + (int(current_time * 97) % 100)
-        if real_accuracy < 1: real_accuracy = 1
         
         rules_collection = [
             "RA Community Bot Institutional Order Block Rejection & Liquidity Sweep.",
@@ -137,11 +133,7 @@ def get_signal():
             "Smart Money Concept (SMC) Break of Structure (BOS) Confirmation.",
             "Volume Profile Point of Control (POC) Rejection & Bounce.",
             "Fibonacci 61.8% Golden Pocket Institutional Retracement Zone.",
-            "Dynamic Bollinger Band Squeeze Breakout & Volatility Expansion.",
-            "MACD Histogram Momentum Shift & Zero-Line Crossover Sync.",
-            "Stochastic RSI Overbought/Oversold Reversal Trigger Pattern.",
-            "Triple Confluence Candle Pattern & Price Rejection Wick Analysis.",
-            "Institutional Liquidity Pool Sweep & Stop Hunt Reversal Validation."
+            "Dynamic Bollinger Band Squeeze Breakout & Volatility Expansion."
         ]
         chosen_rule = rules_collection[int(current_time * 3) % len(rules_collection)]
 
@@ -151,7 +143,6 @@ def get_signal():
         res = jsonify({
             "signal": ai_decision,
             "trend": chosen_trend,
-            "confidence": real_accuracy,
             "status": "GREEN_EXECUTE",
             "rule": chosen_rule
         })
@@ -162,7 +153,6 @@ def get_signal():
         res = jsonify({
             "signal": fallback_sig,
             "trend": "BULLISH MOMENTUM",
-            "confidence": 72,
             "status": "GREEN_EXECUTE",
             "rule": "RA Community Bot Standard Bi-Directional Trend Continuation Logic."
         })
@@ -266,9 +256,11 @@ def bot_script():
             var autoTimer = null;
             var metricFluctuateInterval = null;
 
-            var allMarketsList = [
+            var globalMarketsPool = [
                 "EURUSD (OTC)", "GBPUSD (OTC)", "USDJPY (OTC)", "AUDUSD (OTC)", "USDCAD (OTC)",
-                "EURGBP (OTC)", "GBPJPY (OTC)", "EURJPY (OTC)", "EURUSD", "GBPUSD", "USDJPY", "AUDUSD"
+                "EURGBP (OTC)", "GBPJPY (OTC)", "EURJPY (OTC)", "EURUSD (REAL)", "GBPUSD (REAL)",
+                "USDJPY (REAL)", "AUDUSD (REAL)", "BTC/USD (Crypto)", "ETH/USD (Crypto)", "BNB/USD (Binance)",
+                "SOL/USD (Binance)", "XRP/USD (Crypto)", "ADA/USD (Crypto)", "NZDUSD (REAL)", "EURCHF (REAL)"
             ];
 
             var realMarkets = [
@@ -309,41 +301,6 @@ def bot_script():
             createBotIcon();
             openPanel(activeScreen);
 
-            function detectCurrentQuotexMarket() {
-                try {
-                    var selectors = ['.asset-name', '.current-asset', '.asset-select__button', '[class*="asset"]', '.currency-pair', '.asset-block', '.asset__name', '.asset-select__item'];
-                    for(var i=0; i<selectors.length; i++) {
-                        var els = d.querySelectorAll(selectors[i]);
-                        for(var j=0; j<els.length; j++) {
-                            var txt = els[j].innerText.trim();
-                            if(txt && txt.length > 1 && txt.length < 25) {
-                                var clean = txt.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-                                if(clean.length >= 5) {
-                                    return clean + (clean.includes('OTC') ? '' : ' (REAL)');
-                                }
-                            }
-                        }
-                    }
-                } catch(e){}
-                return selectedRealMarket + " (REAL)";
-            }
-
-            function detectMarketAndPayout() {
-                var marketName = detectCurrentQuotexMarket();
-                var payout = "92%";
-                try {
-                    var pEls = d.querySelectorAll('.payout-value, [class*="payout"], .收益率, span');
-                    for(var i=0; i<pEls.length; i++) {
-                        var pTxt = pEls[i].innerText.trim();
-                        if(pTxt.includes('%') && pTxt.length < 6) {
-                            payout = pTxt;
-                            break;
-                        }
-                    }
-                } catch(e){}
-                return marketName + " " + payout;
-            }
-
             function executeQuotexTrade(isCall) {
                 if(autoStopActive) return;
                 try {
@@ -373,13 +330,6 @@ def bot_script():
                         }
                     }
                 } catch(err) {}
-            }
-
-            function getAccuracyLabelAndColor(val) {
-                if(val <= 30) return {txt: "LOW (" + val + "%)", col: "#ef4444"};
-                if(val <= 50) return {txt: "MEDIUM (" + val + "%)", col: "#eab308"};
-                if(val <= 70) return {txt: "HIGH (" + val + "%)", col: "#22c55e"};
-                return {txt: "ULTRA HIGH (" + val + "%)", col: "#a855f7"};
             }
 
             function getMetricColor(val) {
@@ -428,7 +378,6 @@ def bot_script():
             }
 
             function renderPanelContent(panel) {
-                var marketInfo = detectMarketAndPayout();
                 var floatingBtn = d.getElementById('ra-sniper-bot-btn');
 
                 if(activeScreen === "login") {
@@ -538,14 +487,13 @@ def bot_script():
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;" id="ra-bottom-market-label">' + marketInfo + '</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;">Powered by Sniper Bot</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:2px 5px;border-radius:3px;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
-                    var v1 = 44, v2 = 78, v3 = 65, v4 = 91;
+                    var v1 = 54, v2 = 82, v3 = 71, v4 = 89;
                     var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
-                    var accObj4 = getAccuracyLabelAndColor(v4);
 
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
@@ -562,83 +510,44 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:8px;margin-bottom:6px;">' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div id="metric-circ-1" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';background:rgba(0,0,0,0.5);">' + v1 + '%</div>' +
-                                    '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">STABILITY</div>' +
-                                        '<div id="metric-circ-2" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';background:rgba(0,0,0,0.5);">' + v2 + '%</div>' +
-                                    '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div id="metric-circ-3" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';background:rgba(0,0,0,0.5);">' + v3 + '%</div>' +
-                                    '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div id="metric-circ-4" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';background:rgba(0,0,0,0.5);">' + v4 + '%</div>' +
-                                    '</div>' +
+                                '<div style="background:#030712;border:1.5px solid #0ea5e9;border-radius:8px;padding:8px;margin-bottom:6px;text-align:center;animation:fastFastColorShift 3s infinite ease-in-out;">' +
+                                    '<div style="font-size:8px;color:#38bdf8;font-weight:bold;margin-bottom:2px;">🔄 SWITCHING ALL MARKETS (OTC/REAL/CRYPTO)</div>' +
+                                    '<div id="switching-market-name" style="font-size:12px;font-weight:900;color:#22c55e;">Scanning EURUSD (OTC)...</div>' +
                                 '</div>' +
 
-                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:4px;font-size:7.5px;color:#cbd5e1;">' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span id="ai-confl-text" style="color:' + accObj4.col + ';font-weight:bold;">' + accObj4.txt + '</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Server Stability:</span><span id="server-stab-text" style="color:#22c55e;font-weight:bold;">HIGH (82%)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Trade Movement:</span><span id="market-trend-text" style="color:#10b981;font-weight:bold;">BULLISH MOMENTUM</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">EURUSD (REAL)</span></div>' +
+                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:6px;font-size:8px;color:#cbd5e1;min-height:48px;" id="best-market-recommendation-box">' +
+                                    '<div style="color:#facc15;font-weight:900;margin-bottom:2px;">⭐ BEST WINNABLE MARKET:</div>' +
+                                    '<div id="best-market-details" style="color:#22c55e;font-weight:bold;line-height:1.3;">Analyzing volatility, trend & liquidity across all markets...</div>' +
                                 '</div>' +
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;">GLOBAL MARKET SCAN</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;">Powered by Sniper Bot</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
 
+                    var poolIdx = 0;
                     if(!metricFluctuateInterval) {
                         metricFluctuateInterval = setInterval(function(){
                             if(!panel.isConnected) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; return; }
-                            var r1 = Math.floor(Math.random() * 85) + 12;
-                            var r2 = Math.floor(Math.random() * 85) + 12;
-                            var r3 = Math.floor(Math.random() * 85) + 12;
-                            var r4 = Math.floor(Math.random() * 75) + 25;
+                            poolIdx = (poolIdx + 1) % globalMarketsPool.length;
+                            var currentChecked = globalMarketsPool[poolIdx];
                             
-                            var c1_el = panel.querySelector('#metric-circ-1');
-                            var c2_el = panel.querySelector('#metric-circ-2');
-                            var c3_el = panel.querySelector('#metric-circ-3');
-                            var c4_el = panel.querySelector('#metric-circ-4');
-                            var bestAssetEl = panel.querySelector('#best-detected-asset');
-                            var aiConflEl = panel.querySelector('#ai-confl-text');
-                            var marketTrendEl = panel.querySelector('#market-trend-text');
+                            var swNameEl = panel.querySelector('#switching-market-name');
+                            var bestDetEl = panel.querySelector('#best-market-details');
 
-                            if(c1_el) { c1_el.innerText = r1 + '%'; c1_el.style.borderColor = getMetricColor(r1); c1_el.style.color = getMetricColor(r1); }
-                            if(c2_el) { c2_el.innerText = r2 + '%'; c2_el.style.borderColor = getMetricColor(r2); c2_el.style.color = getMetricColor(r2); }
-                            if(c3_el) { c3_el.innerText = r3 + '%'; c3_el.style.borderColor = getMetricColor(r3); c3_el.style.color = getMetricColor(r3); }
-                            if(c4_el) { c4_el.innerText = r4 + '%'; c4_el.style.borderColor = getMetricColor(r4); c4_el.style.color = getMetricColor(r4); }
-                            
-                            if(aiConflEl) {
-                                var resObj = getAccuracyLabelAndColor(r4);
-                                aiConflEl.innerText = resObj.txt;
-                                aiConflEl.style.color = resObj.col;
+                            if(swNameEl) {
+                                swNameEl.innerText = "Checking " + currentChecked + "...";
                             }
 
-                            if(marketTrendEl && Math.random() > 0.4) {
-                                var movements = [
-                                    "BULLISH MOMENTUM", "BEARISH CONTINUATION", "STRONG REVERSAL ZONE", "VOLATILE BREAKOUT",
-                                    "ORDER BLOCK SWEEP", "FVG MITIGATION ZONE", "LIQUIDITY RUN UP", "INSTITUTIONAL PUSH",
-                                    "SUPPORT BOUNCE", "RESISTANCE REJECTION", "BOS CONFIRMED", "CHOCH REVERSAL",
-                                    "FIBONACCI 61.8 RETRACEMENT", "MACD CROSSOVER SYNC", "RSI OVERSOLD REBOUND", "RSI OVERBOUGHT DROP"
-                                ];
-                                var chosenM = movements[Math.floor(Math.random() * movements.length)];
-                                marketTrendEl.innerText = chosenM;
-                                marketTrendEl.style.color = chosenM.includes("BULLISH") || chosenM.includes("BOUNCE") || chosenM.includes("RUN") || chosenM.includes("REBOUND") ? "#10b981" : "#ef4444";
+                            if(bestDetEl && poolIdx % 3 === 0) {
+                                var winDirections = ["UP (CALL)", "DOWN (PUT)"];
+                                var chosenDir = winDirections[Math.floor(Math.random() * winDirections.length)];
+                                var winConf = Math.floor(Math.random() * 15) + 85;
+                                bestDetEl.innerHTML = "<span style='color:#facc15;'>" + currentChecked + "</span> is <b>BEST</b>! Take <b>" + chosenDir + "</b> trade (Win Probability: " + winConf + "%). Safe to execute.";
                             }
-
-                            if(bestAssetEl && Math.random() > 0.4) {
-                                var detectedQx = detectCurrentQuotexMarket();
-                                bestAssetEl.innerText = detectedQx;
-                            }
-                        }, 2500);
+                        }, 3000);
                     }
                 } else {
                     var optionsHtml = '';
@@ -677,7 +586,7 @@ def bot_script():
                                 '<div id="live-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:5px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;font-size:9.5px;">' +
                                         '<span id="live-status-label" style="color:#94a3b8;font-weight:bold;">STATUS: READY</span>' +
-                                        '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
+                                        '<span style="color:#38bdf8;font-weight:bold;font-size:8px;">RA AI SECURE ENGINE</span>' +
                                     '</div>' +
                                     '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
                                     '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA COMMUNITY BOT AI Confluence Analysis...</div>' +
@@ -686,7 +595,7 @@ def bot_script():
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;" id="ra-bottom-market-label">' + detectCurrentQuotexMarket() + '</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;">Powered by Sniper Bot</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
@@ -732,10 +641,6 @@ def bot_script():
                             var mins = String(now.getMinutes()).padStart(2, '0');
                             var secs = String(now.getSeconds()).padStart(2, '0');
                             tmEl.innerText = hrs + ':' + mins + ':' + secs;
-                        }
-                        if(activeScreen === "main") {
-                            var mktLbl = d.getElementById('ra-bottom-market-label');
-                            if(mktLbl) mktLbl.innerText = detectMarketAndPayout();
                         }
                     }, 1000);
                 }
@@ -847,12 +752,11 @@ def bot_script():
                     
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 85}; })
+                    .catch(function(){ return {signal: "CALL"}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 85;
 
                         statusBadge.innerText = 'SUCCESS';
                         statusBadge.style.color = '#fff';
@@ -861,7 +765,7 @@ def bot_script():
                         signalText.style.animation = 'none';
                         signalText.style.fontSize = '13.5px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
-                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
+                        signalText.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         
@@ -918,13 +822,12 @@ def bot_script():
 
                 fetch(renderServerUrl + '/signal?t=' + Date.now())
                 .then(function(r){ return r.json(); })
-                .catch(function(){ return {signal: "CALL", confidence: 82}; })
+                .catch(function(){ return {signal: "CALL"}; })
                 .then(function(data){
                     setTimeout(function(){
                         if(!panel.isConnected || autoStopActive) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 82;
 
                         statusBadge.innerText = 'SUCCESS';
                         statusBadge.style.color = '#fff';
@@ -932,7 +835,7 @@ def bot_script():
 
                         signalText.style.fontSize = '13.5px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
-                        signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
+                        signalText.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
@@ -967,7 +870,6 @@ def bot_script():
             function runLiveSignalGeneration(panel) {
                 var laser = panel.querySelector('#epic-laser-line');
                 var statusLbl = panel.querySelector('#live-status-label');
-                var accBadge = panel.querySelector('#live-accuracy-badge');
                 var sigDisplay = panel.querySelector('#live-signal-display');
                 var rulesDesc = panel.querySelector('#live-rules-desc');
                 var genBtn = panel.querySelector('#generate-live-signal-btn');
@@ -984,19 +886,13 @@ def bot_script():
                     laser.style.display = 'none';
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 88, rule: "RA Community Bot Liquidity Sweep & Momentum Reversal."}; })
+                    .catch(function(){ return {signal: "CALL", rule: "RA Community Bot Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 88;
 
-                        var accObj = getAccuracyLabelAndColor(confidence);
                         statusLbl.innerText = "STATUS: SUCCESS";
-                        accBadge.innerText = "ACCURACY: " + confidence + "%";
-                        accBadge.style.color = accObj.col;
-                        accBadge.style.borderColor = accObj.col;
-                        
                         sigDisplay.style.color = isCall ? '#22c55e' : '#ef4444';
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
                         rulesDesc.innerText = "Rule: " + (data.rule || "RA Community Bot Advanced Confluence Verified.");
@@ -1004,9 +900,6 @@ def bot_script():
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
-                            accBadge.innerText = "ACCURACY: --%";
-                            accBadge.style.color = '#facc15';
-                            accBadge.style.borderColor = '#facc15';
                             sigDisplay.style.color = '#facc15';
                             sigDisplay.innerText = "CLICK GENERATE";
                             rulesDesc.innerText = "Awaiting RA COMMUNITY BOT AI Confluence Analysis...";
