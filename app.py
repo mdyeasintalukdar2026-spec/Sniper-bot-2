@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 1 + (int(time.time() * 17) % 100)
+        real_accuracy = 1 + (int(time.time() * 19) % 100)
         
         rules_list = [
             "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
@@ -197,27 +197,27 @@ def bot_script():
                           '}' +
                           '@keyframes fastGlowSway1 {' +
                           '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #22c55e); }' +
-                          '50% { transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 22px #22c55e); }' +
+                          '50% { transform: translateY(-5px) scale(1.06); filter: drop-shadow(0 0 24px #22c55e); }' +
                           '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #22c55e); }' +
                           '}' +
                           '@keyframes fastGlowSway2 {' +
                           '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #ef4444); }' +
-                          '50% { transform: translateY(4px) scale(1.05); filter: drop-shadow(0 0 22px #ef4444); }' +
+                          '50% { transform: translateY(5px) scale(1.06); filter: drop-shadow(0 0 24px #ef4444); }' +
                           '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #ef4444); }' +
                           '}' +
                           '@keyframes fastGlowSway3 {' +
                           '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #eab308); }' +
-                          '50% { transform: translateY(-3px) scale(1.05); filter: drop-shadow(0 0 22px #eab308); }' +
+                          '50% { transform: translateY(-4px) scale(1.06); filter: drop-shadow(0 0 24px #eab308); }' +
                           '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #eab308); }' +
                           '}' +
                           '@keyframes fastGlowSway4 {' +
                           '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #38bdf8); }' +
-                          '50% { transform: translateY(3px) scale(1.05); filter: drop-shadow(0 0 22px #38bdf8); }' +
+                          '50% { transform: translateY(4px) scale(1.06); filter: drop-shadow(0 0 24px #38bdf8); }' +
                           '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #38bdf8); }' +
                           '}' +
                           '@keyframes fastGlowSway5 {' +
                           '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #a855f7); }' +
-                          '50% { transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 22px #a855f7); }' +
+                          '50% { transform: translateY(-5px) scale(1.06); filter: drop-shadow(0 0 24px #a855f7); }' +
                           '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px #a855f7); }' +
                           '}' +
                           '@keyframes panelLaserScanAnim {' +
@@ -351,7 +351,7 @@ def bot_script():
                     if(floatingBtn) floatingBtn.style.display = 'none';
                     var panel = d.createElement('div');
                     panel.id = 'ra-sniper-bot-panel';
-                    panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:310px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 3s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
+                    panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:295px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 3s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
                     d.body.appendChild(panel);
                     renderPanelContent(panel);
                     makeDraggable(panel);
@@ -407,12 +407,12 @@ def bot_script():
                                 '<img src="' + commLogo + '" style="width:100%;height:100%;object-fit:cover;" />' +
                             '</div>' +
 
-                            '<a href="' + telegramGroupLink + '" target="_blank" style="width:92%;background:rgba(14,116,144,0.25);border:1.5px solid #0ea5e9;border-radius:7px;padding:6px;text-align:center;text-decoration:none;display:block;margin-bottom:12px;box-sizing:border-box;animation:fastFastColorShift 2s infinite ease-in-out;">' +
-                                '<div style="font-size:9.5px;font-weight:900;color:#38bdf8;">R-A Trading Community</div>' +
-                                '<div style="font-size:7px;color:#94a3b8;">Click to Join Telegram Channel</div>' +
+                            '<a href="' + telegramGroupLink + '" target="_blank" style="width:88%;background:rgba(14,116,144,0.25);border:1.5px solid #0ea5e9;border-radius:6px;padding:5px;text-align:center;text-decoration:none;display:block;margin-bottom:12px;box-sizing:border-box;animation:fastFastColorShift 2s infinite ease-in-out;">' +
+                                '<div style="font-size:9px;font-weight:900;color:#38bdf8;">R-A Trading Community</div>' +
+                                '<div style="font-size:6.5px;color:#94a3b8;">Click to Join Telegram Channel</div>' +
                             '</a>' +
 
-                            '<div style="width:100%;max-width:220px;margin-bottom:8px;">' +
+                            '<div style="width:100%;max-width:210px;margin-bottom:8px;">' +
                                 '<input id="bot-password-input" type="password" placeholder="Bot Access Key" style="width:100%;background:#030712;color:#fff;border:1px solid #334155;border-radius:6px;padding:7px;font-size:11px;outline:none;text-align:center;box-sizing:border-box;" />' +
                             '</div>' +
 
@@ -451,16 +451,16 @@ def bot_script():
                                     '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
                                         '<img src="' + innerHeaderLogo + '" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;animation:fastFastColorShift 2s infinite ease-in-out;" />' +
                                         '<div>' +
-                                            '<div style="font-size:11.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
-                                            '<div style="display:flex;align-items:center;gap:3px;font-size:8px;color:#22c55e;font-weight:700;">' +
+                                            '<div style="font-size:11px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
+                                            '<div style="display:flex;align-items:center;gap:3px;font-size:7.5px;color:#22c55e;font-weight:700;">' +
                                                 '<span style="width:4px;height:4px;background:#22c55e;border-radius:50%;display:inline-block;"></span> RA COMMUNITY AI' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div style="display:flex;align-items:center;gap:4px;">' +
-                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:2px 7px;font-size:8px;font-weight:900;cursor:pointer;">RA LIVE SIGNAL</button>' +
-                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
-                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
+                                        '<button id="nav-live-signal-btn" style="background:#0284c7;color:#fff;border:none;border-radius:4px;padding:2px 6px;font-size:7.5px;font-weight:900;cursor:pointer;">RA LIVE SIGNAL</button>' +
+                                        '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
+                                        '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -475,28 +475,28 @@ def bot_script():
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:8px;position:relative;">' +
-                                    '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
-                                    '<div id="ra-candle-display-box" style="position:relative;display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;overflow:hidden;">' +
+                                    '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
+                                    '<div id="ra-candle-display-box" style="position:relative;display:flex;align-items:center;justify-content:space-evenly;height:90px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;overflow:hidden;">' +
                                         '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway1 2.5s infinite ease-in-out;"><div style="width:3px;height:12px;background:#22c55e;"></div><div style="width:11px;height:42px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:12px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway2 2.5s infinite ease-in-out 0.5s;"><div style="width:3px;height:12px;background:#ef4444;"></div><div style="width:11px;height:46px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:12px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway3 2.5s infinite ease-in-out 1s;"><div style="width:3px;height:12px;background:#eab308;"></div><div style="width:11px;height:40px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:12px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway4 2.5s infinite ease-in-out 1.5s;"><div style="width:3px;height:12px;background:#38bdf8;"></div><div style="width:11px;height:44px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:12px;background:#38bdf8;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway5 2.5s infinite ease-in-out 2s;"><div style="width:3px;height:12px;background:#a855f7;"></div><div style="width:11px;height:42px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:12px;background:#a855f7;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway1 2s infinite ease-in-out;"><div style="width:3px;height:10px;background:#22c55e;"></div><div style="width:10px;height:38px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:10px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway2 2s infinite ease-in-out 0.4s;"><div style="width:3px;height:10px;background:#ef4444;"></div><div style="width:10px;height:42px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:10px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway3 2s infinite ease-in-out 0.8s;"><div style="width:3px;height:10px;background:#eab308;"></div><div style="width:10px;height:36px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:10px;background:#eab308;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway4 2s infinite ease-in-out 1.2s;"><div style="width:3px;height:10px;background:#38bdf8;"></div><div style="width:10px;height:40px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:10px;background:#38bdf8;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastGlowSway5 2s infinite ease-in-out 1.6s;"><div style="width:3px;height:10px;background:#a855f7;"></div><div style="width:10px;height:38px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:10px;background:#a855f7;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
                                 '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px;text-align:center;margin-bottom:6px;display:' + (currentMode === '5S' ? 'none' : 'block') + ';">' +
-                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:10px;">' +
+                                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9.5px;">' +
                                         '<span style="color:#94a3b8;font-weight:bold;">VIP SIGNAL STATUS</span>' +
                                         '<span id="ra-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
                                     '</div>' +
-                                    '<div id="ra-signal-text" style="font-size:14px;font-weight:900;color:#facc15;margin-bottom:6px;">--- : --</div>' +
-                                    '<button id="ra-get-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #2563eb);color:#fff;border:none;border-radius:6px;padding:8px;font-size:11.5px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
+                                    '<div id="ra-signal-text" style="font-size:13.5px;font-weight:900;color:#facc15;margin-bottom:6px;">--- : --</div>' +
+                                    '<button id="ra-get-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #2563eb);color:#fff;border:none;border-radius:6px;padding:8px;font-size:11px;font-weight:900;cursor:pointer;">GET SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
 
-                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8.5px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">' +
+                            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">' +
                                 '<span style="color:#38bdf8;font-weight:bold;">' + marketInfo + '</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:2px 5px;border-radius:3px;">15:40:33</span>' +
                             '</div>' +
@@ -520,22 +520,22 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:6px;">' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div id="metric-circ-1" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';animation:fastFastColorShift 2s infinite;">' + v1 + '%</div>' +
+                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:8px;margin-bottom:6px;">' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div id="metric-circ-1" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';background:rgba(0,0,0,0.5);">' + v1 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
-                                        '<div id="metric-circ-2" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';animation:fastFastColorShift 2s infinite;">' + v2 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">STABILITY</div>' +
+                                        '<div id="metric-circ-2" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';background:rgba(0,0,0,0.5);">' + v2 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div id="metric-circ-3" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';animation:fastFastColorShift 2s infinite;">' + v3 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">LIQUIDITY FLOW</div>' +
+                                        '<div id="metric-circ-3" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';background:rgba(0,0,0,0.5);">' + v3 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:7px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div id="metric-circ-4" style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';animation:fastFastColorShift 2s infinite;">' + v4 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:8px;padding:8px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:3px;font-weight:bold;">AI CONFIDENCE</div>' +
+                                        '<div id="metric-circ-4" style="width:38px;height:38px;border-radius:50%;border:3px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';background:rgba(0,0,0,0.5);">' + v4 + '%</div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -593,7 +593,7 @@ def bot_script():
                                 var formattedAsset = randAsset.includes('OTC') ? randAsset : (randAsset + " (REAL)");
                                 bestAssetEl.innerText = formattedAsset;
                             }
-                        }, 1800);
+                        }, 2200);
                     }
                 } else {
                     var optionsHtml = '';
@@ -819,7 +819,7 @@ def bot_script():
                         statusBadge.style.background = isCall ? '#166534' : '#991b1b';
 
                         signalText.style.animation = 'none';
-                        signalText.style.fontSize = '14px';
+                        signalText.style.fontSize = '13.5px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
 
@@ -829,8 +829,8 @@ def bot_script():
                             innerCandles.style.opacity = '1';
                             innerCandles.innerHTML = 
                                 '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
-                                    '<div style="width:5px;height:70px;background:' + candleColor + ';position:absolute;"></div>' +
-                                    '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
+                                    '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
+                                    '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                                 '</div>';
                         }
 
@@ -841,7 +841,7 @@ def bot_script():
                             statusBadge.innerText = 'READY';
                             statusBadge.style.color = '#10b981';
                             statusBadge.style.background = '#064e3b';
-                            signalText.style.fontSize = '14px';
+                            signalText.style.fontSize = '13.5px';
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
                             openPanel("main");
@@ -866,14 +866,14 @@ def bot_script():
                     '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#030712;border-radius:6px;overflow:hidden;padding:4px 0;">' +
                         '<div style="position:absolute;top:2px;left:6px;font-size:7.5px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">RA DUAL HEARTBEAT SCAN</div>' +
                         '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
-                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatLeft 3.5s linear infinite;" />' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatLeft 5s linear infinite;" />' +
                         '</svg>' +
                         '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
-                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatRight 3.5s linear infinite;" />' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatRight 5s linear infinite;" />' +
                         '</svg>' +
                     '</div>';
 
-                signalText.style.fontSize = '10px';
+                signalText.style.fontSize = '9.5px';
                 signalText.style.color = '#eab308';
                 signalText.innerText = "Slow Heartbeat Confluence Sync...";
 
@@ -891,15 +891,15 @@ def bot_script():
                         statusBadge.style.color = '#fff';
                         statusBadge.style.background = isCall ? '#166534' : '#991b1b';
 
-                        signalText.style.fontSize = '14px';
+                        signalText.style.fontSize = '13.5px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
-                                '<div style="width:5px;height:70px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
+                                '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -909,7 +909,7 @@ def bot_script():
                             statusBadge.innerText = 'READY';
                             statusBadge.style.color = '#10b981';
                             statusBadge.style.background = '#064e3b';
-                            signalText.style.fontSize = '14px';
+                            signalText.style.fontSize = '13.5px';
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
                             
