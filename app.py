@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__, static_folder=None)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
-logger = logging.getLogger("RA_VIP_Bot_Engine")
+logger = logging.getLogger("RA_SNIPER_BOT_Engine")
 
 # --- MASTER API CREDENTIALS & BACKEND KNOWLEDGE PIPELINE ---
 QX_API_KEY = os.environ.get("QX_API_KEY", "qx_live_1xxOcsg5_3vEavHfZwAkGufh9NLLWJhUqG3T6H6oCEuoDWeJV")
@@ -88,7 +88,7 @@ class GroqAIArbiter:
 
 @app.route('/')
 def home():
-    res = make_response("RA VIP BOT ENGINE ACTIVE - READY!")
+    res = make_response("RA SNIPER BOT ENGINE ACTIVE - READY!")
     res.headers.add("Access-Control-Allow-Origin", "*")
     return res
 
@@ -126,7 +126,7 @@ def get_signal():
         real_accuracy = 95 + ((int(time.time() * 11) + 17) % 5)
         
         rules_list = [
-            "RA VIP AI Confluence & Smart Money Rejection Verified.",
+            "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
             "Advanced Price Action Zone & Institutional Order Flow Sync.",
             "Bullish/Bearish Trend Continuation with Zero-Lag Filter.",
             "High-Precision Support/Resistance Reversal Logic."
@@ -135,7 +135,7 @@ def get_signal():
 
         res = jsonify({
             "signal": ai_decision,
-            "trend": "RA_VIP_CONFLUENCE_VERIFIED",
+            "trend": "RA_SNIPER_CONFLUENCE_VERIFIED",
             "confidence": real_accuracy,
             "status": "GREEN_EXECUTE",
             "rule": chosen_rule
@@ -149,7 +149,7 @@ def get_signal():
             "trend": "STABLE MOMENTUM",
             "confidence": 96,
             "status": "GREEN_EXECUTE",
-            "rule": "RA VIP Standard Trend Continuation Logic."
+            "rule": "RA SNIPER Standard Trend Continuation Logic."
         })
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
@@ -162,7 +162,7 @@ def bot_script():
         try {
             var d = document;
             
-            ["ra-vip-bot-panel", "ra-vip-bot-btn", "ra-vip-bot-style", "ra-grand-quantum-overlay"].forEach(function(i){
+            ["ra-sniper-bot-panel", "ra-sniper-bot-btn", "ra-sniper-bot-style", "ra-grand-quantum-overlay"].forEach(function(i){
                 var e = d.getElementById(i);
                 if(e) e.remove();
             });
@@ -171,7 +171,7 @@ def bot_script():
             var renderServerUrl = window.location.origin;
 
             var s = d.createElement('style');
-            s.id = 'ra-vip-bot-style';
+            s.id = 'ra-sniper-bot-style';
             s.innerHTML = '@keyframes raBorderGlow {' +
                           '0% { border-color: #22c55e; box-shadow: 0 0 25px rgba(34,197,94,0.9), inset 0 0 15px rgba(34,197,94,0.4); }' +
                           '33% { border-color: #38bdf8; box-shadow: 0 0 30px rgba(56,189,248,0.95), inset 0 0 15px rgba(56,189,248,0.5); }' +
@@ -183,24 +183,28 @@ def bot_script():
                           '50% { box-shadow: 0 0 25px #a855f7, 0 0 40px #22c55e; border-color: #a855f7; }' +
                           '100% { box-shadow: 0 0 15px #22c55e, 0 0 30px #38bdf8; border-color: #22c55e; }' +
                           '}' +
-                          '@keyframes fastCandleSway1 {' +
-                          '0% { transform: translateY(0px) scaleY(1); }' +
-                          '50% { transform: translateY(-7px) scaleY(1.12); filter: drop-shadow(0 0 16px #22c55e); }' +
-                          '100% { transform: translateY(0px) scaleY(1); }' +
+                          '@keyframes ultraFastCandleSway1 {' +
+                          '0% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
+                          '25% { transform: translateY(-8px) scaleY(1.15) translateX(3px); filter: drop-shadow(0 0 18px #22c55e); }' +
+                          '50% { transform: translateY(0px) scaleY(1) translateX(-2px); }' +
+                          '75% { transform: translateY(8px) scaleY(1.15) translateX(2px); filter: drop-shadow(0 0 18px #ef4444); }' +
+                          '100% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
                           '}' +
-                          '@keyframes fastCandleSway2 {' +
-                          '0% { transform: translateY(0px) scaleY(1); }' +
-                          '50% { transform: translateY(7px) scaleY(1.12); filter: drop-shadow(0 0 16px #ef4444); }' +
-                          '100% { transform: translateY(0px) scaleY(1); }' +
+                          '@keyframes ultraFastCandleSway2 {' +
+                          '0% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
+                          '25% { transform: translateY(8px) scaleY(1.15) translateX(-3px); filter: drop-shadow(0 0 18px #eab308); }' +
+                          '50% { transform: translateY(0px) scaleY(1) translateX(2px); }' +
+                          '75% { transform: translateY(-8px) scaleY(1.15) translateX(-2px); filter: drop-shadow(0 0 18px #38bdf8); }' +
+                          '100% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
                           '}' +
                           '@keyframes grandQuantumWaves {' +
                           '0% { transform: scale(0.2) rotate(0deg); opacity: 1; border-color: #22c55e; }' +
-                          '50% { transform: scale(3.5) rotate(180deg); opacity: 0.8; border-color: #38bdf8; box-shadow: 0 0 80px #a855f7; }' +
+                          '50% { transform: scale(3.5) rotate(180deg); opacity: 0.8; border-color: #38bdf8; box-shadow: 0 0 90px #a855f7; }' +
                           '100% { transform: scale(7) rotate(360deg); opacity: 0; border-color: #ef4444; }' +
                           '}' +
                           '@keyframes textUpDownBounce {' +
                           '0% { transform: translateY(0px); color: #38bdf8; }' +
-                          '50% { transform: translateY(-6px); color: #22c55e; text-shadow: 0 0 12px #22c55e; }' +
+                          '50% { transform: translateY(-6px); color: #22c55e; text-shadow: 0 0 14px #22c55e; }' +
                           '100% { transform: translateY(0px); color: #38bdf8; }' +
                           '}' +
                           '@keyframes proLaserScan {' +
@@ -220,7 +224,7 @@ def bot_script():
                           '}' +
                           '@keyframes candlePopIn {' +
                           '0% { transform: scale(0.3); opacity: 0; }' +
-                          '100% { transform: scale(1.15); opacity: 1; }' +
+                          '100% { transform: scale(1.2); opacity: 1; }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
@@ -238,8 +242,8 @@ def bot_script():
             ];
 
             function createBotIcon() {
-                var wrap = d.getElementById('ra-vip-bot-btn') || d.createElement('div');
-                wrap.id = 'ra-vip-bot-btn';
+                var wrap = d.getElementById('ra-sniper-bot-btn') || d.createElement('div');
+                wrap.id = 'ra-sniper-bot-btn';
                 wrap.style.cssText = 'position:fixed;bottom:80px;left:20px;width:65px;height:65px;border-radius:50%;background:#05070d;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #22c55e;animation:raFloatGlow 3s infinite ease-in-out;z-index:2147483647;cursor:pointer;box-sizing:border-box;overflow:hidden;box-shadow:0 0 20px rgba(34,197,94,0.8);';
                 wrap.innerHTML = '<img src="' + botMainLogo + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;pointer-events:none;" />';
 
@@ -260,11 +264,11 @@ def bot_script():
                     wrap.style.bottom = 'auto'; wrap.style.right = 'auto';
                 };
                 wrap.onmouseup = wrap.ontouchend = function(){ isDragging = false; };
-                wrap.onclick = function(){ if(!hasMoved) toggleVipPanel(); };
+                wrap.onclick = function(){ if(!hasMoved) toggleSniperPanel(); };
             }
 
             createBotIcon();
-            toggleVipPanel();
+            toggleSniperPanel();
 
             function detectCurrentQuotexMarket() {
                 try {
@@ -298,7 +302,7 @@ def bot_script():
                     var tradeBtn = d.querySelector(btnSelector);
                     if(tradeBtn) {
                         tradeBtn.click();
-                        console.log("RA VIP BOT: Auto Trade Executed -> " + (isCall ? "CALL (UP)" : "PUT (DOWN)"));
+                        console.log("RA SNIPER BOT: Auto Trade Executed -> " + (isCall ? "CALL (UP)" : "PUT (DOWN)"));
                     } else {
                         var buttons = d.querySelectorAll('button');
                         for(var i=0; i<buttons.length; i++) {
@@ -315,9 +319,9 @@ def bot_script():
                 }
             }
 
-            function toggleVipPanel() {
-                var existing = d.getElementById('ra-vip-bot-panel');
-                var floatingBtn = d.getElementById('ra-vip-bot-btn');
+            function toggleSniperPanel() {
+                var existing = d.getElementById('ra-sniper-bot-panel');
+                var floatingBtn = d.getElementById('ra-sniper-bot-btn');
                 
                 if(existing) { 
                     existing.remove(); 
@@ -328,7 +332,7 @@ def bot_script():
                 if(floatingBtn) floatingBtn.style.display = 'none';
 
                 var panel = d.createElement('div');
-                panel.id = 'ra-vip-bot-panel';
+                panel.id = 'ra-sniper-bot-panel';
                 panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:305px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
 
                 renderPanelContent(panel);
@@ -343,7 +347,7 @@ def bot_script():
 
             function renderPanelContent(panel) {
                 var marketInfo = detectMarketAndPayout();
-                var floatingBtn = d.getElementById('ra-vip-bot-btn');
+                var floatingBtn = d.getElementById('ra-sniper-bot-btn');
 
                 if(activeScreen === "main") {
                     panel.innerHTML = 
@@ -353,7 +357,7 @@ def bot_script():
                                     '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
                                         '<img src="' + botMainLogo + '" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;" />' +
                                         '<div>' +
-                                            '<div style="font-size:11.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA VIP BOT</div>' +
+                                            '<div style="font-size:11.5px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
                                             '<div style="display:flex;align-items:center;gap:3px;font-size:8px;color:#22c55e;font-weight:700;">' +
                                                 '<span style="width:4px;height:4px;background:#22c55e;border-radius:50%;display:inline-block;"></span> RA COMMUNITY AI' +
                                             '</div>' +
@@ -379,11 +383,11 @@ def bot_script():
                                 '<div style="text-align:center;margin-bottom:8px;">' +
                                     '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
                                     '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastCandleSway1 3.2s infinite ease-in-out;"><div style="width:3px;height:14px;background:#22c55e;"></div><div style="width:10px;height:42px;background:#22c55e;border-radius:3px;box-shadow:0 0 18px #22c55e;"></div><div style="width:3px;height:14px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastCandleSway2 3.2s infinite ease-in-out 0.3s;"><div style="width:3px;height:14px;background:#ef4444;"></div><div style="width:10px;height:46px;background:#ef4444;border-radius:3px;box-shadow:0 0 18px #ef4444;"></div><div style="width:3px;height:14px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastCandleSway1 3.2s infinite ease-in-out 0.6s;"><div style="width:3px;height:14px;background:#eab308;"></div><div style="width:10px;height:40px;background:#eab308;border-radius:3px;box-shadow:0 0 18px #eab308;"></div><div style="width:3px;height:14px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastCandleSway2 3.2s infinite ease-in-out 0.9s;"><div style="width:3px;height:14px;background:#38bdf8;"></div><div style="width:10px;height:44px;background:#38bdf8;border-radius:3px;box-shadow:0 0 18px #38bdf8;"></div><div style="width:3px;height:14px;background:#38bdf8;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:fastCandleSway1 3.2s infinite ease-in-out 1.2s;"><div style="width:3px;height:14px;background:#a855f7;"></div><div style="width:10px;height:43px;background:#a855f7;border-radius:3px;box-shadow:0 0 18px #a855f7;"></div><div style="width:3px;height:14px;background:#a855f7;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 2.2s infinite ease-in-out;"><div style="width:3px;height:15px;background:#22c55e;"></div><div style="width:11px;height:45px;background:#22c55e;border-radius:3px;box-shadow:0 0 20px #22c55e;"></div><div style="width:3px;height:15px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway2 2.2s infinite ease-in-out 0.2s;"><div style="width:3px;height:15px;background:#ef4444;"></div><div style="width:11px;height:50px;background:#ef4444;border-radius:3px;box-shadow:0 0 20px #ef4444;"></div><div style="width:3px;height:15px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 2.2s infinite ease-in-out 0.4s;"><div style="width:3px;height:15px;background:#eab308;"></div><div style="width:11px;height:42px;background:#eab308;border-radius:3px;box-shadow:0 0 20px #eab308;"></div><div style="width:3px;height:15px;background:#eab308;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway2 2.2s infinite ease-in-out 0.6s;"><div style="width:3px;height:15px;background:#38bdf8;"></div><div style="width:11px;height:48px;background:#38bdf8;border-radius:3px;box-shadow:0 0 20px #38bdf8;"></div><div style="width:3px;height:15px;background:#38bdf8;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 2.2s infinite ease-in-out 0.8s;"><div style="width:3px;height:15px;background:#a855f7;"></div><div style="width:11px;height:46px;background:#a855f7;border-radius:3px;box-shadow:0 0 20px #a855f7;"></div><div style="width:3px;height:15px;background:#a855f7;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -421,29 +425,29 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:7px;">' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';">' + v1 + '%</div>' +
+                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:5px;margin-bottom:6px;">' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
+                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 8px ' + c1 + ';">' + v1 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
-                                        '<div style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';">' + v2 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
+                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">STABILITY</div>' +
+                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 8px ' + c2 + ';">' + v2 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';">' + v3 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
+                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">LIQUIDITY FLOW</div>' +
+                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 8px ' + c3 + ';">' + v3 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
-                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div style="width:34px;height:34px;border-radius:50%;border:2.5px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';">' + v4 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
+                                        '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">AI CONFIDENCE</div>' +
+                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 8px ' + c4 + ';">' + v4 + '%</div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:5px;font-size:7.5px;color:#cbd5e1;">' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span style="color:#22c55e;font-weight:bold;">ACTIVE (>80%)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Smart Martingale:</span><span style="color:#38bdf8;font-weight:bold;">STEP 1 ($10)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>News Guard:</span><span style="color:#10b981;font-weight:bold;">SECURE (±15m)</span></div>' +
+                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:5px;margin-bottom:4px;font-size:7px;color:#cbd5e1;">' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:1.5px;"><span>AI Confluence Filter:</span><span style="color:#22c55e;font-weight:bold;">ACTIVE (>80%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:1.5px;"><span>Smart Martingale:</span><span style="color:#38bdf8;font-weight:bold;">STEP 1 ($10)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:1.5px;"><span>News Guard:</span><span style="color:#10b981;font-weight:bold;">SECURE (±15m)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;"><span>Auto Asset Switcher:</span><span style="color:#facc15;font-weight:bold;">OPTIMIZED</span></div>' +
                                 '</div>' +
                             '</div>' +
@@ -468,8 +472,8 @@ def bot_script():
                                         '<div style="font-size:11px;font-weight:900;color:#fff;">RA LIVE SIGNAL</div>' +
                                     '</div>' +
                                     '<div style="display:flex;gap:3px;align-items:center;">' +
-                                        '<button id="all-market-check-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 5px;font-size:7.5px;font-weight:900;cursor:pointer;">ALL MARKET CHECK</button>' +
-                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 5px;font-size:7.5px;font-weight:900;cursor:pointer;">BACK</button>' +
+                                        '<button id="all-market-check-btn" style="background:#0284c7;color:#fff;border:none;border-radius:3px;padding:2px 5px;font-size:7px;font-weight:900;cursor:pointer;">ALL MARKET CHECK</button>' +
+                                        '<button id="back-to-main-btn" style="background:#475569;color:#fff;border:none;border-radius:3px;padding:2px 5px;font-size:7px;font-weight:900;cursor:pointer;">BACK</button>' +
                                         '<div id="ra-minimize-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);font-weight:bold;">—</div>' +
                                         '<div id="ra-close-btn" style="cursor:pointer;font-size:11px;color:#94a3b8;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                                     '</div>' +
@@ -493,7 +497,7 @@ def bot_script():
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
                                     '<div id="live-signal-display" style="font-size:13.5px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA VIP AI Confluence Analysis...</div>' +
+                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA SNIPER AI Confluence Analysis...</div>' +
                                     '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #d97706);color:#fff;border:none;border-radius:5px;padding:7px;font-size:10.5px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
@@ -519,28 +523,28 @@ def bot_script():
                     stopAutoExecution();
                     activeScreen = "live_signal";
                     panel.remove();
-                    toggleVipPanel();
+                    toggleSniperPanel();
                 };
 
                 var allMarketCheckBtn = d.getElementById('all-market-check-btn');
                 if(allMarketCheckBtn) allMarketCheckBtn.onclick = function() {
                     activeScreen = "all_market_check";
                     panel.remove();
-                    toggleVipPanel();
+                    toggleSniperPanel();
                 };
 
                 var backToLiveBtn = d.getElementById('back-to-live-signal-btn');
                 if(backToLiveBtn) backToLiveBtn.onclick = function() {
                     activeScreen = "live_signal";
                     panel.remove();
-                    toggleVipPanel();
+                    toggleSniperPanel();
                 };
 
                 var backMainBtn = d.getElementById('back-to-main-btn');
                 if(backMainBtn) backMainBtn.onclick = function() {
                     activeScreen = "main";
                     panel.remove();
-                    toggleVipPanel();
+                    toggleSniperPanel();
                 };
 
                 var marketSelector = d.getElementById('real-market-selector');
@@ -548,7 +552,7 @@ def bot_script():
                     marketSelector.onchange = function(e) {
                         selectedRealMarket = e.target.value;
                         panel.remove();
-                        toggleVipPanel();
+                        toggleSniperPanel();
                     };
                 }
 
@@ -690,8 +694,8 @@ def bot_script():
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:3.5px;height:62px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:21px;height:40px;background:' + candleColor + ';border-radius:3.5px;z-index:2;box-shadow:0 0 20px ' + candleColor + ';"></div>' +
+                                '<div style="width:4px;height:68px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:23px;height:45px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 22px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -774,8 +778,8 @@ def bot_script():
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:3.5px;height:62px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:21px;height:40px;background:' + candleColor + ';border-radius:3.5px;z-index:2;box-shadow:0 0 20px ' + candleColor + ';"></div>' +
+                                '<div style="width:4px;height:68px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:23px;height:45px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 22px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -810,7 +814,7 @@ def bot_script():
                 if(!laser) return;
                 laser.style.display = 'block';
                 statusLbl.innerText = "STATUS: SCANNING";
-                sigDisplay.innerText = "RA VIP AI Scanning Live Market...";
+                sigDisplay.innerText = "RA SNIPER AI Scanning Live Market...";
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
@@ -819,7 +823,7 @@ def bot_script():
                     laser.style.display = 'none';
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 96, rule: "RA VIP Liquidity Sweep & Momentum Reversal."}; })
+                    .catch(function(){ return {signal: "CALL", confidence: 96, rule: "RA SNIPER Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
@@ -830,7 +834,7 @@ def bot_script():
                         accBadge.innerText = "ACCURACY: " + confidence + "%";
                         sigDisplay.style.color = isCall ? '#22c55e' : '#ef4444';
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
-                        rulesDesc.innerText = "Rule: " + (data.rule || "RA VIP Advanced Confluence Verified.");
+                        rulesDesc.innerText = "Rule: " + (data.rule || "RA SNIPER Advanced Confluence Verified.");
 
                         setTimeout(function(){
                             if(!panel.isConnected) return;
@@ -838,7 +842,7 @@ def bot_script():
                             accBadge.innerText = "ACCURACY: --%";
                             sigDisplay.style.color = '#facc15';
                             sigDisplay.innerText = "CLICK GENERATE";
-                            rulesDesc.innerText = "Awaiting RA VIP AI Confluence Analysis...";
+                            rulesDesc.innerText = "Awaiting RA SNIPER AI Confluence Analysis...";
                             genBtn.disabled = false;
                         }, 7000);
                     });
@@ -869,7 +873,7 @@ def bot_script():
                 }
             }
 
-        } catch(e) { console.error("RA VIP BOT Error:", e); }
+        } catch(e) { console.error("RA SNIPER BOT Error:", e); }
     })();
     """
     res = make_response(js)
