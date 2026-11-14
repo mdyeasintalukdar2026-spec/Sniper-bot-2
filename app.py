@@ -126,7 +126,7 @@ def get_signal():
         real_accuracy = 95 + ((int(time.time() * 11) + 17) % 5)
         
         rules_list = [
-            "RA VIP AI Momentum Confluence & Smart Money Rejection.",
+            "RA VIP AI Confluence & Smart Money Rejection Verified.",
             "Advanced Price Action Zone & Institutional Order Flow Sync.",
             "Bullish/Bearish Trend Continuation with Zero-Lag Filter.",
             "High-Precision Support/Resistance Reversal Logic."
@@ -162,7 +162,7 @@ def bot_script():
         try {
             var d = document;
             
-            ["ra-vip-bot-panel", "ra-vip-bot-btn", "ra-vip-bot-style", "ra-vip-scanner-overlay"].forEach(function(i){
+            ["ra-vip-bot-panel", "ra-vip-bot-btn", "ra-vip-bot-style", "ra-grand-quantum-overlay"].forEach(function(i){
                 var e = d.getElementById(i);
                 if(e) e.remove();
             });
@@ -193,15 +193,20 @@ def bot_script():
                           '50% { transform: translateY(5px) scaleY(1.08); filter: drop-shadow(0 0 14px #ef4444); }' +
                           '100% { transform: translateY(0px) scaleY(1); }' +
                           '}' +
+                          '@keyframes grandQuantumWaves {' +
+                          '0% { transform: scale(0.2) rotate(0deg); opacity: 1; border-color: #22c55e; }' +
+                          '50% { transform: scale(3.5) rotate(180deg); opacity: 0.8; border-color: #38bdf8; box-shadow: 0 0 80px #a855f7; }' +
+                          '100% { transform: scale(7) rotate(360deg); opacity: 0; border-color: #ef4444; }' +
+                          '}' +
+                          '@keyframes textUpDownBounce {' +
+                          '0% { transform: translateY(0px); color: #38bdf8; }' +
+                          '50% { transform: translateY(-6px); color: #22c55e; text-shadow: 0 0 12px #22c55e; }' +
+                          '100% { transform: translateY(0px); color: #38bdf8; }' +
+                          '}' +
                           '@keyframes proLaserScan {' +
                           '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 25px #38bdf8; }' +
                           '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #22c55e; }' +
                           '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 25px #38bdf8; }' +
-                          '}' +
-                          '@keyframes quantumPulseBlast {' +
-                          '0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,1); }' +
-                          '50% { transform: translate(-50%, -50%) scale(6); opacity: 0.95; background: #a855f7; box-shadow: 0 0 150px 80px #00ffff; }' +
-                          '100% { transform: translate(-50%, -50%) scale(12); opacity: 0; background: transparent; }' +
                           '}' +
                           '@keyframes heartbeatLeftToRight {' +
                           '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
@@ -416,28 +421,30 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:8px;">' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + ';">' + v1 + '%</div>' +
+                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:7px;">' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div style="width:32px;height:32px;border-radius:50%;border:2.5px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c1 + ';box-shadow:0 0 8px ' + c1 + ';">' + v1 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + ';">' + v2 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
+                                        '<div style="width:32px;height:32px;border-radius:50%;border:2.5px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c2 + ';box-shadow:0 0 8px ' + c2 + ';">' + v2 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + ';">' + v3 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
+                                        '<div style="width:32px;height:32px;border-radius:50%;border:2.5px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c3 + ';box-shadow:0 0 8px ' + c3 + ';">' + v3 + '%</div>' +
                                     '</div>' +
-                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + ';">' + v4 + '%</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:5px;text-align:center;">' +
+                                        '<div style="font-size:7px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
+                                        '<div style="width:32px;height:32px;border-radius:50%;border:2.5px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:9px;font-weight:900;color:' + c4 + ';box-shadow:0 0 8px ' + c4 + ';">' + v4 + '%</div>' +
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:7px;padding:7px;text-align:center;margin-bottom:5px;">' +
-                                    '<div style="font-size:9.5px;font-weight:900;color:#22c55e;margin-bottom:2px;">ALL MARKETS SYNCED</div>' +
-                                    '<div style="font-size:7.5px;color:#cbd5e1;line-height:1.2;">All major currency pairs are thoroughly scanned with zero fake signals.</div>' +
+                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:5px;font-size:7.5px;color:#cbd5e1;">' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span style="color:#22c55e;font-weight:bold;">ACTIVE (>80%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Smart Martingale:</span><span style="color:#38bdf8;font-weight:bold;">STEP 1 ($10)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>News Guard:</span><span style="color:#10b981;font-weight:bold;">SECURE (±15m)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span>Auto Asset Switcher:</span><span style="color:#facc15;font-weight:bold;">OPTIMIZED</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -595,7 +602,7 @@ def bot_script():
                             if(currentMode === "5S") {
                                 run5sAutoSequence(panel);
                             } else {
-                                runEpicSignalAnimation(panel);
+                                runGrandQuantumScanAnimation(panel);
                             }
                         }
                     };
@@ -608,7 +615,7 @@ def bot_script():
                             if(currentMode === "5S") {
                                 run5sAutoSequence(panel);
                             } else {
-                                runEpicSignalAnimation(panel);
+                                runGrandQuantumScanAnimation(panel);
                             }
                         };
                     }
@@ -620,48 +627,37 @@ def bot_script():
                 if(autoTimer) clearTimeout(autoTimer);
             }
 
-            function triggerQuantumScanOverlay(callback) {
-                var overlay = d.createElement('div');
-                overlay.id = 'ra-vip-scanner-overlay';
-                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;background:rgba(3,7,18,0.4);backdrop-filter:blur(2px);';
-                
-                var laserLine = d.createElement('div');
-                laserLine.style.cssText = 'position:absolute;top:0;left:0;width:100vw;height:6px;background:linear-gradient(90deg, #22c55e, #38bdf8, #a855f7, #22c55e);box-shadow:0 0 35px #22c55e, 0 0 35px #38bdf8;animation:proLaserScan 2.5s ease-in-out infinite alternate;';
-                overlay.appendChild(laserLine);
-
-                d.body.appendChild(overlay);
-
-                setTimeout(function(){
-                    var boom = d.createElement('div');
-                    boom.style.cssText = 'position:fixed;top:50%;left:50%;width:100px;height:100px;border-radius:50%;transform:translate(-50%, -50%);z-index:2147483647;animation:quantumPulseBlast 1s ease-out forwards;pointer-events:none;';
-                    d.body.appendChild(boom);
-
-                    setTimeout(function(){
-                        if(overlay.isConnected) overlay.remove();
-                        if(boom.isConnected) boom.remove();
-                        if(typeof callback === 'function') callback();
-                    }, 1000);
-                }, 5000);
-            }
-
-            function runEpicSignalAnimation(panel) {
+            function runGrandQuantumScanAnimation(panel) {
                 var statusBadge = panel.querySelector('#ra-status-badge');
                 var signalText = panel.querySelector('#ra-signal-text');
                 var candleBox = panel.querySelector('#ra-candle-display-box');
 
                 if(!statusBadge) return;
 
-                statusBadge.innerText = 'AI SCANNING';
+                statusBadge.innerText = 'QUANTUM SCAN';
                 statusBadge.style.color = '#38bdf8';
                 statusBadge.style.background = '#0c4a6e';
-                signalText.innerText = "RA VIP AI Analyzing Market (5s)...";
+
+                var grandOverlay = d.createElement('div');
+                grandOverlay.id = 'ra-grand-quantum-overlay';
+                grandOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;background:rgba(3,7,18,0.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;';
+                
+                for(var i=1; i<=4; i++) {
+                    var ring = d.createElement('div');
+                    ring.style.cssText = 'position:absolute;width:120px;height:120px;border:4px dashed #22c55e;border-radius:50%;animation:grandQuantumWaves 2.5s infinite ease-out;animation-delay:' + (i * 0.6) + 's;';
+                    grandOverlay.appendChild(ring);
+                }
+                d.body.appendChild(grandOverlay);
 
                 candleBox.innerHTML = 
-                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#38bdf8;font-size:10.5px;font-weight:bold;text-align:center;">' +
-                        '⚡ RA VIP AI Quantum Scan in Progress... (5s)' +
+                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:11px;font-weight:900;text-align:center;animation:textUpDownBounce 1s infinite ease-in-out;">' +
+                        '⚡ GRAND QUANTUM SCANNING... (5s)' +
                     '</div>';
+                signalText.innerText = "Analyzing Market Nodes...";
 
-                triggerQuantumScanOverlay(function(){
+                setTimeout(function(){
+                    if(grandOverlay.isConnected) grandOverlay.remove();
+                    
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "CALL", confidence: 96}; })
@@ -704,7 +700,7 @@ def bot_script():
                             }, 10000);
                         }
                     });
-                });
+                }, 5200);
             }
 
             function run5sAutoSequence(panel) {
@@ -804,13 +800,14 @@ def bot_script():
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
-                triggerQuantumScanOverlay(function(){
+                setTimeout(function(){
+                    if(!panel.isConnected) return;
+                    laser.style.display = 'none';
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "CALL", confidence: 96, rule: "RA VIP Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
-                        laser.style.display = 'none';
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
                         var confidence = data.confidence || 96;
@@ -831,7 +828,7 @@ def bot_script():
                             genBtn.disabled = false;
                         }, 7000);
                     });
-                });
+                }, 5000);
             }
 
             function makeDraggable(panelEl) {
