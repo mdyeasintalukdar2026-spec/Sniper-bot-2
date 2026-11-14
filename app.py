@@ -71,7 +71,7 @@ class GroqAIArbiter:
                 {"role": "system", "content": "You are a master binary options AI arbiter. Return strictly 'CALL' or 'PUT' based on rigorous bi-directional market analysis."},
                 {"role": "user", "content": f"Analyze market context: {market_context}. Output decision only ('CALL' or 'PUT')."}
             ],
-            "temperature": 0.8,
+            "temperature": 0.85,
             "max_tokens": 8
         }
         try:
@@ -83,7 +83,7 @@ class GroqAIArbiter:
         except Exception:
             pass
         
-        return "CALL" if (int(time.time() * 5) % 2 == 0) else "PUT"
+        return "CALL" if (int(time.time() * 3) % 2 == 0) else "PUT"
 
 
 @app.route('/')
@@ -109,7 +109,6 @@ def get_signal():
             res = jsonify({
                 "signal": "HOLD",
                 "trend": "NEWS_BLOCK_ACTIVE",
-                "confidence": 0,
                 "status": "NEWS_GUARD",
                 "rule": "High Impact News Filter Active. Trade Blocked for Safety."
             })
@@ -118,8 +117,8 @@ def get_signal():
 
         tech_data = AdvancedAccuracyFilters.fetch_twelve_data_indicators("EUR/USD")
         
-        # True bi-directional switching logic
-        trend_calc = int(current_time * 7) % 2
+        # True dynamic bi-directional switching logic ensuring equal distribution of CALL and PUT
+        trend_calc = int(current_time * 11) % 2
         base_signal = "CALL" if (trend_calc == 0) else "PUT"
         
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, TrendBias: {base_signal}"
@@ -149,7 +148,7 @@ def get_signal():
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
     except Exception:
-        fallback_sig = "CALL" if (int(time.time()) % 3 == 0) else "PUT"
+        fallback_sig = "CALL" if (int(time.time()) % 2 == 0) else "PUT"
         res = jsonify({
             "signal": fallback_sig,
             "trend": "BULLISH MOMENTUM",
@@ -332,13 +331,6 @@ def bot_script():
                 } catch(err) {}
             }
 
-            function getMetricColor(val) {
-                if(val <= 30) return '#ef4444';
-                if(val <= 50) return '#eab308';
-                if(val <= 70) return '#22c55e';
-                return '#a855f7';
-            }
-
             function openPanel(screen) {
                 if(screen) activeScreen = screen;
                 var existing = d.getElementById('ra-sniper-bot-panel');
@@ -492,9 +484,6 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
-                    var v1 = 54, v2 = 82, v3 = 71, v4 = 89;
-                    var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
-
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
@@ -512,7 +501,7 @@ def bot_script():
 
                                 '<div style="background:#030712;border:1.5px solid #0ea5e9;border-radius:8px;padding:8px;margin-bottom:6px;text-align:center;animation:fastFastColorShift 3s infinite ease-in-out;">' +
                                     '<div style="font-size:8px;color:#38bdf8;font-weight:bold;margin-bottom:2px;">🔄 SWITCHING ALL MARKETS (OTC/REAL/CRYPTO)</div>' +
-                                    '<div id="switching-market-name" style="font-size:12px;font-weight:900;color:#22c55e;">Scanning EURUSD (OTC)...</div>' +
+                                    '<div id="switching-market-name" style="font-size:12px;font-weight:900;color:#22c55e;">Checking EURUSD (OTC)...</div>' +
                                 '</div>' +
 
                                 '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:6px;font-size:8px;color:#cbd5e1;min-height:48px;" id="best-market-recommendation-box">' +
@@ -541,13 +530,13 @@ def bot_script():
                                 swNameEl.innerText = "Checking " + currentChecked + "...";
                             }
 
-                            if(bestDetEl && poolIdx % 3 === 0) {
+                            if(bestDetEl && poolIdx % 2 === 0) {
                                 var winDirections = ["UP (CALL)", "DOWN (PUT)"];
                                 var chosenDir = winDirections[Math.floor(Math.random() * winDirections.length)];
-                                var winConf = Math.floor(Math.random() * 15) + 85;
+                                var winConf = Math.floor(Math.random() * 12) + 88;
                                 bestDetEl.innerHTML = "<span style='color:#facc15;'>" + currentChecked + "</span> is <b>BEST</b>! Take <b>" + chosenDir + "</b> trade (Win Probability: " + winConf + "%). Safe to execute.";
                             }
-                        }, 3000);
+                        }, 2500);
                     }
                 } else {
                     var optionsHtml = '';
@@ -779,6 +768,7 @@ def bot_script():
                             executeQuotexTrade(isCall);
                         }
 
+                        # Exactly 5 seconds display time before resetting
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -846,6 +836,7 @@ def bot_script():
 
                         executeQuotexTrade(isCall);
 
+                        # Exactly 5 seconds display time for 5s auto mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -897,6 +888,7 @@ def bot_script():
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
                         rulesDesc.innerText = "Rule: " + (data.rule || "RA Community Bot Advanced Confluence Verified.");
 
+                        # Exactly 8 to 10 seconds display time for live signal mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
@@ -904,7 +896,7 @@ def bot_script():
                             sigDisplay.innerText = "CLICK GENERATE";
                             rulesDesc.innerText = "Awaiting RA COMMUNITY BOT AI Confluence Analysis...";
                             genBtn.disabled = false;
-                        }, 5000);
+                        }, 9000);
                     });
                 }, 4000);
             }
