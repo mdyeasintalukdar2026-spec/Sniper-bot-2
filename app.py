@@ -226,12 +226,14 @@ def bot_script():
                           '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #ffffff, 0 0 25px #22c55e; }' +
                           '100% { top: 0%; opacity: 0.95; box-shadow: 0 0 35px #ffffff, 0 0 25px #38bdf8; }' +
                           '}' +
-                          '@keyframes trueSlowHeartbeatMotion {' +
-                          '0% { transform: translateX(-100%) scaleY(0.8); filter: drop-shadow(0 0 6px #ef4444); }' +
-                          '25% { transform: translateX(-50%) scaleY(1.3); filter: drop-shadow(0 0 12px #ffffff); }' +
-                          '50% { transform: translateX(0%) scaleY(0.9); filter: drop-shadow(0 0 10px #ef4444); }' +
-                          '75% { transform: translateX(50%) scaleY(1.4); filter: drop-shadow(0 0 15px #38bdf8); }' +
-                          '100% { transform: translateX(100%) scaleY(0.8); filter: drop-shadow(0 0 6px #ef4444); }' +
+                          '@keyframes scanMove {' +
+                          '0% { top: 0%; opacity: 0.8; }' +
+                          '50% { top: 100%; opacity: 1; }' +
+                          '100% { top: 0%; opacity: 0.8; }' +
+                          '}' +
+                          '@keyframes textPulse {' +
+                          '0% { opacity: 0.4; }' +
+                          '100% { opacity: 0.9; }' +
                           '}' +
                           '@keyframes textSmoothPulse {' +
                           '0% { opacity: 0.7; transform: scale(0.98); }' +
@@ -497,7 +499,7 @@ def bot_script():
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;">' + marketInfo + '</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;" id="ra-bottom-market-label">' + marketInfo + '</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;background:rgba(34,197,94,0.12);padding:2px 5px;border-radius:3px;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
@@ -641,7 +643,7 @@ def bot_script():
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;">' + detectCurrentQuotexMarket() + '</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;" id="ra-bottom-market-label">' + detectCurrentQuotexMarket() + '</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
@@ -697,8 +699,8 @@ def bot_script():
                             tmEl.innerText = hrs + ':' + mins + ':' + secs;
                         }
                         if(activeScreen === "main") {
-                            var mktLabel = panel.querySelector('span[style*="color:#38bdf8"]');
-                            if(mktLabel) mktLabel.innerText = detectMarketAndPayout();
+                            var mktLbl = d.getElementById('ra-bottom-market-label');
+                            if(mktLbl) mktLbl.innerText = detectMarketAndPayout();
                         }
                     }, 1000);
                 }
@@ -830,8 +832,8 @@ def bot_script():
                         
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">' +
-                                '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
+                                '<div style="width:5px;height:72px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:30px;height:52px;background:' + candleColor + ';border-radius:5px;z-index:2;box-shadow:0 0 30px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -862,17 +864,20 @@ def bot_script():
                 statusBadge.style.color = '#eab308';
                 statusBadge.style.background = '#422006';
 
+                # User requested Scanner Form integration for 5s Auto Mode
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#030712;border-radius:8px;overflow:hidden;box-sizing:border-box;">' +
-                        '<div style="position:absolute;top:4px;left:8px;font-size:7.5px;font-weight:900;color:#ef4444;letter-spacing:0.5px;z-index:2;">RA SINGLE HEARTBEAT SCAN</div>' +
-                        '<svg width="100%" height="45" viewBox="0 0 300 40" preserveAspectRatio="none" style="overflow:visible;">' +
-                            '<path d="M 0 20 L 50 20 L 60 4 L 70 36 L 85 10 L 95 30 L 110 20 L 170 20 L 180 6 L 190 34 L 205 12 L 215 28 L 230 20 L 300 20" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="350" style="animation: trueSlowHeartbeatMotion 3.5s linear infinite;" />' +
-                        '</svg>' +
+                    '<div class="scanner-box" style="width:100%;height:100%;background:rgba(15, 15, 25, 0.95);border:1px solid rgba(255, 0, 85, 0.4);border-radius:6px;padding:6px 10px;box-sizing:border-box;box-shadow:inset 0 0 10px rgba(255, 0, 85, 0.2);display:flex;flex-direction:column;justify-content:space-between;">' +
+                        '<div class="scan-header" style="font-size:9.5px;color:#ff0055;font-weight:bold;letter-spacing:1px;text-shadow:0 0 5px rgba(255, 0, 85, 0.5);">RA SINGLE HEARTBEAT SCAN</div>' +
+                        '<div class="scanner-screen" style="position:relative;width:100%;height:45px;background:#080810;overflow:hidden;border-radius:4px;border:1px solid rgba(0, 240, 255, 0.2);">' +
+                            '<div class="laser-line" style="position:absolute;top:0;left:0;width:100%;height:2px;background:#ff0055;box-shadow:0 0 10px #ff0055, 0 0 20px #ff0055;animation:scanMove 2s linear infinite;"></div>' +
+                            '<div class="grid-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);background-size:10px 10px;"></div>' +
+                            '<div class="matrix-text" style="position:absolute;bottom:3px;left:5px;font-size:8px;color:#00f0ff;letter-spacing:0.5px;opacity:0.7;animation:textPulse 1s ease-in-out infinite alternate;">SCANNING MARKET CONFLUENCE... [98.4%]</div>' +
+                        '</div>' +
                     '</div>';
 
                 signalText.style.fontSize = '9.5px';
                 signalText.style.color = '#eab308';
-                signalText.innerText = "Slow Heartbeat Confluence Sync...";
+                signalText.innerText = "Scanning 5s Confluence Sync...";
 
                 fetch(renderServerUrl + '/signal?t=' + Date.now())
                 .then(function(r){ return r.json(); })
@@ -895,8 +900,8 @@ def bot_script():
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">' +
-                                '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
+                                '<div style="width:5px;height:72px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:30px;height:52px;background:' + candleColor + ';border-radius:5px;z-index:2;box-shadow:0 0 30px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -917,8 +922,8 @@ def bot_script():
                             } else {
                                 openPanel("main");
                             }
-                        }, 5000);
-                    }, 4000);
+                        }, 7500);
+                    }, 5000);
                 });
             }
 
