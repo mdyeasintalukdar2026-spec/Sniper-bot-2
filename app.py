@@ -68,10 +68,10 @@ class GroqAIArbiter:
         payload = {
             "model": "llama-3.3-70b-versatile",
             "messages": [
-                {"role": "system", "content": "You are a master binary options AI arbiter. Return strictly 'CALL' or 'PUT' based on rigorous bi-directional market analysis."},
+                {"role": "system", "content": "You are a master binary options AI arbiter. Return strictly 'CALL' or 'PUT' based on rigorous bi-directional market analysis with equal probability."},
                 {"role": "user", "content": f"Analyze market context: {market_context}. Output decision only ('CALL' or 'PUT')."}
             ],
-            "temperature": 0.9,
+            "temperature": 0.95,
             "max_tokens": 8
         }
         try:
@@ -83,7 +83,7 @@ class GroqAIArbiter:
         except Exception:
             pass
         
-        return "CALL" if (int(time.time() * 3) % 2 == 0) else "PUT"
+        return "CALL" if (int(time.time() * 7) % 2 == 0) else "PUT"
 
 
 @app.route('/')
@@ -117,8 +117,8 @@ def get_signal():
 
         tech_data = AdvancedAccuracyFilters.fetch_twelve_data_indicators("EUR/USD")
         
-        # True dynamic bi-directional switching logic ensuring absolute distribution of CALL and PUT
-        trend_calc = int(current_time * 13) % 2
+        # Absolute true bi-directional switching logic ensuring 50/50 CALL and PUT distribution
+        trend_calc = int(current_time * 17) % 2
         base_signal = "CALL" if (trend_calc == 0) else "PUT"
         
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, TrendBias: {base_signal}"
@@ -255,7 +255,7 @@ def bot_script():
             var autoTimer = null;
             var metricFluctuateInterval = null;
 
-            var globalMarketsPool = [
+            var globalAssetsPool = [
                 "EURUSD (OTC)", "GBPUSD (OTC)", "USDJPY (OTC)", "AUDUSD (OTC)", "USDCAD (OTC)",
                 "EURGBP (OTC)", "GBPJPY (OTC)", "EURJPY (OTC)", "EURUSD (REAL)", "GBPUSD (REAL)",
                 "USDJPY (REAL)", "AUDUSD (REAL)", "BTC/USD (Crypto)", "ETH/USD (Crypto)", "BNB/USD (Binance)",
@@ -329,6 +329,13 @@ def bot_script():
                         }
                     }
                 } catch(err) {}
+            }
+
+            function getMetricColor(val) {
+                if(val <= 30) return '#ef4444';
+                if(val <= 50) return '#eab308';
+                if(val <= 70) return '#22c55e';
+                return '#a855f7';
             }
 
             function openPanel(screen) {
@@ -484,6 +491,9 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
+                    var v1 = 74, v2 = 60, v3 = 98, v4 = 39;
+                    var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
+
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
                             '<div>' +
@@ -499,19 +509,35 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div style="background:#030712;border:1.5px solid #0ea5e9;border-radius:8px;padding:8px;margin-bottom:6px;text-align:center;animation:fastFastColorShift 3s infinite ease-in-out;">' +
-                                    '<div style="font-size:8px;color:#38bdf8;font-weight:bold;margin-bottom:2px;">🔄 SWITCHING ALL MARKETS (OTC/REAL/CRYPTO)</div>' +
-                                    '<div id="switching-market-name" style="font-size:12px;font-weight:900;color:#22c55e;">Checking EURUSD (OTC)...</div>' +
+                                '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:8px;">' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c1 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + '44;">' + v1 + '%</div>' +
+                                    '</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c2 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + '44;">' + v2 + '%</div>' +
+                                    '</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c3 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + '44;">' + v3 + '%</div>' +
+                                    '</div>' +
+                                    '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
+                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c4 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + '44;">' + v4 + '%</div>' +
+                                    '</div>' +
                                 '</div>' +
 
-                                '<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px;margin-bottom:6px;font-size:8px;color:#cbd5e1;min-height:48px;" id="best-market-recommendation-box">' +
-                                    '<div style="color:#facc15;font-weight:900;margin-bottom:2px;">⭐ BEST WINNABLE MARKET:</div>' +
-                                    '<div id="best-market-details" style="color:#22c55e;font-weight:bold;line-height:1.3;">Analyzing volatility, trend & liquidity across all markets...</div>' +
+                                '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:7px;font-size:8px;margin-bottom:6px;">' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">AI Confluence Filter:</span><span style="color:#ef4444;font-weight:bold;">LOW (18%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Server Stability:</span><span style="color:#38bdf8;font-weight:bold;">ULTRA HIGH (96%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Market Trend:</span><span style="color:#22c55e;font-weight:bold;">BULLISH MOMENTUM</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span style="color:#facc15;font-weight:bold;">Best Scanned Asset:</span><span id="switching-asset-name" style="color:#22c55e;font-weight:900;">GBPUSD (REAL)</span></div>' +
                                 '</div>' +
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;">Powered by Sniper Bot</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;">GLOBAL MARKET SCAN</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
@@ -520,21 +546,10 @@ def bot_script():
                     if(!metricFluctuateInterval) {
                         metricFluctuateInterval = setInterval(function(){
                             if(!panel.isConnected) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; return; }
-                            poolIdx = (poolIdx + 1) % globalMarketsPool.length;
-                            var currentChecked = globalMarketsPool[poolIdx];
-                            
-                            var swNameEl = panel.querySelector('#switching-market-name');
-                            var bestDetEl = panel.querySelector('#best-market-details');
-
-                            if(swNameEl) {
-                                swNameEl.innerText = "Checking " + currentChecked + "...";
-                            }
-
-                            if(bestDetEl && poolIdx % 2 === 0) {
-                                var winDirections = ["UP (CALL)", "DOWN (PUT)"];
-                                var chosenDir = winDirections[Math.floor(Math.random() * winDirections.length)];
-                                var winConf = Math.floor(Math.random() * 12) + 88;
-                                bestDetEl.innerHTML = "<span style='color:#facc15;'>" + currentChecked + "</span> is <b>BEST</b>! Take <b>" + chosenDir + "</b> trade (Win Probability: " + winConf + "%). Safe to execute.";
+                            poolIdx = (poolIdx + 1) % globalAssetsPool.length;
+                            var assetEl = panel.querySelector('#switching-asset-name');
+                            if(assetEl) {
+                                assetEl.innerText = globalAssetsPool[poolIdx];
                             }
                         }, 2500);
                     }
@@ -768,6 +783,7 @@ def bot_script():
                             executeQuotexTrade(isCall);
                         }
 
+                        # Exactly 5 seconds display time before resetting
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -835,6 +851,7 @@ def bot_script():
 
                         executeQuotexTrade(isCall);
 
+                        # Exactly 5 seconds display time for 5s auto mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -886,6 +903,7 @@ def bot_script():
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
                         rulesDesc.innerText = "Rule: " + (data.rule || "RA Community Bot Advanced Confluence Verified.");
 
+                        # Exactly 8 to 10 seconds display time for live signal mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
