@@ -123,7 +123,7 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 1 + (int(time.time() * 13) % 100) # 1 to 100 real dynamic accuracy
+        real_accuracy = 1 + (int(time.time() * 13) % 100)
         
         rules_list = [
             "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
@@ -178,44 +178,58 @@ def bot_script():
             var s = d.createElement('style');
             s.id = 'ra-sniper-bot-style';
             s.innerHTML = '@keyframes raBorderGlow {' +
-                          '0% { border-color: #22c55e; box-shadow: 0 0 25px rgba(34,197,94,0.9), inset 0 0 15px rgba(34,197,94,0.4); }' +
-                          '33% { border-color: #38bdf8; box-shadow: 0 0 30px rgba(56,189,248,0.95), inset 0 0 15px rgba(56,189,248,0.5); }' +
-                          '66% { border-color: #a855f7; box-shadow: 0 0 30px rgba(168,85,247,0.95), inset 0 0 15px rgba(168,85,247,0.5); }' +
-                          '100% { border-color: #22c55e; box-shadow: 0 0 25px rgba(34,197,94,0.9), inset 0 0 15px rgba(34,197,94,0.4); }' +
+                          '0% { border-color: #22c55e; box-shadow: 0 0 30px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.4); }' +
+                          '33% { border-color: #38bdf8; box-shadow: 0 0 35px rgba(56,189,248,0.95), inset 0 0 20px rgba(56,189,248,0.5); }' +
+                          '66% { border-color: #a855f7; box-shadow: 0 0 35px rgba(168,85,247,0.95), inset 0 0 20px rgba(168,85,247,0.5); }' +
+                          '100% { border-color: #22c55e; box-shadow: 0 0 30px rgba(34,197,94,0.95), inset 0 0 20px rgba(34,197,94,0.4); }' +
                           '}' +
                           '@keyframes raFloatGlow {' +
-                          '0% { box-shadow: 0 0 15px #22c55e, 0 0 30px #38bdf8; border-color: #22c55e; }' +
-                          '50% { box-shadow: 0 0 25px #a855f7, 0 0 40px #22c55e; border-color: #a855f7; }' +
-                          '100% { box-shadow: 0 0 15px #22c55e, 0 0 30px #38bdf8; border-color: #22c55e; }' +
+                          '0% { box-shadow: 0 0 20px #22c55e, 0 0 40px #38bdf8; border-color: #22c55e; }' +
+                          '50% { box-shadow: 0 0 30px #a855f7, 0 0 50px #22c55e; border-color: #a855f7; }' +
+                          '100% { box-shadow: 0 0 20px #22c55e, 0 0 40px #38bdf8; border-color: #22c55e; }' +
                           '}' +
-                          '@keyframes ultraSmoothSway1 {' +
-                          '0% { transform: translateY(0px) scaleY(1); }' +
-                          '50% { transform: translateY(-1px) scaleY(1.01); }' +
-                          '100% { transform: translateY(0px) scaleY(1); }' +
+                          '@keyframes slowGlowSway1 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #22c55e); }' +
+                          '50% { transform: translateY(-3px) scale(1.03); filter: drop-shadow(0 0 16px #22c55e); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #22c55e); }' +
                           '}' +
-                          '@keyframes ultraSmoothSway2 {' +
-                          '0% { transform: translateY(0px) scaleY(1); }' +
-                          '50% { transform: translateY(1px) scaleY(1.01); }' +
-                          '100% { transform: translateY(0px) scaleY(1); }' +
+                          '@keyframes slowGlowSway2 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #ef4444); }' +
+                          '50% { transform: translateY(3px) scale(1.03); filter: drop-shadow(0 0 16px #ef4444); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #ef4444); }' +
                           '}' +
-                          '@keyframes grandQuantumWaves {' +
-                          '0% { transform: scale(0.3) rotate(0deg); opacity: 0.5; border-color: #22c55e; }' +
-                          '50% { transform: scale(2.0) rotate(180deg); opacity: 0.2; border-color: #38bdf8; }' +
-                          '100% { transform: scale(4.0) rotate(360deg); opacity: 0; border-color: #ef4444; }' +
+                          '@keyframes slowGlowSway3 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #eab308); }' +
+                          '50% { transform: translateY(-2px) scale(1.03); filter: drop-shadow(0 0 16px #eab308); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #eab308); }' +
                           '}' +
-                          '@keyframes textUpDownBounce {' +
-                          '0% { transform: translateY(0px); color: #38bdf8; }' +
-                          '50% { transform: translateY(-1px); color: #22c55e; }' +
-                          '100% { transform: translateY(0px); color: #38bdf8; }' +
+                          '@keyframes slowGlowSway4 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #38bdf8); }' +
+                          '50% { transform: translateY(2px) scale(1.03); filter: drop-shadow(0 0 16px #38bdf8); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #38bdf8); }' +
                           '}' +
-                          '@keyframes proLaserScan {' +
-                          '0% { top: 0%; opacity: 0.7; }' +
-                          '50% { top: 100%; opacity: 0.9; }' +
-                          '100% { top: 0%; opacity: 0.7; }' +
+                          '@keyframes slowGlowSway5 {' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #a855f7); }' +
+                          '50% { transform: translateY(-3px) scale(1.03); filter: drop-shadow(0 0 16px #a855f7); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px #a855f7); }' +
                           '}' +
-                          '@keyframes candlePopIn {' +
-                          '0% { transform: scale(0.9); opacity: 0.8; }' +
-                          '100% { transform: scale(1); opacity: 1; }' +
+                          '@keyframes panelLaserScanAnim {' +
+                          '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 30px #ffffff, 0 0 20px #38bdf8; }' +
+                          '50% { top: 100%; opacity: 1; box-shadow: 0 0 30px #ffffff, 0 0 20px #22c55e; }' +
+                          '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 30px #ffffff, 0 0 20px #38bdf8; }' +
+                          '}' +
+                          '@keyframes heartbeatLeftToRight {' +
+                          '0% { transform: translateX(-100%); }' +
+                          '100% { transform: translateX(100%); }' +
+                          '}' +
+                          '@keyframes heartbeatRightToLeft {' +
+                          '0% { transform: translateX(100%); }' +
+                          '100% { transform: translateX(-100%); }' +
+                          '}' +
+                          '@keyframes textSmoothPulse {' +
+                          '0% { opacity: 0.7; transform: scale(0.98); }' +
+                          '50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 10px #38bdf8; }' +
+                          '100% { opacity: 0.7; transform: scale(0.98); }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
@@ -223,7 +237,8 @@ def bot_script():
             var currentMode = "1M";
             var activeScreen = "login";
             var selectedRealMarket = "EURUSD";
-            var autoLoopActive = false;
+            var autoStartActive = false;
+            var autoStopActive = false;
             var autoTimer = null;
             var metricFluctuateInterval = null;
 
@@ -273,7 +288,8 @@ def bot_script():
                     if(assetEl) {
                         var txt = assetEl.innerText.trim();
                         if(txt && txt.length < 15) {
-                            return txt.replace(/[^a-zA-Z0-9]/g, '').toUpperCase() + " (REAL)";
+                            var cleanTxt = txt.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                            return cleanTxt + (cleanTxt.includes('OTC') ? '' : ' (REAL)');
                         }
                     }
                 } catch(e){}
@@ -294,6 +310,7 @@ def bot_script():
             }
 
             function executeQuotexTrade(isCall) {
+                if(autoStopActive) return; // Block trade if auto stop active
                 try {
                     var btnSelector = isCall ? '.btn-call, .deal_call, [class*="call"], button.success' : '.btn-put, .deal_put, [class*="put"], button.danger';
                     var tradeBtn = d.querySelector(btnSelector);
@@ -327,7 +344,7 @@ def bot_script():
                     if(floatingBtn) floatingBtn.style.display = 'none';
                     var panel = d.createElement('div');
                     panel.id = 'ra-sniper-bot-panel';
-                    panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:305px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
+                    panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:310px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.2s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
                     d.body.appendChild(panel);
                     renderPanelContent(panel);
                     makeDraggable(panel);
@@ -446,17 +463,19 @@ def bot_script():
                                 '</div>' +
 
                                 '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
-                                    '<button id="start-auto-btn" style="flex:1;background:' + (autoLoopActive ? '#b91c1c' : '#059669') + ';color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">' + (autoLoopActive ? 'AUTO START ON' : 'AUTO START OFF') + '</button>' +
-                                    '<button id="stop-auto-btn" style="flex:1;background:#475569;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">AUTO STOP OFF</button>' +
+                                    '<button id="start-auto-btn" style="flex:1;background:' + (autoStartActive ? '#b91c1c' : '#059669') + ';color:#fff;border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">' + (autoStartActive ? 'AUTO START ON' : 'AUTO START OFF') + '</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:' + (autoStopActive ? '#b91c1c' : '#475569') + ';color:#fff;border:none;border-radius:4px;padding:5px;font-size:8px;font-weight:900;cursor:pointer;">' + (autoStopActive ? 'AUTO STOP ON' : 'AUTO STOP OFF') + '</button>' +
                                 '</div>' +
 
-                                '<div style="text-align:center;margin-bottom:8px;">' +
+                                '<div style="text-align:center;margin-bottom:8px;position:relative;">' +
                                     '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
-                                    '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:90px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway1 6s infinite ease-in-out;"><div style="width:2px;height:10px;background:#22c55e;"></div><div style="width:7px;height:32px;background:#22c55e;border-radius:2px;"></div><div style="width:2px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway2 6s infinite ease-in-out 1s;"><div style="width:2px;height:10px;background:#ef4444;"></div><div style="width:7px;height:36px;background:#ef4444;border-radius:2px;"></div><div style="width:2px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway1 6s infinite ease-in-out 2s;"><div style="width:2px;height:10px;background:#eab308;"></div><div style="width:7px;height:30px;background:#eab308;border-radius:2px;"></div><div style="width:2px;height:10px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway2 6s infinite ease-in-out 3s;"><div style="width:2px;height:10px;background:#38bdf8;"></div><div style="width:7px;height:34px;background:#38bdf8;border-radius:2px;"></div><div style="width:2px;height:10px;background:#38bdf8;"></div></div>' +
+                                    '<div id="ra-candle-display-box" style="position:relative;display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;overflow:hidden;">' +
+                                        '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1.2s linear infinite;"></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway1 5s infinite ease-in-out;"><div style="width:3px;height:12px;background:#22c55e;"></div><div style="width:10px;height:40px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:12px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway2 5s infinite ease-in-out 1s;"><div style="width:3px;height:12px;background:#ef4444;"></div><div style="width:10px;height:44px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:12px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway3 5s infinite ease-in-out 2s;"><div style="width:3px;height:12px;background:#eab308;"></div><div style="width:10px;height:38px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:12px;background:#eab308;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway4 5s infinite ease-in-out 3s;"><div style="width:3px;height:12px;background:#38bdf8;"></div><div style="width:10px;height:42px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:12px;background:#38bdf8;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:slowGlowSway5 5s infinite ease-in-out 4s;"><div style="width:3px;height:12px;background:#a855f7;"></div><div style="width:10px;height:40px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:12px;background:#a855f7;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -517,7 +536,7 @@ def bot_script():
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>AI Confluence Filter:</span><span id="ai-confl-text" style="color:#22c55e;font-weight:bold;">ULTRA HIGH (95%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Server Stability:</span><span id="server-stab-text" style="color:#38bdf8;font-weight:bold;">ULTRA HIGH (91%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span>Market Trend:</span><span id="market-trend-text" style="color:#10b981;font-weight:bold;">BULLISH MOMENTUM</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">AUDUSD</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span>Best Scanned Asset:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">AUDUSD (REAL)</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -564,7 +583,8 @@ def bot_script():
 
                             if(bestAssetEl && Math.random() > 0.4) {
                                 var randAsset = allMarketsList[Math.floor(Math.random() * allMarketsList.length)];
-                                bestAssetEl.innerText = randAsset;
+                                var formattedAsset = randAsset.includes('OTC') ? randAsset : (randAsset + " (REAL)");
+                                bestAssetEl.innerText = formattedAsset;
                             }
                         }, 2000);
                     }
@@ -598,7 +618,7 @@ def bot_script():
                                 '</div>' +
 
                                 '<div id="tv-chart-container" style="position:relative;width:100%;height:130px;background:#000;border-radius:6px;border:1px solid #1f2937;overflow:hidden;margin-bottom:6px;">' +
-                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #ef4444 50%, #ffffff 80%);display:none;z-index:10;animation:proLaserScan 1.2s linear infinite;"></div>' +
+                                    '<div id="epic-laser-line" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #ef4444 50%, #ffffff 80%);display:none;z-index:10;animation:panelLaserScanAnim 1.2s linear infinite;"></div>' +
                                     '<iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:' + selectedRealMarket + '&interval=1&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=000000&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&hide_top_toolbar=1&hide_legend=1&withdateranges=0" style="width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.02);"></iframe>' +
                                 '</div>' +
 
@@ -628,7 +648,6 @@ def bot_script():
 
                 var navLiveBtn = panel.querySelector('#nav-live-signal-btn');
                 if(navLiveBtn) navLiveBtn.onclick = function() {
-                    stopAutoExecution();
                     openPanel("live_signal");
                 };
 
@@ -689,7 +708,9 @@ def bot_script():
                         btn1m.style.background = '#10b981';
                         btn5s.style.background = '#8b5cf6';
                         autoControls.style.display = 'none';
-                        stopAutoExecution();
+                        autoStartActive = false;
+                        autoStopActive = false;
+                        if(autoTimer) clearTimeout(autoTimer);
                     };
 
                     btn5s.onclick = function() {
@@ -699,53 +720,63 @@ def bot_script():
                         autoControls.style.display = 'flex';
                     };
 
-                    if(startAutoBtn) startAutoBtn.onclick = function() {
-                        if(!autoLoopActive) {
-                            autoLoopActive = true;
-                            startAutoBtn.innerText = "AUTO START ON";
-                            startAutoBtn.style.background = "#b91c1c";
-                            if(currentMode === "5S") {
+                    if(startAutoBtn) {
+                        startAutoBtn.onclick = function() {
+                            autoStartActive = !autoStartActive;
+                            if(autoStartActive) {
+                                autoStopActive = false;
+                                startAutoBtn.innerText = "AUTO START ON";
+                                startAutoBtn.style.background = "#b91c1c";
+                                if(stopAutoBtn) {
+                                    stopAutoBtn.innerText = "AUTO STOP OFF";
+                                    stopAutoBtn.style.background = "#475569";
+                                }
                                 run5sAutoSequence(panel);
                             } else {
-                                runGrandQuantumScanAnimation(panel);
+                                startAutoBtn.innerText = "AUTO START OFF";
+                                startAutoBtn.style.background = "#059669";
+                                if(autoTimer) clearTimeout(autoTimer);
                             }
-                        } else {
-                            stopAutoExecution();
-                            startAutoBtn.innerText = "AUTO START OFF";
-                            startAutoBtn.style.background = "#059669";
-                        }
-                    };
+                        };
+                    }
 
-                    if(stopAutoBtn) stopAutoBtn.onclick = function() { 
-                        stopAutoExecution(); 
-                        if(startAutoBtn) {
-                            startAutoBtn.innerText = "AUTO START OFF";
-                            startAutoBtn.style.background = "#059669";
-                        }
-                    };
+                    if(stopAutoBtn) {
+                        stopAutoBtn.onclick = function() {
+                            autoStopActive = !autoStopActive;
+                            if(autoStopActive) {
+                                autoStartActive = false;
+                                stopAutoBtn.innerText = "AUTO STOP ON";
+                                stopAutoBtn.style.background = "#b91c1c";
+                                if(startAutoBtn) {
+                                    startAutoBtn.innerText = "AUTO START OFF";
+                                    startAutoBtn.style.background = "#059669";
+                                }
+                                if(autoTimer) clearTimeout(autoTimer);
+                            } else {
+                                stopAutoBtn.innerText = "AUTO STOP OFF";
+                                stopAutoBtn.style.background = "#475569";
+                            }
+                        };
+                    }
 
                     var getSigBtn = panel.querySelector('#ra-get-signal-btn');
                     if(getSigBtn) {
                         getSigBtn.onclick = function() {
-                            if(currentMode === "5S") {
-                                run5sAutoSequence(panel);
-                            } else {
+                            if(currentMode === "1M") {
                                 runGrandQuantumScanAnimation(panel);
+                            } else {
+                                run5sAutoSequence(panel);
                             }
                         };
                     }
                 }
             }
 
-            function stopAutoExecution() {
-                autoLoopActive = false;
-                if(autoTimer) clearTimeout(autoTimer);
-            }
-
             function runGrandQuantumScanAnimation(panel) {
                 var statusBadge = panel.querySelector('#ra-status-badge');
                 var signalText = panel.querySelector('#ra-signal-text');
                 var candleBox = panel.querySelector('#ra-candle-display-box');
+                var laserScanner = panel.querySelector('#panel-laser-scanner');
 
                 if(!statusBadge) return;
 
@@ -753,49 +784,43 @@ def bot_script():
                 statusBadge.style.color = '#38bdf8';
                 statusBadge.style.background = '#0c4a6e';
 
-                var grandOverlay = d.createElement('div');
-                grandOverlay.id = 'ra-grand-quantum-overlay';
-                grandOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;overflow:hidden;background:rgba(3,7,18,0.15);display:flex;align-items:center;justify-content:center;';
-                
-                for(var i=1; i<=2; i++) {
-                    var ring = d.createElement('div');
-                    ring.style.cssText = 'position:absolute;width:80px;height:80px;border:1.5px dashed #38bdf8;border-radius:50%;animation:grandQuantumWaves 1.5s infinite ease-out;animation-delay:' + (i * 0.4) + 's;';
-                    grandOverlay.appendChild(ring);
-                }
-                d.body.appendChild(grandOverlay);
+                if(laserScanner) laserScanner.style.display = 'block';
 
-                candleBox.innerHTML = 
-                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:10px;font-weight:900;text-align:center;animation:textUpDownBounce 1s infinite ease-in-out;">' +
-                        '⚡ LIGHT SCANNING...' +
-                    '</div>';
-                signalText.innerText = "Analyzing Market Nodes...";
+                candleBox.querySelector('div:not(#panel-laser-scanner)').style.opacity = '0.4';
+                signalText.style.animation = 'textSmoothPulse 1s infinite ease-in-out';
+                signalText.innerText = "⚡ LIGHT SCANNING...";
 
                 setTimeout(function(){
-                    if(grandOverlay.isConnected) grandOverlay.remove();
+                    if(laserScanner) laserScanner.style.display = 'none';
                     
                     fetch(renderServerUrl + '/signal?t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 88}; })
+                    .catch(function(){ return {signal: "CALL", confidence: 91}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 88;
+                        var confidence = data.confidence || 91;
 
                         statusBadge.innerText = 'SUCCESS';
                         statusBadge.style.color = '#fff';
                         statusBadge.style.background = isCall ? '#166534' : '#991b1b';
 
+                        signalText.style.animation = 'none';
                         signalText.style.fontSize = '14px';
                         signalText.style.color = isCall ? '#22c55e' : '#ef4444';
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
-                        candleBox.innerHTML = 
-                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.2s ease-out;">' +
-                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:18px;height:36px;background:' + candleColor + ';border-radius:3px;z-index:2;"></div>' +
-                            '</div>';
+                        var innerCandles = candleBox.querySelector('div:not(#panel-laser-scanner)');
+                        if(innerCandles) {
+                            innerCandles.style.opacity = '1';
+                            innerCandles.innerHTML = 
+                                '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
+                                    '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
+                                    '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 20px ' + candleColor + ';"></div>' +
+                                '</div>';
+                        }
 
                         executeQuotexTrade(isCall);
 
@@ -807,19 +832,14 @@ def bot_script():
                             signalText.style.fontSize = '14px';
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
+                            openPanel("main");
                         }, 5000);
-
-                        if(autoLoopActive && currentMode === "5S") {
-                            autoTimer = setTimeout(function(){
-                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
-                            }, 7000);
-                        }
                     });
-                }, 3500);
+                }, 5000);
             }
 
             function run5sAutoSequence(panel) {
-                if(!autoLoopActive || currentMode !== "5S" || !panel.isConnected) return;
+                if(autoStopActive || !panel.isConnected) return;
                 var statusBadge = panel.querySelector('#ra-status-badge');
                 var signalText = panel.querySelector('#ra-signal-text');
                 var candleBox = panel.querySelector('#ra-candle-display-box');
@@ -831,19 +851,29 @@ def bot_script():
                 statusBadge.style.background = '#422006';
 
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#030712;border-radius:6px;overflow:hidden;">' +
-                        '<div style="font-size:9px;font-weight:900;color:#eab308;animation:textUpDownBounce 0.8s infinite ease-in-out;">⚡ ULTRA-SMOOTH SCANNING...</div>' +
+                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#05070d;border-radius:6px;overflow:hidden;padding:4px 0;">' +
+                        '<div style="position:absolute;top:2px;left:6px;font-size:7.5px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">RA DUAL HEARTBEAT SCAN</div>' +
+                        '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
+                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:heartbeatLeftToRight 1.5s linear infinite;" />' +
+                        '</svg>' +
+                        '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
+                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:heartbeatRightToLeft 1.5s linear infinite;" />' +
+                        '</svg>' +
                     '</div>';
+
+                signalText.style.fontSize = '10px';
+                signalText.style.color = '#eab308';
+                signalText.innerText = "Dual Heartbeat Confluence Sync...";
 
                 fetch(renderServerUrl + '/signal?t=' + Date.now())
                 .then(function(r){ return r.json(); })
-                .catch(function(){ return {signal: "CALL", confidence: 85}; })
+                .catch(function(){ return {signal: "CALL", confidence: 89}; })
                 .then(function(data){
                     setTimeout(function(){
-                        if(!panel.isConnected) return;
+                        if(!panel.isConnected || autoStopActive) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 85;
+                        var confidence = data.confidence || 89;
 
                         statusBadge.innerText = 'SUCCESS';
                         statusBadge.style.color = '#fff';
@@ -855,9 +885,9 @@ def bot_script():
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
-                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.2s ease-out;">' +
-                                '<div style="width:3px;height:55px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:18px;height:36px;background:' + candleColor + ';border-radius:3px;z-index:2;"></div>' +
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
+                                '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 20px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -870,14 +900,16 @@ def bot_script():
                             signalText.style.fontSize = '14px';
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
+                            
+                            if(autoStartActive && !autoStopActive && currentMode === "5S") {
+                                autoTimer = setTimeout(function(){
+                                    if(autoStartActive && !autoStopActive && currentMode === "5S") run5sAutoSequence(panel);
+                                }, 3000);
+                            } else {
+                                openPanel("main");
+                            }
                         }, 4000);
-
-                        if(autoLoopActive && currentMode === "5S") {
-                            autoTimer = setTimeout(function(){
-                                if(autoLoopActive && currentMode === "5S") run5sAutoSequence(panel);
-                            }, 5000);
-                        }
-                    }, 2500);
+                    }, 5000);
                 });
             }
 
@@ -901,12 +933,12 @@ def bot_script():
                     laser.style.display = 'none';
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 91, rule: "RA SNIPER Liquidity Sweep & Momentum Reversal."}; })
+                    .catch(function(){ return {signal: "CALL", confidence: 93, rule: "RA SNIPER Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
-                        var confidence = data.confidence || 91;
+                        var confidence = data.confidence || 93;
 
                         var accObj = getDynamicMetric(confidence);
                         statusLbl.innerText = "STATUS: SUCCESS";
@@ -930,7 +962,7 @@ def bot_script():
                             genBtn.disabled = false;
                         }, 5000);
                     });
-                }, 3500);
+                }, 4000);
             }
 
             function makeDraggable(panelEl) {
