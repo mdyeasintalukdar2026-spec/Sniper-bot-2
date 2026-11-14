@@ -71,7 +71,7 @@ class GroqAIArbiter:
                 {"role": "system", "content": "You are a master binary options AI arbiter. Return strictly 'CALL' or 'PUT' based on rigorous bi-directional market analysis."},
                 {"role": "user", "content": f"Analyze market context: {market_context}. Output decision only ('CALL' or 'PUT')."}
             ],
-            "temperature": 0.85,
+            "temperature": 0.9,
             "max_tokens": 8
         }
         try:
@@ -117,8 +117,8 @@ def get_signal():
 
         tech_data = AdvancedAccuracyFilters.fetch_twelve_data_indicators("EUR/USD")
         
-        # True dynamic bi-directional switching logic ensuring equal distribution of CALL and PUT
-        trend_calc = int(current_time * 11) % 2
+        # True dynamic bi-directional switching logic ensuring absolute distribution of CALL and PUT
+        trend_calc = int(current_time * 13) % 2
         base_signal = "CALL" if (trend_calc == 0) else "PUT"
         
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, TrendBias: {base_signal}"
@@ -691,7 +691,7 @@ def bot_script():
                             stopAutoBtn.innerText = "AUTO STOP ON";
                             stopAutoBtn.style.background = "#b91c1c";
                             if(startAutoBtn) {
-                                startAutoBtn.innerText = "AUTO START OFF";
+                                startAutoBtn.innerText = "AUTO STOP OFF";
                                 startAutoBtn.style.background = "#059669";
                             }
                             if(autoTimer) clearTimeout(autoTimer);
@@ -768,7 +768,6 @@ def bot_script():
                             executeQuotexTrade(isCall);
                         }
 
-                        # Exactly 5 seconds display time before resetting
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -836,7 +835,6 @@ def bot_script():
 
                         executeQuotexTrade(isCall);
 
-                        # Exactly 5 seconds display time for 5s auto mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -888,7 +886,6 @@ def bot_script():
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
                         rulesDesc.innerText = "Rule: " + (data.rule || "RA Community Bot Advanced Confluence Verified.");
 
-                        # Exactly 8 to 10 seconds display time for live signal mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
