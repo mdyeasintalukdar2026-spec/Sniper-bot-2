@@ -225,10 +225,12 @@ def bot_script():
                           '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #ffffff, 0 0 25px #22c55e; }' +
                           '100% { top: 0%; opacity: 0.95; box-shadow: 0 0 35px #ffffff, 0 0 25px #38bdf8; }' +
                           '}' +
-                          '@keyframes singleHeartbeatAnim {' +
-                          '0% { transform: translateX(-100%); filter: drop-shadow(0 0 8px #ef4444); }' +
-                          '50% { filter: drop-shadow(0 0 16px #ffffff); }' +
-                          '100% { transform: translateX(100%); filter: drop-shadow(0 0 8px #ef4444); }' +
+                          '@keyframes trueSlowHeartbeatMotion {' +
+                          '0% { transform: translateX(-100%) scaleY(0.8); filter: drop-shadow(0 0 6px #ef4444); }' +
+                          '25% { transform: translateX(-50%) scaleY(1.3); filter: drop-shadow(0 0 12px #ffffff); }' +
+                          '50% { transform: translateX(0%) scaleY(0.9); filter: drop-shadow(0 0 10px #ef4444); }' +
+                          '75% { transform: translateX(50%) scaleY(1.4); filter: drop-shadow(0 0 15px #38bdf8); }' +
+                          '100% { transform: translateX(100%) scaleY(0.8); filter: drop-shadow(0 0 6px #ef4444); }' +
                           '}' +
                           '@keyframes textSmoothPulse {' +
                           '0% { opacity: 0.7; transform: scale(0.98); }' +
@@ -799,12 +801,6 @@ def bot_script():
 
                 if(laserScanner) laserScanner.style.display = 'block';
 
-                // Keep candles fully visible (no black/dimming)
-                var candleChildren = candleBox.querySelectorAll('div:not(#panel-laser-scanner)');
-                for(var i=0; i<candleChildren.length; i++) {
-                    candleChildren[i].style.opacity = '1';
-                }
-
                 signalText.style.animation = 'textSmoothPulse 0.8s infinite ease-in-out';
                 signalText.innerText = "⚡ MARKET SCANNING...";
 
@@ -830,15 +826,13 @@ def bot_script():
                         signalText.innerText = (isCall ? '📈 UP (' : '📉 DOWN (') + confidence + '%)';
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
-                        var innerCandles = candleBox.querySelector('div:not(#panel-laser-scanner)');
-                        if(innerCandles) {
-                            innerCandles.style.opacity = '1';
-                            innerCandles.innerHTML = 
-                                '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
-                                    '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
-                                    '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
-                                '</div>';
-                        }
+                        
+                        # Completely remove old 5 candles preview and render single candle in exact center
+                        candleBox.innerHTML = 
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">' +
+                                '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
+                            '</div>';
 
                         executeQuotexTrade(isCall);
 
@@ -868,12 +862,12 @@ def bot_script():
                 statusBadge.style.color = '#eab308';
                 statusBadge.style.background = '#422006';
 
-                // Single Smooth Heartbeat Line Animation exactly like video_1.mp4
+                # Accurate Slow Heartbeat Wave Animation matching video reference
                 candleBox.innerHTML = 
                     '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#030712;border-radius:8px;overflow:hidden;box-sizing:border-box;">' +
                         '<div style="position:absolute;top:4px;left:8px;font-size:7.5px;font-weight:900;color:#ef4444;letter-spacing:0.5px;z-index:2;">RA SINGLE HEARTBEAT SCAN</div>' +
                         '<svg width="100%" height="45" viewBox="0 0 300 40" preserveAspectRatio="none" style="overflow:visible;">' +
-                            '<path d="M 0 20 L 50 20 L 60 5 L 75 35 L 90 10 L 105 30 L 120 20 L 180 20 L 190 8 L 205 32 L 220 15 L 235 25 L 250 20 L 300 20" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="350" style="animation: singleHeartbeatAnim 2.5s linear infinite;" />' +
+                            '<path d="M 0 20 L 50 20 L 60 4 L 70 36 L 85 10 L 95 30 L 110 20 L 170 20 L 180 6 L 190 34 L 205 12 L 215 28 L 230 20 L 300 20" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="350" style="animation: trueSlowHeartbeatMotion 3.5s linear infinite;" />' +
                         '</svg>' +
                     '</div>';
 
@@ -901,9 +895,9 @@ def bot_script():
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
-                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">' +
+                            '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">' +
                                 '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:24px;height:46px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
+                                '<div style="width:26px;height:48px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
