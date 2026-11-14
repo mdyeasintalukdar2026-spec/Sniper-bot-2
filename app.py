@@ -82,7 +82,7 @@ class GroqAIArbiter:
         except Exception:
             pass
         
-        return "CALL" if (int(time.time() * 11) % 2 == 0) else "PUT"
+        return "CALL" if (int(time.time() * 7) % 2 == 0) else "PUT"
 
 
 @app.route('/')
@@ -116,8 +116,8 @@ def get_signal():
 
         tech_data = AdvancedAccuracyFilters.fetch_twelve_data_indicators("EUR/USD")
         
-        # Absolute bi-directional distribution logic (50% CALL, 50% PUT)
-        trend_calc = int(current_time * 19) % 2
+        # Perfect 50% Bi-directional Distribution Logic (CALL or PUT)
+        trend_calc = int(current_time * 13) % 2
         base_signal = "CALL" if (trend_calc == 0) else "PUT"
         
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, TrendBias: {base_signal}"
@@ -329,11 +329,19 @@ def bot_script():
                 } catch(err) {}
             }
 
+            // Ranges: 1-30: Low (Red), 30-50: Medium (Yellow), 50-70: High (Green), 70-100: Ultra High (Purple)
             function getMetricColor(val) {
                 if(val <= 30) return '#ef4444';
                 if(val <= 50) return '#eab308';
                 if(val <= 70) return '#22c55e';
                 return '#a855f7';
+            }
+
+            function getMetricLabel(val) {
+                if(val <= 30) return 'LOW';
+                if(val <= 50) return 'MEDIUM';
+                if(val <= 70) return 'HIGH';
+                return 'ULTRA HIGH';
             }
 
             function openPanel(screen) {
@@ -489,8 +497,10 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
-                    var v1 = 74, v2 = 60, v3 = 98, v4 = 39;
+                    // Initial values for dynamic fluctuation
+                    var v1 = 74, v2 = 62, v3 = 88, v4 = 81;
                     var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
+                    var l1 = getMetricLabel(v1), l2 = getMetricLabel(v2), l3 = getMetricLabel(v3), l4 = getMetricLabel(v4);
 
                     panel.innerHTML = 
                         '<div style="padding:12px 11px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;">' +
@@ -509,28 +519,28 @@ def bot_script():
 
                                 '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:6px;margin-bottom:8px;">' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c1 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + '44;">' + v1 + '%</div>' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">VOLATILITY (<span id="lbl-v1">' + l1 + '</span>)</div>' +
+                                        '<div id="circle-val-1" style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c1 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 10px ' + c1 + '44;">' + v1 + '%</div>' +
                                     '</div>' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c2 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + '44;">' + v2 + '%</div>' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">STABILITY (<span id="lbl-v2">' + l2 + '</span>)</div>' +
+                                        '<div id="circle-val-2" style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c2 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 10px ' + c2 + '44;">' + v2 + '%</div>' +
                                     '</div>' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c3 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + '44;">' + v3 + '%</div>' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">LIQUIDITY (<span id="lbl-v3">' + l3 + '</span>)</div>' +
+                                        '<div id="circle-val-3" style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c3 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 10px ' + c3 + '44;">' + v3 + '%</div>' +
                                     '</div>' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:6px;text-align:center;">' +
-                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c4 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + '44;">' + v4 + '%</div>' +
+                                        '<div style="font-size:7.5px;color:#94a3b8;margin-bottom:2px;font-weight:bold;">AI CONFIDENCE (<span id="lbl-v4">' + l4 + '</span>)</div>' +
+                                        '<div id="circle-val-4" style="width:36px;height:36px;border-radius:50%;border:3px solid ' + c4 + ';margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 10px ' + c4 + '44;">' + v4 + '%</div>' +
                                     '</div>' +
                                 '</div>' +
 
                                 '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:7px;font-size:8px;margin-bottom:6px;">' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">AI Confluence Filter:</span><span style="color:#ef4444;font-weight:bold;">LOW (18%)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Server Stability:</span><span style="color:#38bdf8;font-weight:bold;">ULTRA HIGH (96%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">AI Confluence Filter:</span><span style="color:#22c55e;font-weight:bold;">HIGH (88%)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Server Stability:</span><span style="color:#38bdf8;font-weight:bold;">ULTRA HIGH (98%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Market Trend:</span><span style="color:#22c55e;font-weight:bold;">BULLISH MOMENTUM</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;"><span style="color:#facc15;font-weight:bold;">Best Scanned Asset:</span><span id="switching-asset-name" style="color:#22c55e;font-weight:900;">GBPUSD (REAL)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span style="color:#facc15;font-weight:bold;" id="best-market-label-title">BEST MARKET:</span><span id="switching-asset-name" style="color:#22c55e;font-weight:900;animation:textSmoothPulse 1s infinite ease-in-out;">SCANNING...</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -541,15 +551,61 @@ def bot_script():
                         '</div>';
 
                     var poolIdx = 0;
+                    var lockCount = 0;
+                    var isLockedOnBest = false;
+                    var lockedAsset = "EURUSD (REAL)";
+
                     if(!metricFluctuateInterval) {
                         metricFluctuateInterval = setInterval(function(){
                             if(!panel.isConnected) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; return; }
-                            poolIdx = (poolIdx + 1) % globalAssetsPool.length;
+
+                            // Dynamic fluctuating numbers for the 4 metrics (Ranges: 1-30, 30-50, 50-70, 70-100)
+                            var nv1 = Math.floor(Math.random() * 70) + 25; // 25-95
+                            var nv2 = Math.floor(Math.random() * 60) + 30; // 30-90
+                            var nv3 = Math.floor(Math.random() * 50) + 45; // 45-95
+                            var nv4 = Math.floor(Math.random() * 40) + 55; // 55-95
+
+                            [ {v: nv1, id: 1}, {v: nv2, id: 2}, {v: nv3, id: 3}, {v: nv4, id: 4} ].forEach(function(item){
+                                var col = getMetricColor(item.v);
+                                var lbl = getMetricLabel(item.v);
+                                var cv = panel.querySelector('#circle-val-' + item.id);
+                                var lv = panel.querySelector('#lbl-v' + item.id);
+                                if(cv) {
+                                    cv.innerText = item.v + '%';
+                                    cv.style.borderColor = col;
+                                    cv.style.color = col;
+                                    cv.style.boxShadow = '0 0 10px ' + col + '44';
+                                }
+                                if(lv) lv.innerText = lbl;
+                            });
+
                             var assetEl = panel.querySelector('#switching-asset-name');
+                            var titleEl = panel.querySelector('#best-market-label-title');
                             if(assetEl) {
-                                assetEl.innerText = globalAssetsPool[poolIdx];
+                                if(!isLockedOnBest) {
+                                    poolIdx = (poolIdx + 1) % globalAssetsPool.length;
+                                    assetEl.innerText = globalAssetsPool[poolIdx];
+                                    if(titleEl) titleEl.innerText = "ALL MARKET CHECK:";
+                                    
+                                    // Every 7 cycles, lock onto a "Best Market" for a profitable trade window
+                                    if(poolIdx === 0) {
+                                        isLockedOnBest = true;
+                                        lockedAsset = globalAssetsPool[Math.floor(Math.random() * globalAssetsPool.length)];
+                                        lockCount = 0;
+                                    }
+                                } else {
+                                    lockCount++;
+                                    assetEl.innerText = lockedAsset;
+                                    if(titleEl) titleEl.innerText = "BEST MARKET FOUND:";
+                                    
+                                    // Unlock after ~3 seconds (2 ticks of 1.5s interval) to resume scanning
+                                    if(lockCount >= 2) {
+                                        isLockedOnBest = false;
+                                        lockCount = 0;
+                                    }
+                                }
                             }
-                        }, 2500);
+                        }, 1500);
                     }
                 } else {
                     var optionsHtml = '';
