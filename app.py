@@ -160,6 +160,7 @@ def bot_script():
     js = """
     (function(){
         try {
+            console.log("RA SNIPER BOT INITIALIZING...");
             var d = document;
             
             ["ra-sniper-bot-panel", "ra-sniper-bot-btn", "ra-sniper-bot-style", "ra-grand-quantum-overlay"].forEach(function(i){
@@ -827,7 +828,6 @@ def bot_script():
 
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         
-                        # Completely remove old 5 candles preview and render single candle in exact center
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">' +
                                 '<div style="width:4px;height:65px;background:' + candleColor + ';position:absolute;"></div>' +
@@ -862,7 +862,6 @@ def bot_script():
                 statusBadge.style.color = '#eab308';
                 statusBadge.style.background = '#422006';
 
-                # Accurate Slow Heartbeat Wave Animation matching video reference
                 candleBox.innerHTML = 
                     '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#030712;border-radius:8px;overflow:hidden;box-sizing:border-box;">' +
                         '<div style="position:absolute;top:4px;left:8px;font-size:7.5px;font-weight:900;color:#ef4444;letter-spacing:0.5px;z-index:2;">RA SINGLE HEARTBEAT SCAN</div>' +
