@@ -88,7 +88,7 @@ class GroqAIArbiter:
 
 @app.route('/')
 def home():
-    res = make_response("RA SNIPER BOT ENGINE ACTIVE - READY!")
+    res = make_response("RA COMMUNITY BOT ENGINE ACTIVE - READY!")
     res.headers.add("Access-Control-Allow-Origin", "*")
     return res
 
@@ -123,11 +123,10 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        # Dynamic variable accuracy between 10% and 100%
         real_accuracy = 10 + (int(time.time() * 41) % 91)
         
         rules_list = [
-            "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
+            "RA COMMUNITY BOT AI Confluence & Smart Money Rejection Verified.",
             "Advanced Price Action Zone & Institutional Order Flow Sync.",
             "Bullish/Bearish Trend Continuation with Zero-Lag Filter.",
             "High-Precision Support/Resistance Reversal Logic."
@@ -153,7 +152,7 @@ def get_signal():
             "trend": "BULLISH MOMENTUM",
             "confidence": 85,
             "status": "GREEN_EXECUTE",
-            "rule": "RA SNIPER Standard Trend Continuation Logic."
+            "rule": "RA COMMUNITY BOT Standard Trend Continuation Logic."
         })
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
@@ -164,7 +163,7 @@ def bot_script():
     js = """
     (function(){
         try {
-            console.log("RA SNIPER BOT BOOTING UP IN QUOTEX...");
+            console.log("RA COMMUNITY BOT BOOTING UP IN QUOTEX...");
             var d = document;
             
             ["ra-sniper-bot-panel", "ra-sniper-bot-btn", "ra-sniper-bot-style", "ra-grand-quantum-overlay"].forEach(function(i){
@@ -347,10 +346,10 @@ def bot_script():
                         var buttons = d.querySelectorAll('button');
                         for(var j=0; j<buttons.length; j++) {
                             var bTxt = buttons[j].innerText.toUpperCase();
-                            if(isCall && (bTxt.includes('CALL') || bTxt.includes('UP') || bTxt.includes('HIGHER'))) {
+                            if(isCall && (bTxt.includes('CALL') || bTxt.includes('UP') || bTxt.includes('HIGHER') || bTxt.includes('BUY'))) {
                                 buttons[j].click();
                                 break;
-                            } else if(!isCall && (bTxt.includes('PUT') || bTxt.includes('DOWN') || bTxt.includes('LOWER'))) {
+                            } else if(!isCall && (bTxt.includes('PUT') || bTxt.includes('DOWN') || bTxt.includes('LOWER') || bTxt.includes('SELL'))) {
                                 buttons[j].click();
                                 break;
                             }
@@ -420,7 +419,7 @@ def bot_script():
                             '<div id="ra-panel-header" style="width:100%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px;margin-bottom:10px;cursor:move;">' +
                                 '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
                                     '<img src="' + innerHeaderLogo + '" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;animation:fastFastColorShift 2s infinite ease-in-out;" />' +
-                                    '<div style="font-size:12px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
+                                    '<div style="font-size:12px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA COMMUNITY BOT</div>' +
                                 '</div>' +
                                 '<div id="ra-close-btn" style="cursor:pointer;font-size:12px;color:#94a3b8;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.08);">✕</div>' +
                             '</div>' +
@@ -474,7 +473,7 @@ def bot_script():
                                     '<div style="display:flex;align-items:center;gap:6px;pointer-events:none;">' +
                                         '<img src="' + innerHeaderLogo + '" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;animation:fastFastColorShift 2s infinite ease-in-out;" />' +
                                         '<div>' +
-                                            '<div style="font-size:11px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA SNIPER BOT</div>' +
+                                            '<div style="font-size:11px;font-weight:900;letter-spacing:0.5px;color:#fff;">RA COMMUNITY BOT</div>' +
                                             '<div style="display:flex;align-items:center;gap:3px;font-size:7.5px;color:#22c55e;font-weight:700;">' +
                                                 '<span style="width:4px;height:4px;background:#22c55e;border-radius:50%;display:inline-block;"></span> RA COMMUNITY AI' +
                                             '</div>' +
@@ -658,7 +657,7 @@ def bot_script():
                                         '<span id="live-accuracy-badge" style="color:#facc15;font-weight:900;background:rgba(250,204,21,0.15);padding:1.5px 5px;border-radius:3px;border:1px solid #facc15;">ACCURACY: --%</span>' +
                                     '</div>' +
                                     '<div id="live-signal-display" style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">CLICK GENERATE</div>' +
-                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA SNIPER AI Confluence Analysis...</div>' +
+                                    '<div id="live-rules-desc" style="font-size:8px;color:#cbd5e1;margin-bottom:6px;min-height:18px;line-height:1.2;">Awaiting RA COMMUNITY BOT AI Confluence Analysis...</div>' +
                                     '<button id="generate-live-signal-btn" style="width:100%;background:linear-gradient(90deg, #16a34a, #d97706);color:#fff;border:none;border-radius:5px;padding:7px;font-size:10.5px;font-weight:900;cursor:pointer;">GENERATE LIVE SIGNAL</button>' +
                                 '</div>' +
                             '</div>' +
@@ -821,7 +820,7 @@ def bot_script():
                 if(laserScanner) laserScanner.style.display = 'block';
 
                 signalText.style.animation = 'textSmoothPulse 0.8s infinite ease-in-out';
-                signalText.innerText = "⚡ মার্কেট স্কানিং...";
+                signalText.innerText = "⚡ MARKET SCANNING...";
 
                 setTimeout(function(){
                     if(laserScanner) laserScanner.style.display = 'none';
@@ -885,7 +884,7 @@ def bot_script():
                         '<div class="scanner-screen" style="position:relative;width:100%;height:45px;background:#080810;overflow:hidden;border-radius:4px;border:1px solid rgba(0, 240, 255, 0.2);display:flex;align-items:center;justify-content:center;">' +
                             '<div class="laser-line" style="position:absolute;top:0;left:0;width:100%;height:2px;background:#ff0055;box-shadow:0 0 10px #ff0055, 0 0 20px #ff0055;animation:scanMove 1.5s linear infinite;"></div>' +
                             '<div class="grid-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);background-size:10px 10px;"></div>' +
-                            '<div style="position:relative;z-index:5;font-size:10px;font-weight:900;color:#ff0055;letter-spacing:1px;animation:textSmoothPulse 1s infinite ease-in-out;text-shadow:0 0 8px rgba(255,0,85,0.8);">মার্কেট স্কানিং</div>' +
+                            '<div style="position:relative;z-index:5;font-size:10px;font-weight:900;color:#ff0055;letter-spacing:1px;animation:textSmoothPulse 1s infinite ease-in-out;text-shadow:0 0 8px rgba(255,0,85,0.8);">MARKET SCANNING</div>' +
                         '</div>' +
                     '</div>';
 
@@ -952,7 +951,7 @@ def bot_script():
                 if(!laser) return;
                 laser.style.display = 'block';
                 statusLbl.innerText = "STATUS: SCANNING";
-                sigDisplay.innerText = "RA SNIPER AI Scanning Live Market...";
+                sigDisplay.innerText = "RA COMMUNITY BOT AI Scanning Live Market...";
                 sigDisplay.style.color = '#38bdf8';
                 genBtn.disabled = true;
 
@@ -961,7 +960,7 @@ def bot_script():
                     laser.style.display = 'none';
                     fetch(renderServerUrl + '/signal?market=' + selectedRealMarket + '&t=' + Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "CALL", confidence: 93, rule: "RA SNIPER Liquidity Sweep & Momentum Reversal."}; })
+                    .catch(function(){ return {signal: "CALL", confidence: 93, rule: "RA COMMUNITY BOT Liquidity Sweep & Momentum Reversal."}; })
                     .then(function(data){
                         if(!panel.isConnected) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
@@ -976,7 +975,7 @@ def bot_script():
                         
                         sigDisplay.style.color = isCall ? '#22c55e' : '#ef4444';
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
-                        rulesDesc.innerText = "Rule: " + (data.rule || "RA SNIPER Advanced Confluence Verified.");
+                        rulesDesc.innerText = "Rule: " + (data.rule || "RA COMMUNITY BOT Advanced Confluence Verified.");
 
                         setTimeout(function(){
                             if(!panel.isConnected) return;
@@ -986,7 +985,7 @@ def bot_script():
                             accBadge.style.borderColor = '#facc15';
                             sigDisplay.style.color = '#facc15';
                             sigDisplay.innerText = "CLICK GENERATE";
-                            rulesDesc.innerText = "Awaiting RA SNIPER AI Confluence Analysis...";
+                            rulesDesc.innerText = "Awaiting RA COMMUNITY BOT AI Confluence Analysis...";
                             genBtn.disabled = false;
                         }, 7500);
                     });
@@ -1017,7 +1016,7 @@ def bot_script():
                 }
             }
 
-        } catch(e) { console.error("RA SNIPER BOT Error:", e); }
+        } catch(e) { console.error("RA COMMUNITY BOT Error:", e); }
     })();
     """
     res = make_response(js)
