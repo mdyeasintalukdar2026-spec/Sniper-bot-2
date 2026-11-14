@@ -11,7 +11,6 @@ app = Flask(__name__, static_folder=None)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
 logger = logging.getLogger("RA_COMMUNITY_BOT_Engine")
 
-# --- MASTER API CREDENTIALS & BACKEND KNOWLEDGE PIPELINE ---
 QX_API_KEY = os.environ.get("QX_API_KEY", "qx_live_1xxOcsg5_3vEavHfZwAkGufh9NLLWJhUqG3T6H6oCEuoDWeJV")
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "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")
 FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY", "dbcaa19r01qqr3s0pf60dbcaa19r01qqr3s0pf6g")
@@ -68,7 +67,7 @@ class GroqAIArbiter:
         payload = {
             "model": "llama-3.3-70b-versatile",
             "messages": [
-                {"role": "system", "content": "You are a master binary options AI arbiter. Return strictly 'CALL' or 'PUT' based on rigorous bi-directional market analysis with equal probability."},
+                {"role": "system", "content": "You are a master binary options AI arbiter. Return strictly 'CALL' or 'PUT' based on rigorous bi-directional market analysis with strict balance."},
                 {"role": "user", "content": f"Analyze market context: {market_context}. Output decision only ('CALL' or 'PUT')."}
             ],
             "temperature": 0.95,
@@ -83,7 +82,7 @@ class GroqAIArbiter:
         except Exception:
             pass
         
-        return "CALL" if (int(time.time() * 7) % 2 == 0) else "PUT"
+        return "CALL" if (int(time.time() * 11) % 2 == 0) else "PUT"
 
 
 @app.route('/')
@@ -117,8 +116,8 @@ def get_signal():
 
         tech_data = AdvancedAccuracyFilters.fetch_twelve_data_indicators("EUR/USD")
         
-        # Absolute true bi-directional switching logic ensuring 50/50 CALL and PUT distribution
-        trend_calc = int(current_time * 17) % 2
+        # Absolute bi-directional distribution logic (50% CALL, 50% PUT)
+        trend_calc = int(current_time * 19) % 2
         base_signal = "CALL" if (trend_calc == 0) else "PUT"
         
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, TrendBias: {base_signal}"
@@ -134,10 +133,9 @@ def get_signal():
             "Fibonacci 61.8% Golden Pocket Institutional Retracement Zone.",
             "Dynamic Bollinger Band Squeeze Breakout & Volatility Expansion."
         ]
-        chosen_rule = rules_collection[int(current_time * 3) % len(rules_collection)]
-
+        chosen_rule = rules_collection[int(time.time() * 3) % len(rules_collection)]
         trends_list = ["BULLISH MOMENTUM", "BEARISH CONTINUATION", "STRONG REVERSAL ZONE", "VOLATILE BREAKOUT"]
-        chosen_trend = trends_list[int(current_time / 2) % len(trends_list)]
+        chosen_trend = trends_list[int(time.time() / 2) % len(trends_list)]
 
         res = jsonify({
             "signal": ai_decision,
@@ -537,7 +535,7 @@ def bot_script():
                             '</div>' +
 
                             '<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#94a3b8;border-top:1px solid rgba(255,255,255,0.06);padding-top:4px;">' +
-                                '<span style="color:#38bdf8;font-weight:bold;">GLOBAL MARKET SCAN</span>' +
+                                '<span style="color:#38bdf8;font-weight:bold;">ALL MARKET CHECKING</span>' +
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
@@ -706,7 +704,7 @@ def bot_script():
                             stopAutoBtn.innerText = "AUTO STOP ON";
                             stopAutoBtn.style.background = "#b91c1c";
                             if(startAutoBtn) {
-                                startAutoBtn.innerText = "AUTO STOP OFF";
+                                startAutoBtn.innerText = "AUTO START OFF";
                                 startAutoBtn.style.background = "#059669";
                             }
                             if(autoTimer) clearTimeout(autoTimer);
@@ -783,7 +781,6 @@ def bot_script():
                             executeQuotexTrade(isCall);
                         }
 
-                        # Exactly 5 seconds display time before resetting
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -851,7 +848,6 @@ def bot_script():
 
                         executeQuotexTrade(isCall);
 
-                        # Exactly 5 seconds display time for 5s auto mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -903,7 +899,6 @@ def bot_script():
                         sigDisplay.innerText = (isCall ? '📈 UP TRADE' : '📉 DOWN TRADE');
                         rulesDesc.innerText = "Rule: " + (data.rule || "RA Community Bot Advanced Confluence Verified.");
 
-                        # Exactly 8 to 10 seconds display time for live signal mode
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusLbl.innerText = "STATUS: READY";
