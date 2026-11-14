@@ -204,9 +204,9 @@ def bot_script():
                           '100% { transform: translateY(0px); color: #38bdf8; }' +
                           '}' +
                           '@keyframes proLaserScan {' +
-                          '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 30px #ffffff, 0 0 20px #ef4444; }' +
-                          '50% { top: 100%; opacity: 1; box-shadow: 0 0 30px #ffffff, 0 0 20px #22c55e; }' +
-                          '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 30px #ffffff, 0 0 20px #ef4444; }' +
+                          '0% { top: 0%; opacity: 0.9; box-shadow: 0 0 35px #ffffff, 0 0 25px #ef4444; }' +
+                          '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #ffffff, 0 0 25px #22c55e; }' +
+                          '100% { top: 0%; opacity: 0.9; box-shadow: 0 0 35px #ffffff, 0 0 25px #ef4444; }' +
                           '}' +
                           '@keyframes heartbeatLeftToRight {' +
                           '0% { stroke-dashoffset: 280; opacity: 0.3; }' +
@@ -237,6 +237,12 @@ def bot_script():
                 "EURGBP (OTC)", "GBPJPY (OTC)", "EURJPY (OTC)", "EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", "NZDUSD"
             ];
 
+            var realMarkets = [
+                "EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", 
+                "NZDUSD", "EURGBP", "EURJPY", "GBPJPY", "AUDJPY", 
+                "USDCHF", "EURAUD", "GBPAUD", "NZDJPY", "CADJPY"
+            ];
+
             function createBotIcon() {
                 var wrap = d.getElementById('ra-sniper-bot-btn') || d.createElement('div');
                 wrap.id = 'ra-sniper-bot-btn';
@@ -264,7 +270,7 @@ def bot_script():
             }
 
             createBotIcon();
-            toggleSniperPanel();
+            openPanel("main");
 
             function detectCurrentQuotexMarket() {
                 try {
@@ -315,23 +321,41 @@ def bot_script():
                 }
             }
 
-            function toggleSniperPanel() {
+            function openPanel(screen) {
+                if(screen) activeScreen = screen;
                 var existing = d.getElementById('ra-sniper-bot-panel');
                 var floatingBtn = d.getElementById('ra-sniper-bot-btn');
                 
-                if(existing) { 
-                    existing.remove(); 
-                    if(floatingBtn) floatingBtn.style.display = 'flex';
-                    return; 
+                if(metricFluctuateInterval) {
+                    clearInterval(metricFluctuateInterval);
+                    metricFluctuateInterval = null;
                 }
 
-                if(floatingBtn) floatingBtn.style.display = 'none';
+                if(!existing) {
+                    if(floatingBtn) floatingBtn.style.display = 'none';
+                    var panel = d.createElement('div');
+                    panel.id = 'ra-sniper-bot-panel';
+                    panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:305px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
+                    d.body.appendChild(panel);
+                    renderPanelContent(panel);
+                    makeDraggable(panel);
+                } else {
+                    renderPanelContent(existing);
+                }
+            }
 
-                var panel = d.createElement('div');
-                panel.id = 'ra-sniper-bot-panel';
-                panel.style.cssText = 'position:fixed;top:44%;left:50%;transform:translate(-50%, -50%);width:305px;background:linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(2, 4, 8, 0.99));border:4px solid #22c55e;border-radius:18px;animation:raBorderGlow 8s infinite ease-in-out, panelFadeIn 0.25s ease-out;z-index:2147483647;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;color:#fff;overflow:hidden;box-sizing:border-box;backdrop-filter:blur(10px);';
-
-                renderPanelContent(panel);
+            function toggleSniperPanel() {
+                var existing = d.getElementById('ra-sniper-bot-panel');
+                var floatingBtn = d.getElementById('ra-sniper-bot-btn');
+                if(existing) {
+                    stopAutoExecution();
+                    if(metricFluctuateInterval) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; }
+                    existing.remove();
+                    if(floatingBtn) floatingBtn.style.display = 'flex';
+                    activeScreen = "main";
+                } else {
+                    openPanel("main");
+                }
             }
 
             function getMetricColor(val) {
@@ -554,54 +578,42 @@ def bot_script():
                         '</div>';
                 }
 
-                d.body.appendChild(panel);
-                makeDraggable(panel);
+                var closeBtn = panel.querySelector('#ra-close-btn');
+                if(closeBtn) closeBtn.onclick = function() { toggleSniperPanel(); };
 
-                var closeBtn = d.getElementById('ra-close-btn');
-                if(closeBtn) closeBtn.onclick = function() { stopAutoExecution(); panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
+                var minBtn = panel.querySelector('#ra-minimize-btn');
+                if(minBtn) minBtn.onclick = function() { toggleSniperPanel(); };
 
-                var minBtn = d.getElementById('ra-minimize-btn');
-                if(minBtn) minBtn.onclick = function() { panel.remove(); if(floatingBtn) floatingBtn.style.display = 'flex'; };
-
-                var navLiveBtn = d.getElementById('nav-live-signal-btn');
+                var navLiveBtn = panel.querySelector('#nav-live-signal-btn');
                 if(navLiveBtn) navLiveBtn.onclick = function() {
                     stopAutoExecution();
-                    activeScreen = "live_signal";
-                    panel.remove();
-                    toggleSniperPanel();
+                    openPanel("live_signal");
                 };
 
-                var allMarketCheckBtn = d.getElementById('all-market-check-btn');
+                var allMarketCheckBtn = panel.querySelector('#all-market-check-btn');
                 if(allMarketCheckBtn) allMarketCheckBtn.onclick = function() {
-                    activeScreen = "all_market_check";
-                    panel.remove();
-                    toggleSniperPanel();
+                    openPanel("all_market_check");
                 };
 
-                var backToLiveBtn = d.getElementById('back-to-live-signal-btn');
+                var backToLiveBtn = panel.querySelector('#back-to-live-signal-btn');
                 if(backToLiveBtn) backToLiveBtn.onclick = function() {
-                    activeScreen = "live_signal";
-                    panel.remove();
-                    toggleSniperPanel();
+                    openPanel("live_signal");
                 };
 
-                var backMainBtn = d.getElementById('back-to-main-btn');
+                var backMainBtn = panel.querySelector('#back-to-main-btn');
                 if(backMainBtn) backMainBtn.onclick = function() {
-                    activeScreen = "main";
-                    panel.remove();
-                    toggleSniperPanel();
+                    openPanel("main");
                 };
 
-                var marketSelector = d.getElementById('real-market-selector');
+                var marketSelector = panel.querySelector('#real-market-selector');
                 if(marketSelector) {
                     marketSelector.onchange = function(e) {
                         selectedRealMarket = e.target.value;
-                        panel.remove();
-                        toggleSniperPanel();
+                        openPanel("live_signal");
                     };
                 }
 
-                var genBtn = d.getElementById('generate-live-signal-btn');
+                var genBtn = panel.querySelector('#generate-live-signal-btn');
                 if(genBtn) {
                     genBtn.onclick = function() { runLiveSignalGeneration(panel); };
                 }
@@ -670,7 +682,7 @@ def bot_script():
                         }
                     };
 
-                    var getSigBtn = d.getElementById('ra-get-signal-btn');
+                    var getSigBtn = panel.querySelector('#ra-get-signal-btn');
                     if(getSigBtn) {
                         getSigBtn.onclick = function() {
                             if(currentMode === "5S") {
@@ -849,12 +861,12 @@ def bot_script():
             }
 
             function runLiveSignalGeneration(panel) {
-                var laser = d.getElementById('epic-laser-line');
-                var statusLbl = d.getElementById('live-status-label');
-                var accBadge = d.getElementById('live-accuracy-badge');
-                var sigDisplay = d.getElementById('live-signal-display');
-                var rulesDesc = d.getElementById('live-rules-desc');
-                var genBtn = d.getElementById('generate-live-signal-btn');
+                var laser = panel.querySelector('#epic-laser-line');
+                var statusLbl = panel.querySelector('#live-status-label');
+                var accBadge = panel.querySelector('#live-accuracy-badge');
+                var sigDisplay = panel.querySelector('#live-signal-display');
+                var rulesDesc = panel.querySelector('#live-rules-desc');
+                var genBtn = panel.querySelector('#generate-live-signal-btn');
 
                 if(!laser) return;
                 laser.style.display = 'block';
@@ -901,7 +913,7 @@ def bot_script():
             }
 
             function makeDraggable(panelEl) {
-                var header = d.getElementById('ra-panel-header');
+                var header = panelEl.querySelector('#ra-panel-header');
                 if(!header) return;
                 var pX = 0, pY = 0, mX = 0, mY = 0;
                 header.onmousedown = header.ontouchstart = function(e) {
