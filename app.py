@@ -45,7 +45,7 @@ class AdvancedAccuracyFilters:
 
     @staticmethod
     def fetch_real_technical_signal(symbol: str = "EUR/USD") -> str:
-        # Strict Dynamic Bi-directional Technical Check to Prevent Single-Direction Lock
+        # Strict Dynamic Bi-directional Technical Check (Prevents Single-Direction Lock)
         try:
             formatted_sym = symbol if "/" in symbol else f"{symbol[:3]}/{symbol[3:]}"
             url = f"https://api.twelvedata.com/rsi?symbol={formatted_sym}&interval=1min&outputsize=3&apikey={TWELVE_DATA_KEY}"
@@ -54,10 +54,9 @@ class AdvancedAccuracyFilters:
                 data = resp.json()
                 if "values" in data and len(data["values"]) > 0:
                     rsi_val = float(data["values"][0]["rsi"])
-                    # True dynamic threshold splitting evenly between CALL and PUT
-                    if rsi_val <= 49.8:
+                    if rsi_val < 50.0:
                         return "CALL"
-                    elif rsi_val >= 50.2:
+                    else:
                         return "PUT"
         except Exception:
             pass
@@ -77,8 +76,8 @@ class AdvancedAccuracyFilters:
         except Exception:
             pass
 
-        # Microsecond based true 50-50 alternating parity distributor
-        return "CALL" if (int(time.time() * 1000) % 2 == 0) else "PUT"
+        # Guaranteed True 50-50 Bi-directional Rotation without any lock
+        return random.choice(["CALL", "PUT"])
 
 
 @app.route('/')
@@ -144,7 +143,7 @@ def get_signal():
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
     except Exception:
-        fallback_sig = "CALL" if (int(time.time()) % 2 == 0) else "PUT"
+        fallback_sig = random.choice(["CALL", "PUT"])
         res = jsonify({
             "signal": fallback_sig,
             "trend": "BULLISH MOMENTUM" if fallback_sig == "CALL" else "BEARISH MOMENTUM",
@@ -248,7 +247,6 @@ def bot_script():
             d.head.appendChild(s);
 
             var currentMode = "1M";
-            // Force clean check so login panel always appears properly on fresh boot/reload
             var isAlreadyLoggedIn = sessionStorage.getItem("ra_bot_logged_in") === "true";
             var activeScreen = isAlreadyLoggedIn ? "main" : "login";
             var selectedRealMarket = "EURUSD";
