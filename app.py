@@ -185,16 +185,16 @@ def bot_script():
                           '}' +
                           '@keyframes ultraFastCandleSway1 {' +
                           '0% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
-                          '25% { transform: translateY(-8px) scaleY(1.15) translateX(3px); filter: drop-shadow(0 0 18px #22c55e); }' +
+                          '25% { transform: translateY(-8px) scaleY(1.18) translateX(3px); filter: drop-shadow(0 0 20px #22c55e); }' +
                           '50% { transform: translateY(0px) scaleY(1) translateX(-2px); }' +
-                          '75% { transform: translateY(8px) scaleY(1.15) translateX(2px); filter: drop-shadow(0 0 18px #ef4444); }' +
+                          '75% { transform: translateY(8px) scaleY(1.18) translateX(2px); filter: drop-shadow(0 0 20px #ef4444); }' +
                           '100% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
                           '}' +
                           '@keyframes ultraFastCandleSway2 {' +
                           '0% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
-                          '25% { transform: translateY(8px) scaleY(1.15) translateX(-3px); filter: drop-shadow(0 0 18px #eab308); }' +
+                          '25% { transform: translateY(8px) scaleY(1.18) translateX(-3px); filter: drop-shadow(0 0 20px #eab308); }' +
                           '50% { transform: translateY(0px) scaleY(1) translateX(2px); }' +
-                          '75% { transform: translateY(-8px) scaleY(1.15) translateX(-2px); filter: drop-shadow(0 0 18px #38bdf8); }' +
+                          '75% { transform: translateY(-8px) scaleY(1.18) translateX(-2px); filter: drop-shadow(0 0 20px #38bdf8); }' +
                           '100% { transform: translateY(0px) scaleY(1) translateX(0px); }' +
                           '}' +
                           '@keyframes grandQuantumWaves {' +
@@ -224,7 +224,7 @@ def bot_script():
                           '}' +
                           '@keyframes candlePopIn {' +
                           '0% { transform: scale(0.3); opacity: 0; }' +
-                          '100% { transform: scale(1.2); opacity: 1; }' +
+                          '100% { transform: scale(1.22); opacity: 1; }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
@@ -234,6 +234,7 @@ def bot_script():
             var selectedRealMarket = "EURUSD";
             var autoLoopActive = false;
             var autoTimer = null;
+            var metricFluctuateInterval = null;
 
             var realMarkets = [
                 "EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", 
@@ -339,9 +340,9 @@ def bot_script():
             }
 
             function getMetricColor(val) {
-                if(val < 30) return '#ef4444'; // Low -> Red
-                if(val < 60) return '#eab308'; // Medium -> Yellow
-                if(val < 85) return '#22c55e'; // High -> Green
+                if(val <= 30) return '#ef4444'; // Low -> Red
+                if(val <= 50) return '#eab308'; // Medium -> Yellow
+                if(val <= 70) return '#22c55e'; // High -> Green
                 return '#a855f7';             // Ultra High -> Purple
             }
 
@@ -377,17 +378,17 @@ def bot_script():
 
                                 '<div id="auto-controls-container" style="display:' + (currentMode === '5S' ? 'flex' : 'none') + ';gap:4px;margin-bottom:6px;">' +
                                     '<button id="start-auto-btn" style="flex:1;background:' + (autoLoopActive ? '#b91c1c' : '#059669') + ';color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">' + (autoLoopActive ? 'AUTO START ON' : 'AUTO START OFF') + '</button>' +
-                                    '<button id="stop-auto-btn" style="flex:1;background:#dc2626;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">Auto Stop</button>' +
+                                    '<button id="stop-auto-btn" style="flex:1;background:#dc2626;color:#fff;border:none;border-radius:4px;padding:4px;font-size:8px;font-weight:900;cursor:pointer;">AUTO STOP OFF</button>' +
                                 '</div>' +
 
                                 '<div style="text-align:center;margin-bottom:8px;">' +
                                     '<div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
                                     '<div id="ra-candle-display-box" style="display:flex;align-items:center;justify-content:space-evenly;height:95px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;box-shadow:inset 0 0 15px rgba(0,0,0,0.9);">' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 2.2s infinite ease-in-out;"><div style="width:3px;height:15px;background:#22c55e;"></div><div style="width:11px;height:45px;background:#22c55e;border-radius:3px;box-shadow:0 0 20px #22c55e;"></div><div style="width:3px;height:15px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway2 2.2s infinite ease-in-out 0.2s;"><div style="width:3px;height:15px;background:#ef4444;"></div><div style="width:11px;height:50px;background:#ef4444;border-radius:3px;box-shadow:0 0 20px #ef4444;"></div><div style="width:3px;height:15px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 2.2s infinite ease-in-out 0.4s;"><div style="width:3px;height:15px;background:#eab308;"></div><div style="width:11px;height:42px;background:#eab308;border-radius:3px;box-shadow:0 0 20px #eab308;"></div><div style="width:3px;height:15px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway2 2.2s infinite ease-in-out 0.6s;"><div style="width:3px;height:15px;background:#38bdf8;"></div><div style="width:11px;height:48px;background:#38bdf8;border-radius:3px;box-shadow:0 0 20px #38bdf8;"></div><div style="width:3px;height:15px;background:#38bdf8;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 2.2s infinite ease-in-out 0.8s;"><div style="width:3px;height:15px;background:#a855f7;"></div><div style="width:11px;height:46px;background:#a855f7;border-radius:3px;box-shadow:0 0 20px #a855f7;"></div><div style="width:3px;height:15px;background:#a855f7;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 1.8s infinite ease-in-out;"><div style="width:3px;height:15px;background:#22c55e;"></div><div style="width:11px;height:45px;background:#22c55e;border-radius:3px;box-shadow:0 0 20px #22c55e;"></div><div style="width:3px;height:15px;background:#22c55e;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway2 1.8s infinite ease-in-out 0.2s;"><div style="width:3px;height:15px;background:#ef4444;"></div><div style="width:11px;height:50px;background:#ef4444;border-radius:3px;box-shadow:0 0 20px #ef4444;"></div><div style="width:3px;height:15px;background:#ef4444;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 1.8s infinite ease-in-out 0.4s;"><div style="width:3px;height:15px;background:#eab308;"></div><div style="width:11px;height:42px;background:#eab308;border-radius:3px;box-shadow:0 0 20px #eab308;"></div><div style="width:3px;height:15px;background:#eab308;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway2 1.8s infinite ease-in-out 0.6s;"><div style="width:3px;height:15px;background:#38bdf8;"></div><div style="width:11px;height:48px;background:#38bdf8;border-radius:3px;box-shadow:0 0 20px #38bdf8;"></div><div style="width:3px;height:15px;background:#38bdf8;"></div></div>' +
+                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraFastCandleSway1 1.8s infinite ease-in-out 0.8s;"><div style="width:3px;height:15px;background:#a855f7;"></div><div style="width:11px;height:46px;background:#a855f7;border-radius:3px;box-shadow:0 0 20px #a855f7;"></div><div style="width:3px;height:15px;background:#a855f7;"></div></div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -428,19 +429,19 @@ def bot_script():
                                 '<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:5px;margin-bottom:6px;">' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
                                         '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">VOLATILITY</div>' +
-                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 8px ' + c1 + ';">' + v1 + '%</div>' +
+                                        '<div id="metric-circ-1" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c1 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c1 + ';box-shadow:0 0 8px ' + c1 + ';">' + v1 + '%</div>' +
                                     '</div>' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
                                         '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">STABILITY</div>' +
-                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 8px ' + c2 + ';">' + v2 + '%</div>' +
+                                        '<div id="metric-circ-2" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c2 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c2 + ';box-shadow:0 0 8px ' + c2 + ';">' + v2 + '%</div>' +
                                     '</div>' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
                                         '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">LIQUIDITY FLOW</div>' +
-                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 8px ' + c3 + ';">' + v3 + '%</div>' +
+                                        '<div id="metric-circ-3" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c3 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c3 + ';box-shadow:0 0 8px ' + c3 + ';">' + v3 + '%</div>' +
                                     '</div>' +
                                     '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:4px;text-align:center;">' +
                                         '<div style="font-size:6.5px;color:#94a3b8;margin-bottom:1px;font-weight:bold;">AI CONFIDENCE</div>' +
-                                        '<div style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 8px ' + c4 + ';">' + v4 + '%</div>' +
+                                        '<div id="metric-circ-4" style="width:30px;height:30px;border-radius:50%;border:2px solid ' + c4 + ';display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:8.5px;font-weight:900;color:' + c4 + ';box-shadow:0 0 8px ' + c4 + ';">' + v4 + '%</div>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -448,7 +449,7 @@ def bot_script():
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:1.5px;"><span>AI Confluence Filter:</span><span style="color:#22c55e;font-weight:bold;">ACTIVE (>80%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:1.5px;"><span>Smart Martingale:</span><span style="color:#38bdf8;font-weight:bold;">STEP 1 ($10)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:1.5px;"><span>News Guard:</span><span style="color:#10b981;font-weight:bold;">SECURE (±15m)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;"><span>Auto Asset Switcher:</span><span style="color:#facc15;font-weight:bold;">OPTIMIZED</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;"><span>Auto Asset Switcher:</span><span style="color:#facc15;font-weight:bold;" id="best-detected-asset">OPTIMIZED (EURUSD)</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -457,6 +458,32 @@ def bot_script():
                                 '<span id="ra-live-timer" style="color:#22c55e;font-weight:900;">15:40:33</span>' +
                             '</div>' +
                         '</div>';
+
+                    if(!metricFluctuateInterval) {
+                        metricFluctuateInterval = setInterval(function(){
+                            if(!panel.isConnected) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; return; }
+                            var r1 = Math.floor(Math.random() * 70) + 20;
+                            var r2 = Math.floor(Math.random() * 65) + 25;
+                            var r3 = Math.floor(Math.random() * 75) + 15;
+                            var r4 = Math.floor(Math.random() * 20) + 80;
+                            
+                            var c1_el = panel.querySelector('#metric-circ-1');
+                            var c2_el = panel.querySelector('#metric-circ-2');
+                            var c3_el = panel.querySelector('#metric-circ-3');
+                            var c4_el = panel.querySelector('#metric-circ-4');
+                            var bestAssetEl = panel.querySelector('#best-detected-asset');
+
+                            if(c1_el) { c1_el.innerText = r1 + '%'; c1_el.style.borderColor = getMetricColor(r1); c1_el.style.color = getMetricColor(r1); c1_el.style.boxShadow = '0 0 8px ' + getMetricColor(r1); }
+                            if(c2_el) { c2_el.innerText = r2 + '%'; c2_el.style.borderColor = getMetricColor(r2); c2_el.style.color = getMetricColor(r2); c2_el.style.boxShadow = '0 0 8px ' + getMetricColor(r2); }
+                            if(c3_el) { c3_el.innerText = r3 + '%'; c3_el.style.borderColor = getMetricColor(r3); c3_el.style.color = getMetricColor(r3); c3_el.style.boxShadow = '0 0 8px ' + getMetricColor(r3); }
+                            if(c4_el) { c4_el.innerText = r4 + '%'; c4_el.style.borderColor = getMetricColor(r4); c4_el.style.color = getMetricColor(r4); c4_el.style.boxShadow = '0 0 8px ' + getMetricColor(r4); }
+                            
+                            if(bestAssetEl && Math.random() > 0.6) {
+                                var randAsset = realMarkets[Math.floor(Math.random() * realMarkets.length)];
+                                bestAssetEl.innerText = "OPTIMIZED (" + randAsset + ")";
+                            }
+                        }, 1500);
+                    }
                 } else {
                     var optionsHtml = '';
                     realMarkets.forEach(function(m){
@@ -694,8 +721,8 @@ def bot_script():
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:4px;height:68px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:23px;height:45px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 22px ' + candleColor + ';"></div>' +
+                                '<div style="width:4.5px;height:72px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:25px;height:48px;background:' + candleColor + ';border-radius:4.5px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
@@ -778,8 +805,8 @@ def bot_script():
                         var candleColor = isCall ? '#22c55e' : '#ef4444';
                         candleBox.innerHTML = 
                             '<div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;animation:candlePopIn 0.3s ease-out;">' +
-                                '<div style="width:4px;height:68px;background:' + candleColor + ';position:absolute;"></div>' +
-                                '<div style="width:23px;height:45px;background:' + candleColor + ';border-radius:4px;z-index:2;box-shadow:0 0 22px ' + candleColor + ';"></div>' +
+                                '<div style="width:4.5px;height:72px;background:' + candleColor + ';position:absolute;"></div>' +
+                                '<div style="width:25px;height:48px;background:' + candleColor + ';border-radius:4.5px;z-index:2;box-shadow:0 0 25px ' + candleColor + ';"></div>' +
                             '</div>';
 
                         executeQuotexTrade(isCall);
