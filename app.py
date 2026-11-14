@@ -123,7 +123,8 @@ def get_signal():
         market_ctx = f"Asset: EURUSD, TimeSlot: {time_slot}, RSI: {tech_data['rsi']}, Preliminary Trend: {base_signal}"
         ai_decision = GroqAIArbiter.get_ai_decision(market_ctx)
         
-        real_accuracy = 15 + (int(time.time() * 37) % 85)
+        # Dynamic variable accuracy between 10% and 100%
+        real_accuracy = 10 + (int(time.time() * 41) % 91)
         
         rules_list = [
             "RA SNIPER AI Confluence & Smart Money Rejection Verified.",
@@ -150,7 +151,7 @@ def get_signal():
         res = jsonify({
             "signal": fallback_sig,
             "trend": "BULLISH MOMENTUM",
-            "confidence": 88,
+            "confidence": 85,
             "status": "GREEN_EXECUTE",
             "rule": "RA SNIPER Standard Trend Continuation Logic."
         })
@@ -238,9 +239,9 @@ def bot_script():
                           '100% { top: 0%; opacity: 0.8; }' +
                           '}' +
                           '@keyframes textSmoothPulse {' +
-                          '0% { opacity: 0.7; transform: scale(0.98); }' +
-                          '50% { opacity: 1; transform: scale(1.03); text-shadow: 0 0 12px #38bdf8; }' +
-                          '100% { opacity: 0.7; transform: scale(0.98); }' +
+                          '0% { opacity: 0.6; transform: scale(0.97); }' +
+                          '50% { opacity: 1; transform: scale(1.04); color: #ff0055; text-shadow: 0 0 12px #ff0055; }' +
+                          '100% { opacity: 0.6; transform: scale(0.97); }' +
                           '}' +
                           '@keyframes panelFadeIn { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }';
             d.head.appendChild(s);
@@ -296,12 +297,17 @@ def bot_script():
 
             function detectCurrentQuotexMarket() {
                 try {
-                    var assetEl = d.querySelector('.asset-name, .current-asset, .asset-select__button, [class*="asset"]');
-                    if(assetEl) {
-                        var txt = assetEl.innerText.trim();
-                        if(txt && txt.length < 15) {
-                            var cleanTxt = txt.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-                            return cleanTxt + (cleanTxt.includes('OTC') ? '' : ' (REAL)');
+                    var selectors = ['.asset-name', '.current-asset', '.asset-select__button', '[class*="asset"]', '.currency-pair', '.asset-block'];
+                    for(var i=0; i<selectors.length; i++) {
+                        var el = d.querySelector(selectors[i]);
+                        if(el) {
+                            var txt = el.innerText.trim();
+                            if(txt && txt.length > 1 && txt.length < 25) {
+                                var clean = txt.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                                if(clean.length >= 5) {
+                                    return clean + (clean.includes('OTC') ? '' : ' (REAL)');
+                                }
+                            }
                         }
                     }
                 } catch(e){}
@@ -312,10 +318,13 @@ def bot_script():
                 var marketName = detectCurrentQuotexMarket();
                 var payout = "92%";
                 try {
-                    var payoutEl = d.querySelector('.payout-value, [class*="payout"]');
-                    if(payoutEl) {
-                        var pTxt = payoutEl.innerText.trim();
-                        if(pTxt.includes('%')) payout = pTxt;
+                    var pEls = d.querySelectorAll('.payout-value, [class*="payout"], .收益率, span');
+                    for(var i=0; i<pEls.length; i++) {
+                        var pTxt = pEls[i].innerText.trim();
+                        if(pTxt.includes('%') && pTxt.length < 6) {
+                            payout = pTxt;
+                            break;
+                        }
                     }
                 } catch(e){}
                 return marketName + " " + payout;
@@ -324,18 +333,26 @@ def bot_script():
             function executeQuotexTrade(isCall) {
                 if(autoStopActive) return;
                 try {
-                    var btnSelector = isCall ? '.btn-call, .deal_call, [class*="call"], button.success' : '.btn-put, .deal_put, [class*="put"], button.danger';
-                    var tradeBtn = d.querySelector(btnSelector);
-                    if(tradeBtn) {
-                        tradeBtn.click();
-                    } else {
+                    var btnSelectors = isCall ? ['.btn-call', '.deal_call', '[class*="call"]', 'button.success', 'button[class*="success"]'] : ['.btn-put', '.deal_put', '[class*="put"]', 'button.danger', 'button[class*="danger"]'];
+                    var clicked = false;
+                    for(var i=0; i<btnSelectors.length; i++) {
+                        var btn = d.querySelector(btnSelectors[i]);
+                        if(btn) {
+                            btn.click();
+                            clicked = true;
+                            break;
+                        }
+                    }
+                    if(!clicked) {
                         var buttons = d.querySelectorAll('button');
-                        for(var i=0; i<buttons.length; i++) {
-                            var bTxt = buttons[i].innerText.toUpperCase();
+                        for(var j=0; j<buttons.length; j++) {
+                            var bTxt = buttons[j].innerText.toUpperCase();
                             if(isCall && (bTxt.includes('CALL') || bTxt.includes('UP') || bTxt.includes('HIGHER'))) {
-                                buttons[i].click(); break;
+                                buttons[j].click();
+                                break;
                             } else if(!isCall && (bTxt.includes('PUT') || bTxt.includes('DOWN') || bTxt.includes('LOWER'))) {
-                                buttons[i].click(); break;
+                                buttons[j].click();
+                                break;
                             }
                         }
                     }
@@ -804,7 +821,7 @@ def bot_script():
                 if(laserScanner) laserScanner.style.display = 'block';
 
                 signalText.style.animation = 'textSmoothPulse 0.8s infinite ease-in-out';
-                signalText.innerText = "⚡ MARKET SCANNING...";
+                signalText.innerText = "⚡ মার্কেট স্কানিং...";
 
                 setTimeout(function(){
                     if(laserScanner) laserScanner.style.display = 'none';
@@ -864,10 +881,11 @@ def bot_script():
                 statusBadge.style.background = '#422006';
 
                 candleBox.innerHTML = 
-                    '<div class="scanner-box" style="width:100%;height:100%;background:rgba(15, 15, 25, 0.95);border:1px solid rgba(255, 0, 85, 0.4);border-radius:6px;padding:6px 10px;box-sizing:border-box;box-shadow:inset 0 0 10px rgba(255, 0, 85, 0.2);display:flex;flex-direction:column;justify-content:center;">' +
-                        '<div class="scanner-screen" style="position:relative;width:100%;height:45px;background:#080810;overflow:hidden;border-radius:4px;border:1px solid rgba(0, 240, 255, 0.2);">' +
+                    '<div class="scanner-box" style="width:100%;height:100%;background:rgba(15, 15, 25, 0.95);border:1px solid rgba(255, 0, 85, 0.4);border-radius:6px;padding:6px 10px;box-sizing:border-box;box-shadow:inset 0 0 10px rgba(255, 0, 85, 0.2);display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;">' +
+                        '<div class="scanner-screen" style="position:relative;width:100%;height:45px;background:#080810;overflow:hidden;border-radius:4px;border:1px solid rgba(0, 240, 255, 0.2);display:flex;align-items:center;justify-content:center;">' +
                             '<div class="laser-line" style="position:absolute;top:0;left:0;width:100%;height:2px;background:#ff0055;box-shadow:0 0 10px #ff0055, 0 0 20px #ff0055;animation:scanMove 1.5s linear infinite;"></div>' +
                             '<div class="grid-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);background-size:10px 10px;"></div>' +
+                            '<div style="position:relative;z-index:5;font-size:10px;font-weight:900;color:#ff0055;letter-spacing:1px;animation:textSmoothPulse 1s infinite ease-in-out;text-shadow:0 0 8px rgba(255,0,85,0.8);">মার্কেট স্কানিং</div>' +
                         '</div>' +
                     '</div>';
 
