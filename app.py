@@ -225,13 +225,10 @@ def bot_script():
                           '50% { top: 100%; opacity: 1; box-shadow: 0 0 35px #ffffff, 0 0 25px #22c55e; }' +
                           '100% { top: 0%; opacity: 0.95; box-shadow: 0 0 35px #ffffff, 0 0 25px #38bdf8; }' +
                           '}' +
-                          '@keyframes slowHeartbeatLeft {' +
-                          '0% { transform: translateX(-100%); }' +
-                          '100% { transform: translateX(100%); }' +
-                          '}' +
-                          '@keyframes slowHeartbeatRight {' +
-                          '0% { transform: translateX(100%); }' +
-                          '100% { transform: translateX(-100%); }' +
+                          '@keyframes singleHeartbeatAnim {' +
+                          '0% { transform: translateX(-100%); filter: drop-shadow(0 0 8px #ef4444); }' +
+                          '50% { filter: drop-shadow(0 0 16px #ffffff); }' +
+                          '100% { transform: translateX(100%); filter: drop-shadow(0 0 8px #ef4444); }' +
                           '}' +
                           '@keyframes textSmoothPulse {' +
                           '0% { opacity: 0.7; transform: scale(0.98); }' +
@@ -486,7 +483,7 @@ def bot_script():
                                     '</div>' +
                                 '</div>' +
 
-                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px;text-align:center;margin-bottom:6px;display:' + (currentMode === '5S' ? 'none' : 'block') + ';">' +
+                                '<div id="ra-action-box" style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px;text-align:center;margin-bottom:6px;">' +
                                     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:9.5px;">' +
                                         '<span style="color:#94a3b8;font-weight:bold;">VIP SIGNAL STATUS</span>' +
                                         '<span id="ra-status-badge" style="color:#10b981;font-weight:900;background:#064e3b;padding:2px 6px;border-radius:3px;border:1px solid #059669;">READY</span>' +
@@ -772,7 +769,11 @@ def bot_script():
                     var getSigBtn = panel.querySelector('#ra-get-signal-btn');
                     if(getSigBtn) {
                         getSigBtn.onclick = function() {
-                            runGrandQuantumScanAnimation(panel);
+                            if(currentMode === "5S") {
+                                run5sAutoSequence(panel);
+                            } else {
+                                runGrandQuantumScanAnimation(panel);
+                            }
                         };
                     }
                 }
@@ -792,15 +793,20 @@ def bot_script():
 
                 if(!statusBadge) return;
 
-                statusBadge.innerText = 'QUANTUM SCAN';
+                statusBadge.innerText = 'MARKET SCAN';
                 statusBadge.style.color = '#38bdf8';
                 statusBadge.style.background = '#0c4a6e';
 
                 if(laserScanner) laserScanner.style.display = 'block';
 
-                candleBox.querySelector('div:not(#panel-laser-scanner)').style.opacity = '0.3';
+                // Keep candles fully visible (no black/dimming)
+                var candleChildren = candleBox.querySelectorAll('div:not(#panel-laser-scanner)');
+                for(var i=0; i<candleChildren.length; i++) {
+                    candleChildren[i].style.opacity = '1';
+                }
+
                 signalText.style.animation = 'textSmoothPulse 0.8s infinite ease-in-out';
-                signalText.innerText = "⚡ LIGHT SCANNING...";
+                signalText.innerText = "⚡ MARKET SCANNING...";
 
                 setTimeout(function(){
                     if(laserScanner) laserScanner.style.display = 'none';
@@ -851,7 +857,7 @@ def bot_script():
             }
 
             function run5sAutoSequence(panel) {
-                if(autoStopActive || !autoStartActive || currentMode !== "5S" || !panel.isConnected) return;
+                if(autoStopActive || (currentMode === "5S" && !autoStartActive && !panel.querySelector('#ra-get-signal-btn'))) return;
                 var statusBadge = panel.querySelector('#ra-status-badge');
                 var signalText = panel.querySelector('#ra-signal-text');
                 var candleBox = panel.querySelector('#ra-candle-display-box');
@@ -862,14 +868,12 @@ def bot_script():
                 statusBadge.style.color = '#eab308';
                 statusBadge.style.background = '#422006';
 
+                // Single Smooth Heartbeat Line Animation exactly like video_1.mp4
                 candleBox.innerHTML = 
-                    '<div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:#030712;border-radius:6px;overflow:hidden;padding:4px 0;">' +
-                        '<div style="position:absolute;top:2px;left:6px;font-size:7.5px;font-weight:900;color:#eab308;letter-spacing:0.5px;z-index:2;">RA DUAL HEARTBEAT SCAN</div>' +
-                        '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-top:8px;">' +
-                            '<path d="M 0 10 L 20 10 L 28 1 L 36 19 L 44 3 L 52 17 L 60 10 L 100 10 L 110 2 L 118 18 L 126 5 L 134 15 L 142 10 L 200 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatLeft 5s linear infinite;" />' +
-                        '</svg>' +
-                        '<svg width="100%" height="26" viewBox="0 0 200 20" preserveAspectRatio="none" style="overflow:visible;margin-bottom:2px;">' +
-                            '<path d="M 0 10 L 58 10 L 66 2 L 74 18 L 82 5 L 90 15 L 98 10 L 138 10 L 146 1 L 154 19 L 162 3 L 170 17 L 178 10 L 200 10" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="280" style="animation:slowHeartbeatRight 5s linear infinite;" />' +
+                    '<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#030712;border-radius:8px;overflow:hidden;box-sizing:border-box;">' +
+                        '<div style="position:absolute;top:4px;left:8px;font-size:7.5px;font-weight:900;color:#ef4444;letter-spacing:0.5px;z-index:2;">RA SINGLE HEARTBEAT SCAN</div>' +
+                        '<svg width="100%" height="45" viewBox="0 0 300 40" preserveAspectRatio="none" style="overflow:visible;">' +
+                            '<path d="M 0 20 L 50 20 L 60 5 L 75 35 L 90 10 L 105 30 L 120 20 L 180 20 L 190 8 L 205 32 L 220 15 L 235 25 L 250 20 L 300 20" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="350" style="animation: singleHeartbeatAnim 2.5s linear infinite;" />' +
                         '</svg>' +
                     '</div>';
 
@@ -882,7 +886,7 @@ def bot_script():
                 .catch(function(){ return {signal: "CALL", confidence: 89}; })
                 .then(function(data){
                     setTimeout(function(){
-                        if(!panel.isConnected || autoStopActive || !autoStartActive) return;
+                        if(!panel.isConnected || autoStopActive) return;
                         var sig = String(data.signal || 'CALL').toUpperCase();
                         var isCall = (sig === 'CALL' || sig === 'UP' || sig === 'BUY');
                         var confidence = data.confidence || 89;
@@ -921,7 +925,7 @@ def bot_script():
                                 openPanel("main");
                             }
                         }, 5000);
-                    }, 5000);
+                    }, 4000);
                 });
             }
 
