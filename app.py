@@ -66,25 +66,25 @@ class BiDirectionalMarketEngine:
                     if diff1 > 0 and diff2 >= 0:
                         return {
                             "signal": "CALL",
-                            "trend": "STRONG BULLISH MOMENTUM",
+                            "trend": "BULLISH (UP)",
                             "rule": f"Upward Expansion Confirmed ({c0:.5f} > {c1:.5f})"
                         }
                     elif diff1 < 0 and diff2 <= 0:
                         return {
                             "signal": "PUT",
-                            "trend": "STRONG BEARISH MOMENTUM",
+                            "trend": "BEARISH (DOWN)",
                             "rule": f"Downward Expansion Confirmed ({c0:.5f} < {c1:.5f})"
                         }
                     elif diff1 > 0:
                         return {
                             "signal": "CALL",
-                            "trend": "BULLISH SUPPORT REJECTION",
+                            "trend": "BULLISH (UP)",
                             "rule": "Support Level Rejection Verified."
                         }
                     else:
                         return {
                             "signal": "PUT",
-                            "trend": "BEARISH RESISTANCE REJECTION",
+                            "trend": "BEARISH (DOWN)",
                             "rule": "Resistance Level Rejection Verified."
                         }
         except Exception:
@@ -94,13 +94,13 @@ class BiDirectionalMarketEngine:
         if (epoch_sec // 15) % 2 == 0:
             return {
                 "signal": "CALL",
-                "trend": "STABLE BULLISH CONTINUATION",
+                "trend": "BULLISH (UP)",
                 "rule": "Live Trend Synchronization Active."
             }
         else:
             return {
                 "signal": "PUT",
-                "trend": "STABLE BEARISH CONTINUATION",
+                "trend": "BEARISH (DOWN)",
                 "rule": "Live Trend Synchronization Active."
             }
 
@@ -133,7 +133,7 @@ def get_signal():
         if not is_news_safe:
             res = jsonify({
                 "signal": "HOLD",
-                "trend": "NEWS_BLOCK_ACTIVE",
+                "trend": "NEWS BLOCK",
                 "status": "NEWS_GUARD",
                 "rule": "High Impact News Filter Active. Trade Blocked for Safety."
             })
@@ -155,7 +155,7 @@ def get_signal():
         fallback_sig = "CALL" if int(time.time()) % 2 == 0 else "PUT"
         res = jsonify({
             "signal": fallback_sig,
-            "trend": "BULLISH MOMENTUM" if fallback_sig == "CALL" else "BEARISH MOMENTUM",
+            "trend": "BULLISH (UP)" if fallback_sig == "CALL" else "BEARISH (DOWN)",
             "status": "GREEN_EXECUTE",
             "rule": "RA Community Bot Standard Confluence Sync."
         })
@@ -212,29 +212,29 @@ def bot_script():
                           '100% { box-shadow: 0 0 25px #ffffff, 0 0 45px #38bdf8; border-color: #22c55e; }' +
                           '}' +
                           '@keyframes ultraSmoothSway1 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #22c55e); }' +
-                          '50% { transform: translateY(-8px) scale(1.12); filter: drop-shadow(0 0 35px #22c55e) drop-shadow(0 0 55px #22c55e); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #22c55e); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #22c55e); }' +
+                          '50% { transform: translateY(-8px) scale(1.12); filter: drop-shadow(0 0 38px #22c55e) drop-shadow(0 0 60px #22c55e); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #22c55e); }' +
                           '}' +
                           '@keyframes ultraSmoothSway2 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #ef4444); }' +
-                          '50% { transform: translateY(8px) scale(1.12); filter: drop-shadow(0 0 35px #ef4444) drop-shadow(0 0 55px #ef4444); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #ef4444); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #ef4444); }' +
+                          '50% { transform: translateY(8px) scale(1.12); filter: drop-shadow(0 0 38px #ef4444) drop-shadow(0 0 60px #ef4444); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #ef4444); }' +
                           '}' +
                           '@keyframes ultraSmoothSway3 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #eab308); }' +
-                          '50% { transform: translateY(-7px) scale(1.12); filter: drop-shadow(0 0 35px #eab308) drop-shadow(0 0 55px #eab308); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #eab308); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #eab308); }' +
+                          '50% { transform: translateY(-7px) scale(1.12); filter: drop-shadow(0 0 38px #eab308) drop-shadow(0 0 60px #eab308); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #eab308); }' +
                           '}' +
                           '@keyframes ultraSmoothSway4 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #38bdf8); }' +
-                          '50% { transform: translateY(7px) scale(1.12); filter: drop-shadow(0 0 35px #38bdf8) drop-shadow(0 0 55px #38bdf8); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #38bdf8); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #38bdf8); }' +
+                          '50% { transform: translateY(7px) scale(1.12); filter: drop-shadow(0 0 38px #38bdf8) drop-shadow(0 0 60px #38bdf8); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #38bdf8); }' +
                           '}' +
                           '@keyframes ultraSmoothSway5 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #a855f7); }' +
-                          '50% { transform: translateY(-8px) scale(1.12); filter: drop-shadow(0 0 35px #a855f7) drop-shadow(0 0 55px #a855f7); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #a855f7); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #a855f7); }' +
+                          '50% { transform: translateY(-8px) scale(1.12); filter: drop-shadow(0 0 38px #a855f7) drop-shadow(0 0 60px #a855f7); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #a855f7); }' +
                           '}' +
                           '@keyframes panelLaserScanAnim {' +
                           '0% { top: 0%; opacity: 0.95; box-shadow: 0 0 40px #ffffff, 0 0 30px #38bdf8; }' +
@@ -537,7 +537,7 @@ def bot_script():
                             '</div>' +
                         '</div>';
                 } else if(activeScreen === "all_market_check") {
-                    var v1 = 74, v2 = 62, v3 = 88, v4 = 81;
+                    var v1 = 74, v2 = 45, v3 = 88, v4 = 62;
                     var c1 = getMetricColor(v1), c2 = getMetricColor(v2), c3 = getMetricColor(v3), c4 = getMetricColor(v4);
                     var l1 = getMetricLabel(v1), l2 = getMetricLabel(v2), l3 = getMetricLabel(v3), l4 = getMetricLabel(v4);
 
@@ -578,8 +578,8 @@ def bot_script():
                                 '<div style="background:#030712;border:1px solid #1f2937;border-radius:6px;padding:7px;font-size:8px;margin-bottom:6px;">' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">AI Confluence Filter:</span><span id="sub-metric-1" style="color:#22c55e;font-weight:bold;">HIGH (88%)</span></div>' +
                                     '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Server Stability:</span><span id="sub-metric-2" style="color:#38bdf8;font-weight:bold;">ULTRA HIGH (98%)</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Market Trend:</span><span id="sub-metric-3" style="color:#22c55e;font-weight:bold;">BUG-FREE SYNC</span></div>' +
-                                    '<div style="display:flex;justify-content:space-between;align-items:center;"><span id="best-market-label-title" style="color:#94a3b8;font-size:7px;font-weight:bold;">ALL MARKET CHECK:</span><span id="switching-asset-name" style="color:#38bdf8;font-size:8px;font-weight:900;">CHECKING...</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="color:#94a3b8;">Market Trend:</span><span id="sub-metric-3" style="color:#22c55e;font-weight:bold;">BULLISH (UP)</span></div>' +
+                                    '<div style="display:flex;justify-content:space-between;align-items:center;"><span id="best-market-label-title" style="color:#94a3b8;font-size:7px;font-weight:bold;">BEST MARKET:</span><span id="switching-asset-name" style="color:#22c55e;font-size:8px;font-weight:900;">EURUSD (OTC)</span></div>' +
                                 '</div>' +
                             '</div>' +
 
@@ -599,10 +599,12 @@ def bot_script():
                             if(!panel.isConnected) { clearInterval(metricFluctuateInterval); metricFluctuateInterval = null; return; }
 
                             var ts = Math.floor(Date.now() / 1000);
-                            var nv1 = (ts % 75) + 20;
-                            var nv2 = ((ts + 10) % 70) + 25;
-                            var nv3 = ((ts + 20) % 80) + 15;
-                            var nv4 = ((ts + 30) % 75) + 20;
+                            
+                            // Fully independent unique values for each of the 4 circles
+                            var nv1 = ((ts * 7) % 65) + 25;
+                            var nv2 = ((ts * 13) % 70) + 15;
+                            var nv3 = ((ts * 11) % 60) + 30;
+                            var nv4 = ((ts * 17) % 65) + 20;
 
                             [ {v: nv1, id: 1}, {v: nv2, id: 2}, {v: nv3, id: 3}, {v: nv4, id: 4} ].forEach(function(item){
                                 var col = getMetricColor(item.v);
@@ -621,17 +623,28 @@ def bot_script():
                                 }
                             });
 
+                            // Independent fluctuating values for the top 2 sub-metrics
+                            var subVal1 = ((ts * 5) % 55) + 35;
+                            var subVal2 = ((ts * 9) % 50) + 40;
+
                             var sub1 = panel.querySelector('#sub-metric-1');
                             var sub2 = panel.querySelector('#sub-metric-2');
+                            var sub3 = panel.querySelector('#sub-metric-3');
+
                             if(sub1) {
-                                var cSub1 = getMetricColor(nv3);
-                                sub1.innerText = getMetricLabel(nv3) + ' (' + nv3 + '%)';
+                                var cSub1 = getMetricColor(subVal1);
+                                sub1.innerText = getMetricLabel(subVal1) + ' (' + subVal1 + '%)';
                                 sub1.style.color = cSub1;
                             }
                             if(sub2) {
-                                var cSub2 = getMetricColor(nv4);
-                                sub2.innerText = getMetricLabel(nv4) + ' (' + nv4 + '%)';
+                                var cSub2 = getMetricColor(subVal2);
+                                sub2.innerText = getMetricLabel(subVal2) + ' (' + subVal2 + '%)';
                                 sub2.style.color = cSub2;
+                            }
+                            if(sub3) {
+                                var trendDir = (ts % 2 === 0) ? "BULLISH (UP)" : "BEARISH (DOWN)";
+                                sub3.innerText = trendDir;
+                                sub3.style.color = (trendDir.includes("UP") ? "#22c55e" : "#ef4444");
                             }
 
                             var assetEl = panel.querySelector('#switching-asset-name');
@@ -646,7 +659,7 @@ def bot_script():
                                     titleEl.style.color = "#94a3b8";
                                 }
 
-                                if(scanSteps >= 8) {
+                                if(scanSteps >= 6) {
                                     isLockedOnBest = true;
                                     if(titleEl) {
                                         titleEl.innerText = "BEST MARKET:";
@@ -900,7 +913,6 @@ def bot_script():
                             executeQuotexTrade(isCall);
                         }
 
-                        // Display result candle for 5.5s then seamlessly revert back to original 5 animated preview candles
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -974,22 +986,21 @@ def bot_script():
 
                         executeQuotexTrade(isCall);
 
+                        // Directly loop back to 5s scanning sequence without reverting to static preview candles
                         setTimeout(function(){
-                            if(!panel.isConnected) return;
-                            statusBadge.innerText = 'READY';
-                            statusBadge.style.color = '#10b981';
-                            statusBadge.style.background = '#064e3b';
-                            signalText.style.fontSize = '13.5px';
-                            signalText.style.color = '#facc15';
-                            signalText.innerText = '--- : --';
-                            candleBox.innerHTML = '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' + getInitialCandlesHtml();
-                            
+                            if(!panel.isConnected || autoStopActive) return;
                             if(autoStartActive && !autoStopActive && currentMode === "5S") {
-                                autoTimer = setTimeout(function(){
-                                    if(autoStartActive && !autoStopActive && currentMode === "5S") run5sAutoSequence(panel);
-                                }, 1000);
+                                run5sAutoSequence(panel);
+                            } else {
+                                statusBadge.innerText = 'READY';
+                                statusBadge.style.color = '#10b981';
+                                statusBadge.style.background = '#064e3b';
+                                signalText.style.fontSize = '13.5px';
+                                signalText.style.color = '#facc15';
+                                signalText.innerText = '--- : --';
+                                candleBox.innerHTML = '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' + getInitialCandlesHtml();
                             }
-                        }, 5500);
+                        }, 5000);
                     }, 3500);
                 })
                 .catch(function(){
