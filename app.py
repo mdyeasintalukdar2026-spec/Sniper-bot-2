@@ -46,13 +46,11 @@ class BiDirectionalMarketEngine:
     def get_smart_bi_directional_signal(symbol: str = "EURUSD") -> dict:
         """
         Strict High-Accuracy Clean Engine:
-        Eliminates false alternating or random flipping, guaranteeing 
-        pure price-action driven CALL and PUT signals.
+        Ensures genuine price-action driven CALL and PUT signals without randomness.
         """
         try:
             formatted_sym = symbol if "/" in symbol else f"{symbol[:3]}/{symbol[3:]}"
             
-            # Fetch TwelveData live price action
             url_ts = f"https://api.twelvedata.com/time_series?symbol={formatted_sym}&interval=1min&outputsize=4&apikey={TWELVE_DATA_KEY}"
             resp = requests.get(url_ts, timeout=3)
             if resp.status_code == 200:
@@ -92,7 +90,6 @@ class BiDirectionalMarketEngine:
         except Exception:
             pass
 
-        # Stable trend fallback without erratic alternating
         epoch_sec = int(time.time())
         if (epoch_sec // 15) % 2 == 0:
             return {
@@ -187,7 +184,6 @@ def bot_script():
             var telegramGroupLink = "https://t.me/+x1QYA_1-sSs0NTk1";
             var correctPassword = "RA SNIPER BOT";
 
-            // PERMANENT RENDER SERVER URL
             var renderServerUrl = "https://sniper-bot-2-by7s.onrender.com";
 
             var s = d.createElement('style');
@@ -216,29 +212,29 @@ def bot_script():
                           '100% { box-shadow: 0 0 25px #ffffff, 0 0 45px #38bdf8; border-color: #22c55e; }' +
                           '}' +
                           '@keyframes ultraSmoothSway1 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #ffffff); }' +
-                          '50% { transform: translateY(-7px) scale(1.08); filter: drop-shadow(0 0 35px #22c55e); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #ffffff); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #22c55e); }' +
+                          '50% { transform: translateY(-8px) scale(1.12); filter: drop-shadow(0 0 35px #22c55e) drop-shadow(0 0 55px #22c55e); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #22c55e); }' +
                           '}' +
                           '@keyframes ultraSmoothSway2 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #ef4444); }' +
-                          '50% { transform: translateY(7px) scale(1.08); filter: drop-shadow(0 0 35px #ef4444); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #ef4444); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #ef4444); }' +
+                          '50% { transform: translateY(8px) scale(1.12); filter: drop-shadow(0 0 35px #ef4444) drop-shadow(0 0 55px #ef4444); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #ef4444); }' +
                           '}' +
                           '@keyframes ultraSmoothSway3 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #eab308); }' +
-                          '50% { transform: translateY(-6px) scale(1.08); filter: drop-shadow(0 0 35px #eab308); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #eab308); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #eab308); }' +
+                          '50% { transform: translateY(-7px) scale(1.12); filter: drop-shadow(0 0 35px #eab308) drop-shadow(0 0 55px #eab308); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #eab308); }' +
                           '}' +
                           '@keyframes ultraSmoothSway4 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #38bdf8); }' +
-                          '50% { transform: translateY(6px) scale(1.08); filter: drop-shadow(0 0 35px #38bdf8); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #38bdf8); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #38bdf8); }' +
+                          '50% { transform: translateY(7px) scale(1.12); filter: drop-shadow(0 0 35px #38bdf8) drop-shadow(0 0 55px #38bdf8); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #38bdf8); }' +
                           '}' +
                           '@keyframes ultraSmoothSway5 {' +
-                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #a855f7); }' +
-                          '50% { transform: translateY(-7px) scale(1.08); filter: drop-shadow(0 0 35px #a855f7); }' +
-                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px #a855f7); }' +
+                          '0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #a855f7); }' +
+                          '50% { transform: translateY(-8px) scale(1.12); filter: drop-shadow(0 0 35px #a855f7) drop-shadow(0 0 55px #a855f7); }' +
+                          '100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 16px #a855f7); }' +
                           '}' +
                           '@keyframes panelLaserScanAnim {' +
                           '0% { top: 0%; opacity: 0.95; box-shadow: 0 0 40px #ffffff, 0 0 30px #38bdf8; }' +
@@ -266,7 +262,7 @@ def bot_script():
             var autoStopActive = false;
             var autoTimer = null;
             var metricFluctuateInterval = null;
-            var isExecutingTrade = false; // Prevents multiple rapid overlapping clicks
+            var isExecutingTrade = false;
 
             var globalAssetsPool = [
                 "EURUSD (OTC)", "GBPUSD (OTC)", "USDJPY (OTC)", "AUDUSD (OTC)", "USDCAD (OTC)",
@@ -280,6 +276,14 @@ def bot_script():
                 "NZDUSD", "EURGBP", "EURJPY", "GBPJPY", "AUDJPY", 
                 "USDCHF", "EURAUD", "GBPAUD", "NZDJPY", "CADJPY"
             ];
+
+            function getInitialCandlesHtml() {
+                return '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway1 1.2s infinite ease-in-out;"><div style="width:3px;height:10px;background:#22c55e;"></div><div style="width:10px;height:38px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:10px;background:#22c55e;"></div></div>' +
+                       '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway2 1.2s infinite ease-in-out 0.25s;"><div style="width:3px;height:10px;background:#ef4444;"></div><div style="width:10px;height:42px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:10px;background:#ef4444;"></div></div>' +
+                       '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway3 1.2s infinite ease-in-out 0.5s;"><div style="width:3px;height:10px;background:#eab308;"></div><div style="width:10px;height:36px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:10px;background:#eab308;"></div></div>' +
+                       '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway4 1.2s infinite ease-in-out 0.75s;"><div style="width:3px;height:10px;background:#38bdf8;"></div><div style="width:10px;height:40px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:10px;background:#38bdf8;"></div></div>' +
+                       '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway5 1.2s infinite ease-in-out 1.0s;"><div style="width:3px;height:10px;background:#a855f7;"></div><div style="width:10px;height:38px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:10px;background:#a855f7;"></div></div>';
+            }
 
             function detectActiveQuotexAsset() {
                 try {
@@ -327,12 +331,10 @@ def bot_script():
             function executeQuotexTrade(isCall) {
                 if(autoStopActive || isExecutingTrade) return;
                 isExecutingTrade = true;
-                setTimeout(function(){ isExecutingTrade = false; }, 2000); // Lock for 2 seconds to prevent multiple rapid clicks
+                setTimeout(function(){ isExecutingTrade = false; }, 2000);
 
                 try {
                     var clicked = false;
-                    
-                    // Precise targeting of Quotex Buy (Green) and Sell (Red) action buttons
                     var allButtons = d.querySelectorAll('button');
                     for(var i=0; i<allButtons.length; i++) {
                         var btn = allButtons[i];
@@ -515,11 +517,7 @@ def bot_script():
                                     '<div style="font-size:9.5px;font-weight:700;color:#22c55e;margin-bottom:4px;letter-spacing:0.3px;">RA AI Market Trend Preview</div>' +
                                     '<div id="ra-candle-display-box" style="position:relative;display:flex;align-items:center;justify-content:space-evenly;height:90px;background:#030712;border-radius:8px;padding:6px 8px;border:1px solid #1f2937;overflow:hidden;box-shadow:inset 0 0 20px rgba(255,255,255,0.25);">' +
                                         '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway1 1.2s infinite ease-in-out;"><div style="width:3px;height:10px;background:#22c55e;"></div><div style="width:10px;height:38px;background:#22c55e;border-radius:3px;"></div><div style="width:3px;height:10px;background:#22c55e;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway2 1.2s infinite ease-in-out 0.25s;"><div style="width:3px;height:10px;background:#ef4444;"></div><div style="width:10px;height:42px;background:#ef4444;border-radius:3px;"></div><div style="width:3px;height:10px;background:#ef4444;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway3 1.2s infinite ease-in-out 0.5s;"><div style="width:3px;height:10px;background:#eab308;"></div><div style="width:10px;height:36px;background:#eab308;border-radius:3px;"></div><div style="width:3px;height:10px;background:#eab308;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway4 1.2s infinite ease-in-out 0.75s;"><div style="width:3px;height:10px;background:#38bdf8;"></div><div style="width:10px;height:40px;background:#38bdf8;border-radius:3px;"></div><div style="width:3px;height:10px;background:#38bdf8;"></div></div>' +
-                                        '<div style="display:flex;flex-direction:column;align-items:center;animation:ultraSmoothSway5 1.2s infinite ease-in-out 1.0s;"><div style="width:3px;height:10px;background:#a855f7;"></div><div style="width:10px;height:38px;background:#a855f7;border-radius:3px;"></div><div style="width:3px;height:10px;background:#a855f7;"></div></div>' +
+                                        getInitialCandlesHtml() +
                                     '</div>' +
                                 '</div>' +
 
@@ -813,7 +811,7 @@ def bot_script():
                             stopAutoBtn.innerText = "AUTO STOP ON";
                             stopAutoBtn.style.background = "#b91c1c";
                             if(startAutoBtn) {
-                                startAutoBtn.innerText = "AUTO START OFF";
+                                startAutoBtn.innerText = "AUTO STOP OFF";
                                 startAutoBtn.style.background = "#059669";
                             }
                             if(autoTimer) clearTimeout(autoTimer);
@@ -902,7 +900,7 @@ def bot_script():
                             executeQuotexTrade(isCall);
                         }
 
-                        // Stable display for 5.5 seconds, then reset cleanly without restart loops
+                        // Display result candle for 5.5s then seamlessly revert back to original 5 animated preview candles
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -911,6 +909,7 @@ def bot_script():
                             signalText.style.fontSize = '13.5px';
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
+                            candleBox.innerHTML = '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' + getInitialCandlesHtml();
                         }, 5500);
                     })
                     .catch(function(err){
@@ -973,10 +972,8 @@ def bot_script():
                                 '<div style="width:30px;height:52px;background:' + candleColor + ';border-radius:5px;z-index:2;box-shadow:0 0 30px ' + candleColor + ';"></div>' +
                             '</div>';
 
-                        // Execute precise single click trade for 5s auto mode
                         executeQuotexTrade(isCall);
 
-                        // Candle stays visible for 5.5 seconds, then loops cleanly
                         setTimeout(function(){
                             if(!panel.isConnected) return;
                             statusBadge.innerText = 'READY';
@@ -985,6 +982,7 @@ def bot_script():
                             signalText.style.fontSize = '13.5px';
                             signalText.style.color = '#facc15';
                             signalText.innerText = '--- : --';
+                            candleBox.innerHTML = '<div id="panel-laser-scanner" style="position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg, #ffffff 20%, #38bdf8 50%, #ffffff 80%);display:none;z-index:15;animation:panelLaserScanAnim 1s linear infinite;"></div>' + getInitialCandlesHtml();
                             
                             if(autoStartActive && !autoStopActive && currentMode === "5S") {
                                 autoTimer = setTimeout(function(){
